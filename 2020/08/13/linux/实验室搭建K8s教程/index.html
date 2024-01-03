@@ -1,0 +1,833 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#FFF">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+<link rel="alternate" type="application/rss+xml" title="有几个头大的博客" href="http://example.com/rss.xml" />
+<link rel="alternate" type="application/atom+xml" title="有几个头大的博客" href="http://example.com/atom.xml" />
+<link rel="alternate" type="application/json" title="有几个头大的博客" href="http://example.com/feed.json" />
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="/css/app.css?v=0.2.5">
+
+  
+
+<link rel="canonical" href="http://example.com/2020/08/13/linux/%E5%AE%9E%E9%AA%8C%E5%AE%A4%E6%90%AD%E5%BB%BAK8s%E6%95%99%E7%A8%8B/">
+
+
+
+  <title>
+实验室搭建K8s教程 - Linux |
+Watsmal = 有几个头大的博客 = 天生我材必有用，我是高手！我是高手！</title>
+<meta name="generator" content="Hexo 6.0.0"></head>
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div id="loading">
+    <div class="cat">
+      <div class="body"></div>
+      <div class="head">
+        <div class="face"></div>
+      </div>
+      <div class="foot">
+        <div class="tummy-end"></div>
+        <div class="bottom"></div>
+        <div class="legs left"></div>
+        <div class="legs right"></div>
+      </div>
+      <div class="paw">
+        <div class="hands left"></div>
+        <div class="hands right"></div>
+      </div>
+    </div>
+  </div>
+  <div id="container">
+    <header id="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="inner">
+        <div id="brand">
+          <div class="pjax">
+          
+  <h1 itemprop="name headline">实验室搭建K8s教程
+  </h1>
+  
+<div class="meta">
+  <span class="item" title="创建时间：2020-08-13 20:45:48">
+    <span class="icon">
+      <i class="ic i-calendar"></i>
+    </span>
+    <span class="text">发表于</span>
+    <time itemprop="dateCreated datePublished" datetime="2020-08-13T20:45:48+08:00">2020-08-13</time>
+  </span>
+  <span class="item" title="本文字数">
+    <span class="icon">
+      <i class="ic i-pen"></i>
+    </span>
+    <span class="text">本文字数</span>
+    <span>11k</span>
+    <span class="text">字</span>
+  </span>
+  <span class="item" title="阅读时长">
+    <span class="icon">
+      <i class="ic i-clock"></i>
+    </span>
+    <span class="text">阅读时长</span>
+    <span>27 分钟</span>
+  </span>
+</div>
+
+
+          </div>
+        </div>
+        <nav id="nav">
+  <div class="inner">
+    <div class="toggle">
+      <div class="lines" aria-label="切换导航栏">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </div>
+    </div>
+    <ul class="menu">
+      <li class="item title"><a href="/" rel="start">Watsmal</a></li>
+    </ul>
+    <ul class="right">
+      <li class="item theme">
+        <i class="ic i-sun"></i>
+      </li>
+      <li class="item search">
+        <i class="ic i-search"></i>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+      </div>
+      <div id="imgs" class="pjax">
+        <ul>
+          <li class="item" data-background-image="https://i.imgtg.com/2023/03/09/Y0iNK.jpg"></li>
+          <li class="item" data-background-image="https://i.imgtg.com/2023/03/09/YSIlc.jpg"></li>
+          <li class="item" data-background-image="https://ooo.0x0.ooo/2024/01/03/OZMq6c.jpg"></li>
+          <li class="item" data-background-image="https://i.imgtg.com/2023/03/09/Y0hOs.jpg"></li>
+          <li class="item" data-background-image="https://i.imgtg.com/2023/03/09/Y0kTl.jpg"></li>
+          <li class="item" data-background-image="https://i.imgtg.com/2023/03/09/YSj7p.jpg"></li>
+        </ul>
+      </div>
+    </header>
+    <div id="waves">
+      <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" />
+          <use xlink:href="#gentle-wave" x="48" y="3" />
+          <use xlink:href="#gentle-wave" x="48" y="5" />
+          <use xlink:href="#gentle-wave" x="48" y="7" />
+        </g>
+      </svg>
+    </div>
+    <main>
+      <div class="inner">
+        <div id="main" class="pjax">
+          
+  <div class="article wrap">
+    
+<div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+<i class="ic i-home"></i>
+<span><a href="/">首页</a></span><i class="ic i-angle-right"></i>
+<span  class="current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/linux/" itemprop="item" rel="index" title="分类于 Linux"><span itemprop="name">Linux</span></a>
+<meta itemprop="position" content="1" /></span>
+</div>
+
+    <article itemscope itemtype="http://schema.org/Article" class="post block" lang="zh-CN">
+  <link itemprop="mainEntityOfPage" href="http://example.com/2020/08/13/linux/%E5%AE%9E%E9%AA%8C%E5%AE%A4%E6%90%AD%E5%BB%BAK8s%E6%95%99%E7%A8%8B/">
+
+  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="image" content="/images/avatar.jpg">
+    <meta itemprop="name" content="Watsmal">
+    <meta itemprop="description" content="天生我材必有用，我是高手！我是高手！, 有几个头大的博客">
+  </span>
+
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="有几个头大的博客">
+  </span>
+
+  <div class="body md" itemprop="articleBody">
+    
+
+    <h2 id="实验室搭建k8s教程"><a class="anchor" href="#实验室搭建k8s教程">#</a> 实验室搭建 K8s 教程</h2>
+<ul>
+<li>
+<p>配置系统 centos7 ，安装 k8s 版本 1.26.3  docker：v23.0.1</p>
+</li>
+<li>
+<p>主机详细信息</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">VM</th>
+<th>主机名</th>
+<th>系统</th>
+<th>docker</th>
+<th>k8s</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">10.0.21.215</td>
+<td>master</td>
+<td>centos7(64)</td>
+<td>v23.0.1</td>
+<td>v1.26.3</td>
+</tr>
+<tr>
+<td style="text-align:left">10.0.21.216</td>
+<td>node1</td>
+<td>centos7(64)</td>
+<td>v23.0.1</td>
+<td>v1.26.3</td>
+</tr>
+<tr>
+<td style="text-align:left">10.0.21.217</td>
+<td>node2</td>
+<td>centos7(64)</td>
+<td>v23.0.1</td>
+<td>v1.26.3</td>
+</tr>
+<tr>
+<td style="text-align:left">10.0.21.218</td>
+<td>node3</td>
+<td>centos7(64)</td>
+<td>v23.0.1</td>
+<td>v1.26.3</td>
+</tr>
+</tbody>
+</table>
+<p><strong>主机名</strong>：利用 <code>hostnamectl</code>  去设置主机名</p>
+<ol>
+<li>
+<p>（每台执行）安装镜像过程不在叙述这里只需要注意安装之后 &lt;u&gt;<em> 访问不了互联网</em> &lt;/u&gt; 问题？</p>
+<p>因为默认是不可以访问互联网的，所以需要去设定一个 <code>ONBOOT=yes</code> ，此外安装 <code>k8s</code>  最好选择静态 IP（因为集群需要共享节点信息等）。</p>
+<ul>
+<li>
+<p>首先在  <code>etc/sysconfig/network-scripts/</code>  找到网卡 &lt;u&gt;ifcfg - 你的网卡名字 &lt;/u&gt; （我这里是 <code>ifcfg-ens192</code> ）</p>
+<p><img data-src="C:%5CUsers%5CAdministrator%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20230326185531504.png" alt="image-20230326185531504" /></p>
+</li>
+<li>
+<p>然后  <code>vi  ifcfg-ens192</code>  进去修改网卡配置，这里采用静态 IP 方式，具体修改选项如下：</p>
+<ul>
+<li><code>ONBOOT=yes</code></li>
+<li><code>IPADDR=10.0.21.215</code></li>
+<li><code>NATMASK=255.255.255.0</code></li>
+<li><code>GATEWAY=10.0.21.254</code></li>
+<li><code>DNS1=8.8.8.8</code></li>
+</ul>
+</li>
+<li>
+<p>再去修改 <code>/etc/sysconfig/network</code>  里面的内容</p>
+<ul>
+<li><code>NETWORKING=yes</code></li>
+<li><code>GATEWAY=10.0.21.254</code></li>
+</ul>
+</li>
+<li>
+<p>最后重启网络服务即可 <code>service network restart</code></p>
+</li>
+</ul>
+</li>
+<li>
+<p>（每台执行）这个时候镜像可以访问网络了，那么需要对 centos7 镜像 tools 等的安装 ( <code>gcc glibc gcc-c++ make net-tools screen vim lrzsz tree dos2unix lsof tcpdump bash-completion ntp</code> )</p>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token comment">#安装 wget</span></pre></td></tr><tr><td data-num="2"></td><td><pre><span class="token punctuation">[</span>root@localhost ~<span class="token punctuation">]</span><span class="token comment"># yum -y install wget</span></pre></td></tr><tr><td data-num="3"></td><td><pre> </pre></td></tr><tr><td data-num="4"></td><td><pre><span class="token comment">#​​​​​​​备份 CentOS-Base.repo</span></pre></td></tr><tr><td data-num="5"></td><td><pre><span class="token punctuation">[</span>root@localhost ~<span class="token punctuation">]</span><span class="token comment"># mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup</span></pre></td></tr><tr><td data-num="6"></td><td><pre> </pre></td></tr><tr><td data-num="7"></td><td><pre><span class="token comment">#​​​​​​​下载新的 CentOS-Base.repo 到 /etc/yum.repos.d/</span></pre></td></tr><tr><td data-num="8"></td><td><pre><span class="token punctuation">[</span>root@localhost ~<span class="token punctuation">]</span><span class="token comment"># wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo</span></pre></td></tr><tr><td data-num="9"></td><td><pre> </pre></td></tr><tr><td data-num="10"></td><td><pre><span class="token comment">#​​​​​​​生成缓存</span></pre></td></tr><tr><td data-num="11"></td><td><pre><span class="token punctuation">[</span>root@localhost ~<span class="token punctuation">]</span><span class="token comment"># yum makecache</span></pre></td></tr><tr><td data-num="12"></td><td><pre><span class="token punctuation">[</span>root@localhost ~<span class="token punctuation">]</span><span class="token comment"># yum update</span></pre></td></tr><tr><td data-num="13"></td><td><pre><span class="token comment">#​​​​​​​安装必要软件</span></pre></td></tr><tr><td data-num="14"></td><td><pre><span class="token punctuation">[</span>root@localhost ~<span class="token punctuation">]</span><span class="token comment"># yum -y install gcc glibc gcc-c++ make net-tools screen vim lrzsz tree dos2unix lsof tcpdump bash-completion ntp</span></pre></td></tr></table></figure></li>
+<li>
+<p>（分别执行）设置主机名字，四个主机（看文主机详细信息），分别是 <code>master,node1,node2,node3</code></p>
+<ul>
+<li>
+<p>在 master 主机上运行  <code>hostnamectl set-hostname master</code>  即可，其余类似。</p>
+<p>可以看到设置完之后，运行 <code>hostnamectl status</code>  如下：</p>
+<p><img data-src="C:%5CUsers%5CAdministrator%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20230326190708475.png" alt="image-20230326190708475" /></p>
+</li>
+</ul>
+</li>
+<li>
+<p>（每台执行） <code>hosts文件</code> 设置：[host 文件作用](<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hvbmdrYWlodWExOTg3L2FydGljbGUvZGV0YWlscy8xMTEyMTQzNDM/b3BzX3JlcXVlc3RfbWlzYz0lN0IlMjJyZXF1ZXN0JTVGaWQlMjIlM0ElMjIxNjc5ODIwNjkxMTY3ODI0Mjc0OTQyMDglMjIlMkMlMjJzY20lMjIlM0ElMjIyMDE0MDcxMy4xMzAxMDIzMzQuLiUyMiU3RCZhbXA7cmVxdWVzdF9pZD0xNjc5ODIwNjkxMTY3ODI0Mjc0OTQyMDgmYW1wO2Jpel9pZD0wJmFtcDt1dG1fbWVkaXVtPWRpc3RyaWJ1dGUucGNfc2VhcmNoX3Jlc3VsdC5ub25lLXRhc2stYmxvZy0yfmFsbH5zb2JhaWR1ZW5kfmRlZmF1bHQtNC0xMTEyMTQzNDMtbnVsbC1udWxsLjE0MiU1RXY3NiU1RXdlY2hhdCwyMDElNUV2NCU1RWFkZF9hc2ssMjM5JTVFdjIlNUVpbnNlcnRfY2hhdGdwdCZhbXA7dXRtX3Rlcm09aG9zdHMlRTYlOTYlODclRTQlQkIlQjYmYW1wO3NwbT0xMDE4LjIyMjYuMzAwMS40MTg3">(25 条消息) hosts 文件简析_host 格式_Finder_Way 的博客 - CSDN 博客</span>) 设置如下：</p>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>每台都执行</pre></td></tr><tr><td data-num="2"></td><td><pre><span class="token function">cat</span> <span class="token operator">>></span> /etc/hosts <span class="token operator">&lt;&lt;</span><span class="token string">EOF</pre></td></tr><tr><td data-num="3"></td><td><pre>10.0.21.215  master</pre></td></tr><tr><td data-num="4"></td><td><pre>10.0.21.216  node1</pre></td></tr><tr><td data-num="5"></td><td><pre>10.0.21.217  node2</pre></td></tr><tr><td data-num="6"></td><td><pre>10.0.21.218  node3</pre></td></tr><tr><td data-num="7"></td><td><pre>EOF</span></pre></td></tr></table></figure></li>
+<li>
+<p>（每台执行）关闭防火墙和 selinux &lt;u&gt;<strong> 推荐永久关闭（否则重启报错）</strong>&lt;/u&gt;，具体代码执行如下：</p>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>三台都执行，以下无特殊说明，则三台都执行</pre></td></tr><tr><td data-num="2"></td><td><pre>systemctl stop firewalld</pre></td></tr><tr><td data-num="3"></td><td><pre>systemctl disable firewalld</pre></td></tr><tr><td data-num="4"></td><td><pre></pre></td></tr><tr><td data-num="5"></td><td><pre><span class="token comment"># 临时禁用 selinux</span></pre></td></tr><tr><td data-num="6"></td><td><pre>setenforce <span class="token number">0</span></pre></td></tr><tr><td data-num="7"></td><td><pre></pre></td></tr><tr><td data-num="8"></td><td><pre><span class="token comment"># 永久关闭 selinux 继续运行下面</span></pre></td></tr><tr><td data-num="9"></td><td><pre><span class="token comment"># 修改 /etc/sysconfig/selinux 文件设置</span></pre></td></tr><tr><td data-num="10"></td><td><pre><span class="token function">sed</span> <span class="token parameter variable">-i</span> <span class="token string">'s/SELINUX=permissive/SELINUX=disabled/'</span> /etc/sysconfig/selinux</pre></td></tr><tr><td data-num="11"></td><td><pre><span class="token function">sed</span> <span class="token parameter variable">-i</span> <span class="token string">"s/SELINUX=enforcing/SELINUX=disabled/g"</span> /etc/selinux/config</pre></td></tr></table></figure></li>
+<li>
+<p>（每台执行）关闭 swap 分区</p>
+</li>
+</ol>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>swapoff <span class="token parameter variable">-a</span>   //临时关闭</pre></td></tr><tr><td data-num="2"></td><td><pre><span class="token function">vi</span> /etc/fstab    //永久关闭（注释掉最后一条配置）</pre></td></tr><tr><td data-num="3"></td><td><pre><span class="token punctuation">..</span>.</pre></td></tr><tr><td data-num="4"></td><td><pre><span class="token comment">#/dev/mapper/centos-swap swap     swap  defaults  0 0</span></pre></td></tr><tr><td data-num="5"></td><td><pre></pre></td></tr><tr><td data-num="6"></td><td><pre><span class="token function">free</span> <span class="token parameter variable">-h</span> <span class="token operator">|</span> <span class="token function">grep</span> Swap   //验证Swap关闭情况（显示0代表成功关闭）</pre></td></tr><tr><td data-num="7"></td><td><pre>Swap:            0B          0B          0B</pre></td></tr></table></figure><ol start="7">
+<li>
+<p>（每台执行）各个节点内核调节</p>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token function">cat</span> <span class="token operator">></span> /etc/sysctl.d/k8s.conf <span class="token operator">&lt;&lt;</span><span class="token string">EOF</pre></td></tr><tr><td data-num="2"></td><td><pre>net.bridge.bridge-nf-call-ip6tables = 1</pre></td></tr><tr><td data-num="3"></td><td><pre>net.bridge.bridge-nf-call-iptables = 1</pre></td></tr><tr><td data-num="4"></td><td><pre>net.ipv4.ip_forward = 1</pre></td></tr><tr><td data-num="5"></td><td><pre>vm.swappiness = 0 #禁止适用swap空间</pre></td></tr><tr><td data-num="6"></td><td><pre>EOF</span></pre></td></tr><tr><td data-num="7"></td><td><pre><span class="token function">sysctl</span> <span class="token parameter variable">--system</span></pre></td></tr></table></figure></li>
+<li>
+<p>（每台执行）下面就是安装 docker 工具了</p>
+<ul>
+<li>
+<p>安装 yum 仓库管理工具</p>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>yum makecache      //更新yum软件包索引</pre></td></tr><tr><td data-num="2"></td><td><pre>yum <span class="token parameter variable">-y</span> <span class="token function">install</span> yum-utils</pre></td></tr></table></figure></li>
+<li>
+<p>安装阿里的 docker-ce 仓库</p>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>yum-config-manager --add-repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</pre></td></tr><tr><td data-num="2"></td><td><pre><span class="token comment">#或则 wget https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo -O /etc/yum.repos.d/docker-ce.repo</span></pre></td></tr><tr><td data-num="3"></td><td><pre></pre></td></tr><tr><td data-num="4"></td><td><pre><span class="token comment">#可以去 cd /etc/yum.repos.d/ 删除对应的 docker repo 即可</span></pre></td></tr></table></figure></li>
+<li>
+<p>安装需要的软件包， yum-util 提供 yum-config-manager 功能，另外两个是 devicemapper 驱动依赖的</p>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>yum <span class="token function">install</span> <span class="token parameter variable">-y</span> yum-utils device-mapper-persistent-data lvm2</pre></td></tr><tr><td data-num="2"></td><td><pre><span class="token comment">#可能会报错，没有就算了</span></pre></td></tr><tr><td data-num="3"></td><td><pre><span class="token comment">#failure: repodata/repomd.xml from mirrors.aliyun.com_docker-ce_linux_centos_docker-ce: [Errno 256] No more mirrors to try.</span></pre></td></tr><tr><td data-num="4"></td><td><pre><span class="token comment">#运行 yum-config-manager --save --setopt=mirrors.aliyun.com_docker-ce_linux_centos_docker-ce.skip_if_unavailable=true</span></pre></td></tr></table></figure></li>
+<li>
+<p>设置 yum 源</p>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo</pre></td></tr></table></figure></li>
+<li>
+<p>可以查看所有仓库中所有 docker 版本，并选择特定版本安装</p>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>yum list docker-ce <span class="token parameter variable">--showduplicates</span> <span class="token operator">|</span> <span class="token function">sort</span> <span class="token parameter variable">-r</span></pre></td></tr></table></figure></li>
+<li>
+<p>安装 docker</p>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>yum <span class="token function">install</span> docker-ce docker-ce-cli containerd.io</pre></td></tr><tr><td data-num="2"></td><td><pre><span class="token comment">#yum install -y docker-ce-3:20.10.9-3.el7</span></pre></td></tr></table></figure></li>
+<li>
+<p>启动并加入开机启动</p>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>systemctl start <span class="token function">docker</span></pre></td></tr><tr><td data-num="2"></td><td><pre> systemctl <span class="token builtin class-name">enable</span> <span class="token function">docker</span></pre></td></tr></table></figure></li>
+<li>
+<p>验证 docker 是安装成功</p>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token function">docker</span> version</pre></td></tr><tr><td data-num="2"></td><td><pre><span class="token function">docker</span> info</pre></td></tr></table></figure></li>
+<li>
+<p>配置镜像加速</p>
+</li>
+</ul>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token function">sudo</span> <span class="token function">mkdir</span> <span class="token parameter variable">-p</span> /etc/docker</pre></td></tr><tr><td data-num="2"></td><td><pre><span class="token function">sudo</span> <span class="token function">tee</span> /etc/docker/daemon.json <span class="token operator">&lt;&lt;-</span><span class="token string">'EOF'</pre></td></tr><tr><td data-num="3"></td><td><pre>&#123;</pre></td></tr><tr><td data-num="4"></td><td><pre>"registry-mirrors" : [</pre></td></tr><tr><td data-num="5"></td><td><pre>    "https://jkfdsf2u.mirror.aliyuncs.com",</pre></td></tr><tr><td data-num="6"></td><td><pre>    "https://registry.docker-cn.com"</pre></td></tr><tr><td data-num="7"></td><td><pre>  ],</pre></td></tr><tr><td data-num="8"></td><td><pre>  "insecure-registries" : [</pre></td></tr><tr><td data-num="9"></td><td><pre>    "docker-registry.zjq.com"</pre></td></tr><tr><td data-num="10"></td><td><pre>  ],</pre></td></tr><tr><td data-num="11"></td><td><pre>  "log-driver": "json-file",</pre></td></tr><tr><td data-num="12"></td><td><pre>  "log-opts": &#123;</pre></td></tr><tr><td data-num="13"></td><td><pre>    "max-size": "10m",</pre></td></tr><tr><td data-num="14"></td><td><pre>    "max-file": "10"</pre></td></tr><tr><td data-num="15"></td><td><pre>  &#125;,</pre></td></tr><tr><td data-num="16"></td><td><pre>  "data-root": "/data/docker"</pre></td></tr><tr><td data-num="17"></td><td><pre>&#125;</pre></td></tr><tr><td data-num="18"></td><td><pre>EOF</span></pre></td></tr><tr><td data-num="19"></td><td><pre><span class="token function">sudo</span> systemctl daemon-reload</pre></td></tr><tr><td data-num="20"></td><td><pre><span class="token function">sudo</span> systemctl restart <span class="token function">docker</span></pre></td></tr></table></figure></li>
+<li>
+<p>（每台执行，例外初始化）安装 <code>kubeadm</code></p>
+<ul>
+<li>添加阿里云 <code>K8s</code>  的 yum 源</li>
+</ul>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token function">cat</span> <span class="token operator">>></span> /etc/yum.repos.d/kubernetes.repo <span class="token operator">&lt;&lt;</span> <span class="token string">EOF</pre></td></tr><tr><td data-num="2"></td><td><pre>[kubernetes]</pre></td></tr><tr><td data-num="3"></td><td><pre>name=Kubernetes Repo</pre></td></tr><tr><td data-num="4"></td><td><pre>baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64/</pre></td></tr><tr><td data-num="5"></td><td><pre>gpgcheck=1</pre></td></tr><tr><td data-num="6"></td><td><pre>gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg</pre></td></tr><tr><td data-num="7"></td><td><pre>enabled=1</pre></td></tr><tr><td data-num="8"></td><td><pre>EOF</span></pre></td></tr></table></figure><ul>
+<li>
+<p>安装 <code>Kubeadm、Kubelet、Kubectl</code>  组件</p>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>yum  list  <span class="token operator">|</span><span class="token function">grep</span> kubeadm<span class="token comment">#查看版本</span></pre></td></tr><tr><td data-num="2"></td><td><pre>yum <span class="token parameter variable">-y</span> <span class="token function">install</span> kubelet-1.26.3-0 kubeadm-1.26.3-0 kubectl-1.26.3-0 </pre></td></tr><tr><td data-num="3"></td><td><pre>systemctl <span class="token builtin class-name">enable</span> kubelet <span class="token operator">&amp;&amp;</span> systemctl start kubelet</pre></td></tr></table></figure></li>
+<li>
+<p>（仅 master 节点）始化 <code>Kubernetes Master </code></p>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>kubeadm init --kubernetes-version<span class="token operator">=</span>v1.26.3 <span class="token punctuation">\</span></pre></td></tr><tr><td data-num="2"></td><td><pre>--apiserver-advertise-address<span class="token operator">=</span><span class="token number">10.0</span>.21.215   <span class="token punctuation">\</span></pre></td></tr><tr><td data-num="3"></td><td><pre>--image-repository registry.aliyuncs.com/google_containers  <span class="token punctuation">\</span></pre></td></tr><tr><td data-num="4"></td><td><pre>--service-cidr<span class="token operator">=</span><span class="token number">10.96</span>.0.0/16 --pod-network-cidr<span class="token operator">=</span><span class="token number">10.244</span>.0.0/16<span class="token punctuation">\</span></pre></td></tr><tr><td data-num="5"></td><td><pre>--cri-socket unix:///var/run/cri-dockerd.sock <span class="token punctuation">\</span></pre></td></tr><tr><td data-num="6"></td><td><pre>--ignore-preflight-errors<span class="token operator">=</span>all</pre></td></tr><tr><td data-num="7"></td><td><pre><span class="token comment">#可能会报错 [ERROR CRI]: container runtime is not running，解决：https://blog.csdn.net/qq_43580215/article/details/125153959</span></pre></td></tr><tr><td data-num="8"></td><td><pre></pre></td></tr><tr><td data-num="9"></td><td><pre><span class="token comment">#如果有其他错误看 11 点纠错即可。</span></pre></td></tr></table></figure><ul>
+<li>image-repository 是镜像源，由于 kubeadm 默认从官网<span class="exturl" data-url="aHR0cHM6Ly9saW5rLnpoaWh1LmNvbS8/dGFyZ2V0PWh0dHAlM0EvL2s4cy5ncmMuaW8="> http://k8s.grc.io</span> 下载所需镜像，国内无法访问，因此需要通过 image-repository 指定阿里云镜像仓库地址。</li>
+<li>apiserver-advertise-address 是 Master 机的 IP 地址，在本例中是 10.0.21.215</li>
+<li>pod-network-cidr 是 POD 的网段，本例中将其设为 10.244.0.0/16，可自行修改。</li>
+</ul>
+</li>
+<li>
+<p>得到加入密钥即可（先不要执行，因为从节点还没有配置 <code>admin.conf</code> ）：</p>
+</li>
+<li>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>kubeadm <span class="token function">join</span> <span class="token number">10.0</span>.21.215:6443 <span class="token parameter variable">--token</span> wy4b2n.k0mkkevck8devjm8 <span class="token punctuation">\</span></pre></td></tr><tr><td data-num="2"></td><td><pre>        --discovery-token-ca-cert-hash sha256:50ffa9744ca72782901e83341f6458164e1b7bc9032015176f5014a69207add4</pre></td></tr></table></figure><p><strong>注意</strong> ：从节点需要加上  <code>--cri-socket unix:///var/run/cri-dockerd.sock</code> ，因为没有整合 kubelet 和 cri-dockerd 所以需要。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>这还需要配置从节点的 kubectl，kubectl 命令需要使用 kubernetes-admin 来运行，需要 admin.conf 文件；而 admin.conf 文件是通过 “kubeadmin init” 命令在 /etc/kubernetes 中创建的，从节点没有该配置文件；因此需要将 admin.conf  <strong>复制到从节点</strong> 相同目录下面。</p>
+<ul>
+<li>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token comment">#文件复制（在主节点操作，利用 scp 命令）</span></pre></td></tr><tr><td data-num="2"></td><td><pre><span class="token function">scp</span> /etc/kubernetes/admin.conf root@10.0.21.216:/etc/kubernetes/</pre></td></tr><tr><td data-num="3"></td><td><pre><span class="token comment">#然后输入 10.0.21.216 密码即可</span></pre></td></tr><tr><td data-num="4"></td><td><pre><span class="token comment">#Warning: Permanently added '10.0.21.218' (ECDSA) to the list of known hosts.</span></pre></td></tr><tr><td data-num="5"></td><td><pre><span class="token comment">#root@10.0.21.218's password: *******</span></pre></td></tr><tr><td data-num="6"></td><td><pre></pre></td></tr><tr><td data-num="7"></td><td><pre>同样的操作把10.0.21.217、10.0.21.218配置即可</pre></td></tr><tr><td data-num="8"></td><td><pre></pre></td></tr><tr><td data-num="9"></td><td><pre><span class="token comment">#当每个 Node 都有 admin.conf 后，分别运行下面配置环境变量的代码</span></pre></td></tr><tr><td data-num="10"></td><td><pre><span class="token builtin class-name">echo</span> <span class="token string">"export KUBECONFIG=/etc/kubernetes/admin.conf"</span> <span class="token operator">>></span> ~/.bash_profile</pre></td></tr><tr><td data-num="11"></td><td><pre><span class="token builtin class-name">source</span> ~/.bash_profile</pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>
+<p>以上操作弄完之后就可以把从节点加入主节点了</p>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token comment">#每个从节点都需要加入</span></pre></td></tr><tr><td data-num="2"></td><td><pre>kubeadm <span class="token function">join</span> <span class="token number">10.0</span>.21.215:6443 <span class="token parameter variable">--token</span> wy4b2n.k0mkkevck8devjm8 <span class="token punctuation">\</span></pre></td></tr><tr><td data-num="3"></td><td><pre>        --discovery-token-ca-cert-hash sha256:50ffa9744ca72782901e83341f6458164e1b7bc9032015176f5014a69207add4 --cri-socket unix:///var/run/cri-dockerd.sock</pre></td></tr></table></figure><p>未加入前 kubectl get nodes 如下：</p>
+<p><img data-src="C:%5CUsers%5CAdministrator%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20230328095601955.png" alt="image-20230328095601955" /></p>
+<p>加入节点之后：（状态为 NotReady，需要配置网络）</p>
+<p><img data-src="C:%5CUsers%5CAdministrator%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20230328095641564.png" alt="image-20230328095641564" /></p>
+<h2 id="11节为k8s纠错如果没有就跳转12节"><a class="anchor" href="#11节为k8s纠错如果没有就跳转12节">#</a> 11 节为 K8s 纠错，，如果没有就跳转 12 节</h2>
+</li>
+<li>
+<p>纠错：</p>
+</li>
+</ol>
+<pre><code>* ```bash
+  error execution phase preflight: [preflight] Some fatal errors occurred:         [ERROR FileAvailabl
+  ```
+
+  ​	解决方案：kubeadm reset
+
+  
+
+* ```bash
+  [wait-control-plane] Waiting for the kubelet to boot up the control plane as static Pods from directory &quot;/etc/kubernetes/manifests&quot;. This can take up to 4m0s
+  [kubelet-check] Initial timeout of 40s passed.
+  
+  ```
+
+  解决方案需要安装cri-dockerd（所有节点）
+
+  ```bash
+  #从https://github.com/Mirantis/cri-dockerd/releases中下载最新的rpm包,手动下载后上传到服务器里
+  rpm -ivh cri-dockerd-0.3.1-3.el7.x86_64.rpm
+  
+  #修改/usr/lib/systemd/system/cri-docker.service文件中的ExecStart配置
+  vim /usr/lib/systemd/system/cri-docker.service
+  ExecStart=/usr/bin/cri-dockerd --network-plugin=cni --pod-infra-container-image=registry.aliyuncs.com/google_containers/pause:3.7
+  
+  systemctl daemon-reload
+  systemctl enable --now cri-docker
+  ```
+
+  之后在运行下面代码，初始化即可。
+
+  ```bash
+  kubeadm init \
+  --apiserver-advertise-address=10.0.21.215 \
+  --image-repository registry.aliyuncs.com/google_containers \
+  --kubernetes-version v1.26.3 \
+  --service-cidr=10.96.0.0/12 \
+  --pod-network-cidr=10.244.0.0/16 \
+  --cri-socket unix:///var/run/cri-dockerd.sock \
+  --ignore-preflight-errors=all
+  ```
+</code></pre>
+<h1 id="到目前位置就安装完k8s了"><a class="anchor" href="#到目前位置就安装完k8s了">#</a> 到目前位置就安装完 k8s 了</h1>
+<h1 id="下面进行网络等初始化配置"><a class="anchor" href="#下面进行网络等初始化配置">#</a> 下面进行网络等初始化配置：</h1>
+</li>
+<li>
+<p>使用 wget 命令，地址为：(<span class="exturl" data-url="aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL2NvcmVvcy9mbGFubmVsL21hc3Rlci9Eb2N1bWVudGF0aW9uL2t1YmUtZmxhbm5lbC55bWw=">https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml</span>)，这个地址国内访问不了，所以我把内容复制下来，为了避免前面文章过长，我把它粘贴到文章末尾了。这个 yml 配置文件中配置了一个国内无法访问的地址 (<span class="exturl" data-url="aHR0cDovL3F1YXkuaW8=">quay.io</span>)，我已经将其改为国内可以访问的地址 (<span class="exturl" data-url="aHR0cDovL3F1YXktbWlycm9yLnFpbml1LmNvbQ==">quay-mirror.qiniu.com</span>)。我们新建一个 kube-flannel.yml 文件，复制粘贴该内容即可。</p>
+</li>
+</ul>
+<p>​	之后运行：</p>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>kubectl apply <span class="token parameter variable">-f</span> kube-flannel.yml</pre></td></tr></table></figure><p><img data-src="C:%5CUsers%5CAdministrator%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20230328102951128.png" alt="image-20230328102951128" /></p>
+<h1 id="下面进行一个小实验体会一下k8s"><a class="anchor" href="#下面进行一个小实验体会一下k8s">#</a> 下面进行一个小实验体会一下 k8s：</h1>
+<ul>
+<li>
+<p>这里就简单做一个 nginx 实验即可</p>
+<ol>
+<li>
+<p>首先你需要下载一个 yaml 文件</p>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token function">wget</span> https://raw.githubusercontent.com/kubernetes/website/master/content/en/examples/application/nginx-app.yaml</pre></td></tr></table></figure><p>如果想 vim yaml 文件，可以看到里面有 Service 、 Deployment，</p>
+<p><strong>三份副本</strong></p>
+</li>
+<li>
+<p>然后：</p>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>kubectl apply <span class="token parameter variable">-f</span> nginx-app.yaml</pre></td></tr></table></figure><p><img data-src="C:%5CUsers%5CAdministrator%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20230328201357001.png" alt="image-20230328201357001" /></p>
+<p>可以看到 <code>kubectl</code>  帮建立了一个 <code>service</code>  和 <code>deployment</code> , <code>deployment</code>  里面 <code> replicas: 3</code> ，所以得到 3 个 pod。</p>
+</li>
+<li>
+<p>然后在相当于服务暴露到 <code>10.0.21.215:31497</code> , <code>10.0.21.216:31497</code> , <code>10.0.21.217:31497</code> , <code>10.0.21.218:31497</code>  去浏览器访问即可。</p>
+</li>
+</ol>
+<p>如下图：</p>
+<p><img data-src="C:%5CUsers%5CAdministrator%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20230328202011694.png" alt="image-20230328202011694" /></p>
+</li>
+</ul>
+<h2 id="附录"><a class="anchor" href="#附录">#</a> 附录</h2>
+<ul>
+<li>kube-flannel.yml</li>
+</ul>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>---</pre></td></tr><tr><td data-num="2"></td><td><pre>kind: Namespace</pre></td></tr><tr><td data-num="3"></td><td><pre>apiVersion: v1</pre></td></tr><tr><td data-num="4"></td><td><pre>metadata:</pre></td></tr><tr><td data-num="5"></td><td><pre>  name: kube-flannel</pre></td></tr><tr><td data-num="6"></td><td><pre>  labels:</pre></td></tr><tr><td data-num="7"></td><td><pre>    pod-security.kubernetes.io/enforce: privileged</pre></td></tr><tr><td data-num="8"></td><td><pre>---</pre></td></tr><tr><td data-num="9"></td><td><pre>kind: ClusterRole</pre></td></tr><tr><td data-num="10"></td><td><pre>apiVersion: rbac.authorization.k8s.io/v1</pre></td></tr><tr><td data-num="11"></td><td><pre>metadata:</pre></td></tr><tr><td data-num="12"></td><td><pre>  name: flannel</pre></td></tr><tr><td data-num="13"></td><td><pre>rules:</pre></td></tr><tr><td data-num="14"></td><td><pre>- apiGroups:</pre></td></tr><tr><td data-num="15"></td><td><pre>  - <span class="token string">""</span></pre></td></tr><tr><td data-num="16"></td><td><pre>  resources:</pre></td></tr><tr><td data-num="17"></td><td><pre>  - pods</pre></td></tr><tr><td data-num="18"></td><td><pre>  verbs:</pre></td></tr><tr><td data-num="19"></td><td><pre>  - get</pre></td></tr><tr><td data-num="20"></td><td><pre>- apiGroups:</pre></td></tr><tr><td data-num="21"></td><td><pre>  - <span class="token string">""</span></pre></td></tr><tr><td data-num="22"></td><td><pre>  resources:</pre></td></tr><tr><td data-num="23"></td><td><pre>  - nodes</pre></td></tr><tr><td data-num="24"></td><td><pre>  verbs:</pre></td></tr><tr><td data-num="25"></td><td><pre>  - get</pre></td></tr><tr><td data-num="26"></td><td><pre>  - list</pre></td></tr><tr><td data-num="27"></td><td><pre>  - <span class="token function">watch</span></pre></td></tr><tr><td data-num="28"></td><td><pre>- apiGroups:</pre></td></tr><tr><td data-num="29"></td><td><pre>  - <span class="token string">""</span></pre></td></tr><tr><td data-num="30"></td><td><pre>  resources:</pre></td></tr><tr><td data-num="31"></td><td><pre>  - nodes/status</pre></td></tr><tr><td data-num="32"></td><td><pre>  verbs:</pre></td></tr><tr><td data-num="33"></td><td><pre>  - patch</pre></td></tr><tr><td data-num="34"></td><td><pre>- apiGroups:</pre></td></tr><tr><td data-num="35"></td><td><pre>  - <span class="token string">"networking.k8s.io"</span></pre></td></tr><tr><td data-num="36"></td><td><pre>  resources:</pre></td></tr><tr><td data-num="37"></td><td><pre>  - clustercidrs</pre></td></tr><tr><td data-num="38"></td><td><pre>  verbs:</pre></td></tr><tr><td data-num="39"></td><td><pre>  - list</pre></td></tr><tr><td data-num="40"></td><td><pre>  - <span class="token function">watch</span></pre></td></tr><tr><td data-num="41"></td><td><pre>---</pre></td></tr><tr><td data-num="42"></td><td><pre>kind: ClusterRoleBinding</pre></td></tr><tr><td data-num="43"></td><td><pre>apiVersion: rbac.authorization.k8s.io/v1</pre></td></tr><tr><td data-num="44"></td><td><pre>metadata:</pre></td></tr><tr><td data-num="45"></td><td><pre>  name: flannel</pre></td></tr><tr><td data-num="46"></td><td><pre>roleRef:</pre></td></tr><tr><td data-num="47"></td><td><pre>  apiGroup: rbac.authorization.k8s.io</pre></td></tr><tr><td data-num="48"></td><td><pre>  kind: ClusterRole</pre></td></tr><tr><td data-num="49"></td><td><pre>  name: flannel</pre></td></tr><tr><td data-num="50"></td><td><pre>subjects:</pre></td></tr><tr><td data-num="51"></td><td><pre>- kind: ServiceAccount</pre></td></tr><tr><td data-num="52"></td><td><pre>  name: flannel</pre></td></tr><tr><td data-num="53"></td><td><pre>  namespace: kube-flannel</pre></td></tr><tr><td data-num="54"></td><td><pre>---</pre></td></tr><tr><td data-num="55"></td><td><pre>apiVersion: v1</pre></td></tr><tr><td data-num="56"></td><td><pre>kind: ServiceAccount</pre></td></tr><tr><td data-num="57"></td><td><pre>metadata:</pre></td></tr><tr><td data-num="58"></td><td><pre>  name: flannel</pre></td></tr><tr><td data-num="59"></td><td><pre>  namespace: kube-flannel</pre></td></tr><tr><td data-num="60"></td><td><pre>---</pre></td></tr><tr><td data-num="61"></td><td><pre>kind: ConfigMap</pre></td></tr><tr><td data-num="62"></td><td><pre>apiVersion: v1</pre></td></tr><tr><td data-num="63"></td><td><pre>metadata:</pre></td></tr><tr><td data-num="64"></td><td><pre>  name: kube-flannel-cfg</pre></td></tr><tr><td data-num="65"></td><td><pre>  namespace: kube-flannel</pre></td></tr><tr><td data-num="66"></td><td><pre>  labels:</pre></td></tr><tr><td data-num="67"></td><td><pre>    tier: <span class="token function">node</span></pre></td></tr><tr><td data-num="68"></td><td><pre>    app: flannel</pre></td></tr><tr><td data-num="69"></td><td><pre>data:</pre></td></tr><tr><td data-num="70"></td><td><pre>  cni-conf.json: <span class="token operator">|</span></pre></td></tr><tr><td data-num="71"></td><td><pre>    <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="72"></td><td><pre>      <span class="token string">"name"</span><span class="token builtin class-name">:</span> <span class="token string">"cbr0"</span>,</pre></td></tr><tr><td data-num="73"></td><td><pre>      <span class="token string">"cniVersion"</span><span class="token builtin class-name">:</span> <span class="token string">"0.3.1"</span>,</pre></td></tr><tr><td data-num="74"></td><td><pre>      <span class="token string">"plugins"</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span></pre></td></tr><tr><td data-num="75"></td><td><pre>        <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="76"></td><td><pre>          <span class="token string">"type"</span><span class="token builtin class-name">:</span> <span class="token string">"flannel"</span>,</pre></td></tr><tr><td data-num="77"></td><td><pre>          <span class="token string">"delegate"</span><span class="token builtin class-name">:</span> <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="78"></td><td><pre>            <span class="token string">"hairpinMode"</span><span class="token builtin class-name">:</span> true,</pre></td></tr><tr><td data-num="79"></td><td><pre>            <span class="token string">"isDefaultGateway"</span><span class="token builtin class-name">:</span> <span class="token boolean">true</span></pre></td></tr><tr><td data-num="80"></td><td><pre>          <span class="token punctuation">&#125;</span></pre></td></tr><tr><td data-num="81"></td><td><pre>        <span class="token punctuation">&#125;</span>,</pre></td></tr><tr><td data-num="82"></td><td><pre>        <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="83"></td><td><pre>          <span class="token string">"type"</span><span class="token builtin class-name">:</span> <span class="token string">"portmap"</span>,</pre></td></tr><tr><td data-num="84"></td><td><pre>          <span class="token string">"capabilities"</span><span class="token builtin class-name">:</span> <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="85"></td><td><pre>            <span class="token string">"portMappings"</span><span class="token builtin class-name">:</span> <span class="token boolean">true</span></pre></td></tr><tr><td data-num="86"></td><td><pre>          <span class="token punctuation">&#125;</span></pre></td></tr><tr><td data-num="87"></td><td><pre>        <span class="token punctuation">&#125;</span></pre></td></tr><tr><td data-num="88"></td><td><pre>      <span class="token punctuation">]</span></pre></td></tr><tr><td data-num="89"></td><td><pre>    <span class="token punctuation">&#125;</span></pre></td></tr><tr><td data-num="90"></td><td><pre>  net-conf.json: <span class="token operator">|</span></pre></td></tr><tr><td data-num="91"></td><td><pre>    <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="92"></td><td><pre>      <span class="token string">"Network"</span><span class="token builtin class-name">:</span> <span class="token string">"10.242.0.0/16"</span>,</pre></td></tr><tr><td data-num="93"></td><td><pre>      <span class="token string">"Backend"</span><span class="token builtin class-name">:</span> <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="94"></td><td><pre>        <span class="token string">"Type"</span><span class="token builtin class-name">:</span> <span class="token string">"vxlan"</span></pre></td></tr><tr><td data-num="95"></td><td><pre>      <span class="token punctuation">&#125;</span></pre></td></tr><tr><td data-num="96"></td><td><pre>    <span class="token punctuation">&#125;</span></pre></td></tr><tr><td data-num="97"></td><td><pre>---</pre></td></tr><tr><td data-num="98"></td><td><pre>apiVersion: apps/v1</pre></td></tr><tr><td data-num="99"></td><td><pre>kind: DaemonSet</pre></td></tr><tr><td data-num="100"></td><td><pre>metadata:</pre></td></tr><tr><td data-num="101"></td><td><pre>  name: kube-flannel-ds</pre></td></tr><tr><td data-num="102"></td><td><pre>  namespace: kube-flannel</pre></td></tr><tr><td data-num="103"></td><td><pre>  labels:</pre></td></tr><tr><td data-num="104"></td><td><pre>    tier: <span class="token function">node</span></pre></td></tr><tr><td data-num="105"></td><td><pre>    app: flannel</pre></td></tr><tr><td data-num="106"></td><td><pre>spec:</pre></td></tr><tr><td data-num="107"></td><td><pre>  selector:</pre></td></tr><tr><td data-num="108"></td><td><pre>    matchLabels:</pre></td></tr><tr><td data-num="109"></td><td><pre>      app: flannel</pre></td></tr><tr><td data-num="110"></td><td><pre>  template:</pre></td></tr><tr><td data-num="111"></td><td><pre>    metadata:</pre></td></tr><tr><td data-num="112"></td><td><pre>      labels:</pre></td></tr><tr><td data-num="113"></td><td><pre>        tier: <span class="token function">node</span></pre></td></tr><tr><td data-num="114"></td><td><pre>        app: flannel</pre></td></tr><tr><td data-num="115"></td><td><pre>    spec:</pre></td></tr><tr><td data-num="116"></td><td><pre>      affinity:</pre></td></tr><tr><td data-num="117"></td><td><pre>        nodeAffinity:</pre></td></tr><tr><td data-num="118"></td><td><pre>          requiredDuringSchedulingIgnoredDuringExecution:</pre></td></tr><tr><td data-num="119"></td><td><pre>            nodeSelectorTerms:</pre></td></tr><tr><td data-num="120"></td><td><pre>            - matchExpressions:</pre></td></tr><tr><td data-num="121"></td><td><pre>              - key: kubernetes.io/os</pre></td></tr><tr><td data-num="122"></td><td><pre>                operator: In</pre></td></tr><tr><td data-num="123"></td><td><pre>                values:</pre></td></tr><tr><td data-num="124"></td><td><pre>                - linux</pre></td></tr><tr><td data-num="125"></td><td><pre>      hostNetwork: <span class="token boolean">true</span></pre></td></tr><tr><td data-num="126"></td><td><pre>      priorityClassName: system-node-critical</pre></td></tr><tr><td data-num="127"></td><td><pre>      tolerations:</pre></td></tr><tr><td data-num="128"></td><td><pre>      - operator: Exists</pre></td></tr><tr><td data-num="129"></td><td><pre>        effect: NoSchedule</pre></td></tr><tr><td data-num="130"></td><td><pre>      serviceAccountName: flannel</pre></td></tr><tr><td data-num="131"></td><td><pre>      initContainers:</pre></td></tr><tr><td data-num="132"></td><td><pre>      - name: install-cni-plugin</pre></td></tr><tr><td data-num="133"></td><td><pre>        image: docker.io/flannel/flannel-cni-plugin:v1.1.2</pre></td></tr><tr><td data-num="134"></td><td><pre>       <span class="token comment">#image: docker.io/rancher/mirrored-flannelcni-flannel-cni-plugin:v1.1.2</span></pre></td></tr><tr><td data-num="135"></td><td><pre>        command:</pre></td></tr><tr><td data-num="136"></td><td><pre>        - <span class="token function">cp</span></pre></td></tr><tr><td data-num="137"></td><td><pre>        args:</pre></td></tr><tr><td data-num="138"></td><td><pre>        - <span class="token parameter variable">-f</span></pre></td></tr><tr><td data-num="139"></td><td><pre>        - /flannel</pre></td></tr><tr><td data-num="140"></td><td><pre>        - /opt/cni/bin/flannel</pre></td></tr><tr><td data-num="141"></td><td><pre>        volumeMounts:</pre></td></tr><tr><td data-num="142"></td><td><pre>        - name: cni-plugin</pre></td></tr><tr><td data-num="143"></td><td><pre>          mountPath: /opt/cni/bin</pre></td></tr><tr><td data-num="144"></td><td><pre>      - name: install-cni</pre></td></tr><tr><td data-num="145"></td><td><pre>        image: docker.io/flannel/flannel:v0.21.4</pre></td></tr><tr><td data-num="146"></td><td><pre>       <span class="token comment">#image: docker.io/rancher/mirrored-flannelcni-flannel:v0.21.4</span></pre></td></tr><tr><td data-num="147"></td><td><pre>        command:</pre></td></tr><tr><td data-num="148"></td><td><pre>        - <span class="token function">cp</span></pre></td></tr><tr><td data-num="149"></td><td><pre>        args:</pre></td></tr><tr><td data-num="150"></td><td><pre>        - <span class="token parameter variable">-f</span></pre></td></tr><tr><td data-num="151"></td><td><pre>        - /etc/kube-flannel/cni-conf.json</pre></td></tr><tr><td data-num="152"></td><td><pre>        - /etc/cni/net.d/10-flannel.conflist</pre></td></tr><tr><td data-num="153"></td><td><pre>        volumeMounts:</pre></td></tr><tr><td data-num="154"></td><td><pre>        - name: cni</pre></td></tr><tr><td data-num="155"></td><td><pre>          mountPath: /etc/cni/net.d</pre></td></tr><tr><td data-num="156"></td><td><pre>        - name: flannel-cfg</pre></td></tr><tr><td data-num="157"></td><td><pre>          mountPath: /etc/kube-flannel/</pre></td></tr><tr><td data-num="158"></td><td><pre>      containers:</pre></td></tr><tr><td data-num="159"></td><td><pre>      - name: kube-flannel</pre></td></tr><tr><td data-num="160"></td><td><pre>        image: docker.io/flannel/flannel:v0.21.4</pre></td></tr><tr><td data-num="161"></td><td><pre>       <span class="token comment">#image: docker.io/rancher/mirrored-flannelcni-flannel:v0.21.4</span></pre></td></tr><tr><td data-num="162"></td><td><pre>        command:</pre></td></tr><tr><td data-num="163"></td><td><pre>        - /opt/bin/flanneld</pre></td></tr><tr><td data-num="164"></td><td><pre>        args:</pre></td></tr><tr><td data-num="165"></td><td><pre>        - --ip-masq</pre></td></tr><tr><td data-num="166"></td><td><pre>        - --kube-subnet-mgr</pre></td></tr><tr><td data-num="167"></td><td><pre>        resources:</pre></td></tr><tr><td data-num="168"></td><td><pre>          requests:</pre></td></tr><tr><td data-num="169"></td><td><pre>            cpu: <span class="token string">"100m"</span></pre></td></tr><tr><td data-num="170"></td><td><pre>            memory: <span class="token string">"50Mi"</span></pre></td></tr><tr><td data-num="171"></td><td><pre>        securityContext:</pre></td></tr><tr><td data-num="172"></td><td><pre>          privileged: <span class="token boolean">false</span></pre></td></tr><tr><td data-num="173"></td><td><pre>          capabilities:</pre></td></tr><tr><td data-num="174"></td><td><pre>            add: <span class="token punctuation">[</span><span class="token string">"NET_ADMIN"</span>, <span class="token string">"NET_RAW"</span><span class="token punctuation">]</span></pre></td></tr><tr><td data-num="175"></td><td><pre>        env:</pre></td></tr><tr><td data-num="176"></td><td><pre>        - name: POD_NAME</pre></td></tr><tr><td data-num="177"></td><td><pre>          valueFrom:</pre></td></tr><tr><td data-num="178"></td><td><pre>            fieldRef:</pre></td></tr><tr><td data-num="179"></td><td><pre>              fieldPath: metadata.name</pre></td></tr><tr><td data-num="180"></td><td><pre>        - name: POD_NAMESPACE</pre></td></tr><tr><td data-num="181"></td><td><pre>          valueFrom:</pre></td></tr><tr><td data-num="182"></td><td><pre>            fieldRef:</pre></td></tr><tr><td data-num="183"></td><td><pre>              fieldPath: metadata.namespace</pre></td></tr><tr><td data-num="184"></td><td><pre>        - name: EVENT_QUEUE_DEPTH</pre></td></tr><tr><td data-num="185"></td><td><pre>          value: <span class="token string">"5000"</span></pre></td></tr><tr><td data-num="186"></td><td><pre>        volumeMounts:</pre></td></tr><tr><td data-num="187"></td><td><pre>        - name: run</pre></td></tr><tr><td data-num="188"></td><td><pre>          mountPath: /run/flannel</pre></td></tr><tr><td data-num="189"></td><td><pre>        - name: flannel-cfg</pre></td></tr><tr><td data-num="190"></td><td><pre>          mountPath: /etc/kube-flannel/</pre></td></tr><tr><td data-num="191"></td><td><pre>        - name: xtables-lock</pre></td></tr><tr><td data-num="192"></td><td><pre>          mountPath: /run/xtables.lock</pre></td></tr><tr><td data-num="193"></td><td><pre>      volumes:</pre></td></tr><tr><td data-num="194"></td><td><pre>      - name: run</pre></td></tr><tr><td data-num="195"></td><td><pre>        hostPath:</pre></td></tr><tr><td data-num="196"></td><td><pre>          path: /run/flannel</pre></td></tr><tr><td data-num="197"></td><td><pre>      - name: cni-plugin</pre></td></tr><tr><td data-num="198"></td><td><pre>        hostPath:</pre></td></tr><tr><td data-num="199"></td><td><pre>          path: /opt/cni/bin</pre></td></tr><tr><td data-num="200"></td><td><pre>      - name: cni</pre></td></tr><tr><td data-num="201"></td><td><pre>        hostPath:</pre></td></tr><tr><td data-num="202"></td><td><pre>          path: /etc/cni/net.d</pre></td></tr><tr><td data-num="203"></td><td><pre>      - name: flannel-cfg</pre></td></tr><tr><td data-num="204"></td><td><pre>        configMap:</pre></td></tr><tr><td data-num="205"></td><td><pre>          name: kube-flannel-cfg</pre></td></tr><tr><td data-num="206"></td><td><pre>      - name: xtables-lock</pre></td></tr><tr><td data-num="207"></td><td><pre>        hostPath:</pre></td></tr><tr><td data-num="208"></td><td><pre>          path: /run/xtables.lock</pre></td></tr><tr><td data-num="209"></td><td><pre>          type: FileOrCreate</pre></td></tr></table></figure>
+  </div>
+
+   <footer>
+
+    <div class="meta">
+  <span class="item">
+    <span class="icon">
+      <i class="ic i-calendar-check"></i>
+    </span>
+    <span class="text">更新于</span>
+    <time title="修改时间：2024-01-03 19:29:57" itemprop="dateModified" datetime="2024-01-03T19:29:57+08:00">2024-01-03</time>
+  </span>
+  <span id="2020/08/13/linux/实验室搭建K8s教程/" class="item leancloud_visitors" data-flag-title="实验室搭建K8s教程" title="阅读次数">
+      <span class="icon">
+        <i class="ic i-eye"></i>
+      </span>
+      <span class="text">阅读次数</span>
+      <span class="leancloud-visitors-count"></span>
+      <span class="text">次</span>
+  </span>
+</div>
+
+      
+<div class="reward">
+  <button><i class="ic i-heartbeat"></i> 赞赏</button>
+  <p>请我喝[茶]~(￣▽￣)~*</p>
+  <div id="qr">
+      
+      <div>
+        <img data-src="/images/wechatpay.png" alt="Watsmal 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div>
+        <img data-src="/images/alipay.png" alt="Watsmal 支付宝">
+        <p>支付宝</p>
+      </div>
+      
+      <div>
+        <img data-src="/images/paypal.png" alt="Watsmal 贝宝">
+        <p>贝宝</p>
+      </div>
+  </div>
+</div>
+
+      
+
+<div id="copyright">
+<ul>
+  <li class="author">
+    <strong>本文作者： </strong>Watsmal <i class="ic i-at"><em>@</em></i>有几个头大的博客
+  </li>
+  <li class="link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2020/08/13/linux/%E5%AE%9E%E9%AA%8C%E5%AE%A4%E6%90%AD%E5%BB%BAK8s%E6%95%99%E7%A8%8B/" title="实验室搭建K8s教程">http://example.com/2020/08/13/linux/实验室搭建K8s教程/</a>
+  </li>
+  <li class="license">
+    <strong>版权声明： </strong>本站所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC96aC1DTg=="><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+  </footer>
+
+</article>
+
+  </div>
+  
+
+<div class="post-nav">
+    <div class="item left">
+      
+
+  <a href="/2020/08/13/hexo/theme-shoka-doc/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;i.imgtg.com&#x2F;2023&#x2F;03&#x2F;09&#x2F;Y0zdB.jpg" title="Hexo主题Shoka搭建">
+  <span class="type">上一篇</span>
+  <span class="category"><i class="ic i-flag"></i> Theme Shoka</span>
+  <h3>Hexo主题Shoka搭建</h3>
+  </a>
+
+    </div>
+    <div class="item right">
+      
+
+  <a href="/2020/08/13/hexo/theme-shoka/dependents/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;i.imgtg.com&#x2F;2023&#x2F;03&#x2F;09&#x2F;YSIlc.jpg" title="Step.1 依赖插件">
+  <span class="type">下一篇</span>
+  <span class="category"><i class="ic i-flag"></i> Theme Shoka</span>
+  <h3>Step.1 依赖插件</h3>
+  </a>
+
+    </div>
+</div>
+
+  
+  <div class="wrap" id="comments"></div>
+
+
+        </div>
+        <div id="sidebar">
+          
+
+<div class="inner">
+
+  <div class="panels">
+    <div class="inner">
+      <div class="contents panel pjax" data-title="文章目录">
+          <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E5%AE%A4%E6%90%AD%E5%BB%BAk8s%E6%95%99%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text"> 实验室搭建 K8s 教程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11%E8%8A%82%E4%B8%BAk8s%E7%BA%A0%E9%94%99%E5%A6%82%E6%9E%9C%E6%B2%A1%E6%9C%89%E5%B0%B1%E8%B7%B3%E8%BD%AC12%E8%8A%82"><span class="toc-number">2.</span> <span class="toc-text"> 11 节为 K8s 纠错，，如果没有就跳转 12 节</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%B0%E7%9B%AE%E5%89%8D%E4%BD%8D%E7%BD%AE%E5%B0%B1%E5%AE%89%E8%A3%85%E5%AE%8Ck8s%E4%BA%86"><span class="toc-number"></span> <span class="toc-text"> 到目前位置就安装完 k8s 了</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%8B%E9%9D%A2%E8%BF%9B%E8%A1%8C%E7%BD%91%E7%BB%9C%E7%AD%89%E5%88%9D%E5%A7%8B%E5%8C%96%E9%85%8D%E7%BD%AE"><span class="toc-number"></span> <span class="toc-text"> 下面进行网络等初始化配置：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%8B%E9%9D%A2%E8%BF%9B%E8%A1%8C%E4%B8%80%E4%B8%AA%E5%B0%8F%E5%AE%9E%E9%AA%8C%E4%BD%93%E4%BC%9A%E4%B8%80%E4%B8%8Bk8s"><span class="toc-number"></span> <span class="toc-text"> 下面进行一个小实验体会一下 k8s：</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%99%84%E5%BD%95"><span class="toc-number">1.</span> <span class="toc-text"> 附录</span></a></li></ol>
+      </div>
+      <div class="related panel pjax" data-title="系列文章">
+        <ul>
+          <li class="active"><a href="/2020/08/13/linux/%E5%AE%9E%E9%AA%8C%E5%AE%A4%E6%90%AD%E5%BB%BAK8s%E6%95%99%E7%A8%8B/" rel="bookmark" title="实验室搭建K8s教程">实验室搭建K8s教程</a></li><li><a href="/2020/08/13/linux/chatgpt/chatgpt-token%E5%88%B6%E4%BD%9C%E6%96%B9%E6%A1%88/" rel="bookmark" title="chatgpt-token制作方案">chatgpt-token制作方案</a></li>
+        </ul>
+      </div>
+      <div class="overview panel" data-title="站点概览">
+        <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="image" itemprop="image" alt="Watsmal"
+      data-src="/images/avatar.jpg">
+  <p class="name" itemprop="name">Watsmal</p>
+  <div class="description" itemprop="description">有几个头大的博客</div>
+</div>
+
+<nav class="state">
+    <div class="item posts">
+      <a href="/archives/">
+        <span class="count">10</span>
+        <span class="name">文章</span>
+      </a>
+    </div>
+    <div class="item categories">
+      <a href="/categories/">
+        <span class="count">6</span>
+        <span class="name">分类</span>
+      </a>
+    </div>
+    <div class="item tags">
+      <a href="/tags/">
+        <span class="count">7</span>
+        <span class="name">标签</span>
+      </a>
+    </div>
+</nav>
+
+<div class="social">
+      <span class="exturl item github" data-url="aHR0cHM6Ly9naXRodWIuY29tLzE0Njk1MzgxMzhjaGlycw==" title="https:&#x2F;&#x2F;github.com&#x2F;1469538138chirs"><i class="ic i-github"></i></span>
+      <span class="exturl item zhihu" data-url="aHR0cHM6Ly93d3cuemhpaHUuY29tL3Blb3BsZS95b3UtamktZ2UtdG91LWRh" title="https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;you-ji-ge-tou-da"><i class="ic i-zhihu"></i></span>
+      <span class="exturl item weibo" data-url="aHR0cHM6Ly93ZWliby5jb20veW91cm5hbWU=" title="https:&#x2F;&#x2F;weibo.com&#x2F;yourname"><i class="ic i-weibo"></i></span>
+      <a href="/17671200459@163.com" title="17671200459@163.com" class="item email"><i class="ic i-envelope"></i></a>
+      <span class="exturl item stackoverflow" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS91c2Vycy8yMzE5MDAzNC8lRTYlOUMlODklRTUlODclQTAlRTQlQjglQUElRTUlQTQlQjQlRTUlQTQlQTc=" title="https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;23190034&#x2F;%E6%9C%89%E5%87%A0%E4%B8%AA%E5%A4%B4%E5%A4%A7"><i class="ic i-stack-overflow"></i></span>
+</div>
+
+<ul class="menu">
+  
+    
+  <li class="item">
+    <a href="/" rel="section"><i class="ic i-home"></i>首页</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/about/" rel="section"><i class="ic i-user"></i>关于</a>
+  </li>
+
+        
+  <li class="item dropdown">
+      <a href="javascript:void(0);"><i class="ic i-feather"></i>文章</a>
+    <ul class="submenu">
+
+        
+  <li class="item">
+    <a href="/archives/" rel="section"><i class="ic i-list-alt"></i>归档</a>
+  </li>
+
+        
+  <li class="item">
+    <a href="/categories/" rel="section"><i class="ic i-th"></i>分类</a>
+  </li>
+
+        
+  <li class="item">
+    <a href="/tags/" rel="section"><i class="ic i-tags"></i>标签</a>
+  </li>
+
+  </ul>
+    
+  <li class="item">
+    <a href="/friends/" rel="section"><i class="ic i-heart"></i>友链</a>
+  </li>
+
+
+</ul>
+
+      </div>
+    </div>
+  </div>
+
+  <ul id="quick">
+    <li class="prev pjax">
+        <a href="/2020/08/13/hexo/theme-shoka-doc/" rel="prev" title="上一篇"><i class="ic i-chevron-left"></i></a>
+    </li>
+    <li class="up"><i class="ic i-arrow-up"></i></li>
+    <li class="down"><i class="ic i-arrow-down"></i></li>
+    <li class="next pjax">
+        <a href="/2020/08/13/hexo/theme-shoka/dependents/" rel="next" title="下一篇"><i class="ic i-chevron-right"></i></a>
+    </li>
+    <li class="percent"></li>
+  </ul>
+</div>
+
+
+        </div>
+        <div class="dimmer"></div>
+      </div>
+    </main>
+    <footer id="footer">
+      <div class="inner">
+        <div class="widgets">
+          
+<div class="rpost pjax">
+  <h2>随机文章</h2>
+  <ul>
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/hexo/" title="分类于 hexo搭建">hexo搭建</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/hexo/theme-shoka/" title="分类于 Theme Shoka">Theme Shoka</a>
+</div>
+
+    <span><a href="/2020/08/13/hexo/theme-shoka/config/" title="Step.2 基本配置">Step.2 基本配置</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/hexo/" title="分类于 hexo搭建">hexo搭建</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/hexo/theme-shoka/" title="分类于 Theme Shoka">Theme Shoka</a>
+</div>
+
+    <span><a href="/2020/08/13/hexo/theme-shoka-doc/" title="Hexo主题Shoka搭建">Hexo主题Shoka搭建</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/hexo/" title="分类于 hexo搭建">hexo搭建</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/hexo/theme-shoka/" title="分类于 Theme Shoka">Theme Shoka</a>
+</div>
+
+    <span><a href="/2020/08/13/hexo/theme-shoka/special/" title="Step.4 主题特殊功能">Step.4 主题特殊功能</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/hexo/" title="分类于 hexo搭建">hexo搭建</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/hexo/theme-shoka/" title="分类于 Theme Shoka">Theme Shoka</a>
+</div>
+
+    <span><a href="/2020/08/13/hexo/theme-shoka/dependents/" title="Step.1 依赖插件">Step.1 依赖插件</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/linux/" title="分类于 Linux">Linux</a>
+</div>
+
+    <span><a href="/2020/08/13/linux/%E5%AE%9E%E9%AA%8C%E5%AE%A4%E6%90%AD%E5%BB%BAK8s%E6%95%99%E7%A8%8B/" title="实验室搭建K8s教程">实验室搭建K8s教程</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/rust/" title="分类于 rust学习">rust学习</a>
+</div>
+
+    <span><a href="/2020/08/13/rust/rust%20%E4%BA%8C%E5%8F%89%E6%A0%91%E6%9E%84%E5%BB%BA/" title="rust 二叉树构建">rust 二叉树构建</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+</div>
+
+    <span><a href="/2024/01/02/hello-world/" title="Hello World">Hello World</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/other/" title="分类于 其他">其他</a>
+</div>
+
+    <span><a href="/2021/08/13/other/switch%E9%81%87%E8%A7%81%20i++/" title="C语言里面的switch偶遇i++">C语言里面的switch偶遇i++</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/hexo/" title="分类于 hexo搭建">hexo搭建</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/hexo/theme-shoka/" title="分类于 Theme Shoka">Theme Shoka</a>
+</div>
+
+    <span><a href="/2020/08/13/hexo/theme-shoka/display/" title="Step.3 界面显示">Step.3 界面显示</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/linux/" title="分类于 Linux">Linux</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/linux/chatgpt/" title="分类于 chatgpt搭建">chatgpt搭建</a>
+</div>
+
+    <span><a href="/2020/08/13/linux/chatgpt/chatgpt-token%E5%88%B6%E4%BD%9C%E6%96%B9%E6%A1%88/" title="chatgpt-token制作方案">chatgpt-token制作方案</a></span>
+  </li>
+
+  </ul>
+</div>
+<div>
+  <h2>最新评论</h2>
+  <ul class="leancloud-recent-comment"></ul>
+</div>
+
+        </div>
+        <div class="status">
+  <div class="copyright">
+    
+    &copy; 2022 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="ic i-watsmal"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Watsmal @ Watsmal</span>
+  </div>
+  <div class="count">
+    <span class="post-meta-item-icon">
+      <i class="ic i-chart-area"></i>
+    </span>
+    <span title="站点总字数">44k 字</span>
+
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="ic i-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:50</span>
+  </div>
+  <div class="powered-by">
+    基于 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span>
+  </div>
+</div>
+
+      </div>
+    </footer>
+  </div>
+<script data-config type="text/javascript">
+  var LOCAL = {
+    path: '2020/08/13/linux/实验室搭建K8s教程/',
+    favicon: {
+      show: "（●´3｀●）博客",
+      hide: "(´Д｀)Watsmal"
+    },
+    search : {
+      placeholder: "文章搜索",
+      empty: "关于 「 ${query} 」，什么也没搜到",
+      stats: "${time} ms 内找到 ${hits} 条结果"
+    },
+    valine: true,fancybox: true,
+    copyright: '复制成功，转载请遵守 <i class="ic i-creative-commons"></i>BY-NC-SA 协议。',
+    ignores : [
+      function(uri) {
+        return uri.includes('#');
+      },
+      function(uri) {
+        return new RegExp(LOCAL.path+"$").test(uri);
+      }
+    ]
+  };
+</script>
+
+<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>
+
+<script src="//cdn.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js,npm/animejs@3.2.0/lib/anime.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script>
+
+<script src="/js/app.js?v=0.2.5"></script>
+
+
+
+
+</body>
+</html>
