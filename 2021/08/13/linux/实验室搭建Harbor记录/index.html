@@ -1,0 +1,660 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#FFF">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+<link rel="alternate" type="application/rss+xml" title="有几个头大的博客" href="https://watsmal.github.io/rss.xml" />
+<link rel="alternate" type="application/atom+xml" title="有几个头大的博客" href="https://watsmal.github.io/atom.xml" />
+<link rel="alternate" type="application/json" title="有几个头大的博客" href="https://watsmal.github.io/feed.json" />
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="/css/app.css?v=0.2.5">
+
+  
+  <meta name="keywords" content="教程,centos8,docker_images,harbor" />
+
+
+<link rel="canonical" href="https://watsmal.github.io/2021/08/13/linux/%E5%AE%9E%E9%AA%8C%E5%AE%A4%E6%90%AD%E5%BB%BAHarbor%E8%AE%B0%E5%BD%95/">
+
+
+
+  <title>
+实验室搭建K8s教程 - Linux |
+Watsmal = 有几个头大的博客 = 天生我材必有用，我是高手！我是高手！</title>
+<meta name="generator" content="Hexo 6.0.0"></head>
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div id="loading">
+    <div class="cat">
+      <div class="body"></div>
+      <div class="head">
+        <div class="face"></div>
+      </div>
+      <div class="foot">
+        <div class="tummy-end"></div>
+        <div class="bottom"></div>
+        <div class="legs left"></div>
+        <div class="legs right"></div>
+      </div>
+      <div class="paw">
+        <div class="hands left"></div>
+        <div class="hands right"></div>
+      </div>
+    </div>
+  </div>
+  <div id="container">
+    <header id="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="inner">
+        <div id="brand">
+          <div class="pjax">
+          
+  <h1 itemprop="name headline">实验室搭建K8s教程
+  </h1>
+  
+<div class="meta">
+  <span class="item" title="创建时间：2021-08-13 20:45:48">
+    <span class="icon">
+      <i class="ic i-calendar"></i>
+    </span>
+    <span class="text">发表于</span>
+    <time itemprop="dateCreated datePublished" datetime="2021-08-13T20:45:48+08:00">2021-08-13</time>
+  </span>
+  <span class="item" title="本文字数">
+    <span class="icon">
+      <i class="ic i-pen"></i>
+    </span>
+    <span class="text">本文字数</span>
+    <span>2k</span>
+    <span class="text">字</span>
+  </span>
+  <span class="item" title="阅读时长">
+    <span class="icon">
+      <i class="ic i-clock"></i>
+    </span>
+    <span class="text">阅读时长</span>
+    <span>5 分钟</span>
+  </span>
+</div>
+
+
+          </div>
+        </div>
+        <nav id="nav">
+  <div class="inner">
+    <div class="toggle">
+      <div class="lines" aria-label="切换导航栏">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </div>
+    </div>
+    <ul class="menu">
+      <li class="item title"><a href="/" rel="start">Watsmal</a></li>
+    </ul>
+    <ul class="right">
+      <li class="item theme">
+        <i class="ic i-sun"></i>
+      </li>
+      <li class="item search">
+        <i class="ic i-search"></i>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+      </div>
+      <div id="imgs" class="pjax">
+        <ul>
+          <li class="item" data-background-image="https://ooo.0x0.ooo/2024/01/03/OZMq6c.jpg"></li>
+          <li class="item" data-background-image="https://th.bing.com/th/id/R.7d744ba41f907e4446e8a2d9b2df22c2?rik=Ji973MJxwTrk%2fA&riu=http%3a%2f%2fpic.bizhi360.com%2fbbpic%2f36%2f1936.jpg&ehk=jc46kt%2fE6qbtaQXKqCH7A5d8x0yNQVOFQu0rHA5oQ5U%3d&risl=&pid=ImgRaw&r=0"></li>
+          <li class="item" data-background-image="https://i.imgtg.com/2023/03/09/Y0iNK.jpg"></li>
+          <li class="item" data-background-image="https://th.bing.com/th/id/R.f7530826ebfe6b42c6d42253bac6153d?rik=JYIKz8yEvjuRmg&riu=http%3a%2f%2fwww.quazero.com%2fuploads%2fallimg%2f140303%2f1-140303215013.jpg&ehk=feA%2f5sUIHbzCYEj7Mq8o2hZrIFNOsnnwOBX0gVUVpOI%3d&risl=&pid=ImgRaw&r=0"></li>
+          <li class="item" data-background-image="https://i.imgtg.com/2023/03/09/YQSYM.jpg"></li>
+          <li class="item" data-background-image="https://i.imgtg.com/2023/03/09/YSIlc.jpg"></li>
+        </ul>
+      </div>
+    </header>
+    <div id="waves">
+      <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" />
+          <use xlink:href="#gentle-wave" x="48" y="3" />
+          <use xlink:href="#gentle-wave" x="48" y="5" />
+          <use xlink:href="#gentle-wave" x="48" y="7" />
+        </g>
+      </svg>
+    </div>
+    <main>
+      <div class="inner">
+        <div id="main" class="pjax">
+          
+  <div class="article wrap">
+    
+<div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+<i class="ic i-home"></i>
+<span><a href="/">首页</a></span><i class="ic i-angle-right"></i>
+<span  class="current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/linux/" itemprop="item" rel="index" title="分类于 Linux"><span itemprop="name">Linux</span></a>
+<meta itemprop="position" content="1" /></span>
+</div>
+
+    <article itemscope itemtype="http://schema.org/Article" class="post block" lang="zh-CN">
+  <link itemprop="mainEntityOfPage" href="https://watsmal.github.io/2021/08/13/linux/%E5%AE%9E%E9%AA%8C%E5%AE%A4%E6%90%AD%E5%BB%BAHarbor%E8%AE%B0%E5%BD%95/">
+
+  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="image" content="/images/avatar.jpg">
+    <meta itemprop="name" content="Watsmal">
+    <meta itemprop="description" content="天生我材必有用，我是高手！我是高手！, 有几个头大的博客">
+  </span>
+
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="有几个头大的博客">
+  </span>
+
+  <div class="body md" itemprop="articleBody">
+    
+
+    <h2 id="实验室搭建harbor记录"><a class="anchor" href="#实验室搭建harbor记录">#</a> 实验室搭建 Harbor 记录</h2>
+<hr />
+<p>前置条件：</p>
+<p><code>docker-conpose</code>  安装 <code>https://blog.csdn.net/liu_chen_yang/article/details/124688952</code></p>
+<p><code>docker</code>  安装  <code>https://xie.infoq.cn/link?target=https%3A%2F%2Fblog.csdn.net%2Fliu_chen_yang%2Farticle%2Fdetails%2F123842609</code></p>
+<ol>
+<li>
+<h5 id="harbor私有镜像管理系统"><a class="anchor" href="#harbor私有镜像管理系统">#</a> harbor，私有镜像管理系统。</h5>
+<p><img data-src="https://static001.geekbang.org/infoq/47/47478a2ae4dff83b6233e8962adfdae8.png" alt="img" /></p>
+</li>
+<li>
+<h5 id="配置步骤按照httpsxieinfoqcnarticlefaa9ee456452891828cc080b8来就好"><a class="anchor" href="#配置步骤按照httpsxieinfoqcnarticlefaa9ee456452891828cc080b8来就好">#</a> 配置步骤：按照 <code>https://xie.infoq.cn/article/faa9ee456452891828cc080b8</code>  来就好</h5>
+</li>
+</ol>
+<hr />
+<ol start="3">
+<li>
+<h5 id="一般配置http即可下面是继续配置https的步骤"><a class="anchor" href="#一般配置http即可下面是继续配置https的步骤">#</a> 一般配置 http 即可，下面是继续配置 https 的步骤</h5>
+<p>按照 <code>https://juejin.cn/post/7030414239181307918 </code> 步骤配置（<ins class="wavy warning">参考前 5 步，第六步客户端参考本文第 4 点</ins>）。</p>
+<p>一般配置 http 主要面对的问题：</p>
+<ul>
+<li>
+<p><strong>docekr 重启失败</strong></p>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token punctuation">[</span>root@AY13091717064020986bZ ~<span class="token punctuation">]</span><span class="token comment"># service docker start</span></pre></td></tr><tr><td data-num="2"></td><td><pre>Redirecting to /bin/systemctl start  docker.service</pre></td></tr><tr><td data-num="3"></td><td><pre>Job <span class="token keyword">for</span> docker.service failed because the control process exited with error code. See <span class="token string">"systemctl status docker.service"</span> and <span class="token string">"journalctl -xe"</span> <span class="token keyword">for</span> details.</pre></td></tr></table></figure><p>这个问题主要出现在修改 <code>vi /etc/docker/daemon.json </code> 之后，重启 docker 错误，一般就是 daemon.json 的文件内容出现格式错误。</p>
+</li>
+<li>
+<p><strong>客户端不信任证书</strong></p>
+<p><img data-src="https://ooo.0x0.ooo/2024/01/04/OZafCD.png" alt="image-20231228150215674" /></p>
+<p>只需要正确配置客户端证书即可，例如下文。</p>
+</li>
+<li>
+<p><strong>如果 https 不是默认 443，http 不是默认 80，那么反向代理可能会出问题</strong></p>
+<p><img data-src="https://ooo.0x0.ooo/2024/01/04/OZa9nF.png" alt="image-20231228150356387" /></p>
+<p>这里，反向代理出现问题，主要体现为： <code>docker login -uadmin -pHarbor12345 https://10.0.21.20:10443 </code> 但是任然会被重定向为 http。</p>
+<p><span class="label">分析原因：</span></p>
+<p><img data-src="https://ooo.0x0.ooo/2024/01/04/OZaj46.png" alt="image-20231228150512064" /></p>
+<p>这里同时打开 http 和 https，默认重定向到 https，</p>
+<p>所以这里有两种访问办法： <code>10.0.21.20:10010</code>  和  <code>https://10.0.21.20:10443 </code></p>
+<p>那么由于这里使用了代理，出现报错的原因就是因为，这里最开始写的</p>
+<p><img data-src="https://ooo.0x0.ooo/2024/01/04/OZaYQI.png" alt="image-20231228151020233" /></p>
+<p>改正为：</p>
+<p><img data-src="https://ooo.0x0.ooo/2024/01/04/OZaVA1.png" alt="image-20231228150851767" /></p>
+</li>
+</ul>
+<p>​			当然这里也有其他解决办法：</p>
+<ul>
+<li>去掉 external_url</li>
+</ul>
+<ol start="2">
+<li>docker login -uadmin -pHarbor12345 10.0.21.20:10010</li>
+</ol>
+</li>
+<li>
+<p>客户端配置参考（简单）：</p>
+<ul>
+<li>
+<p>首先，需要配置客户机的不安全访问</p>
+<p>ubantu 和 centos 均如下：</p>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token function">vi</span> /etc/docker/daemon.json </pre></td></tr><tr><td data-num="2"></td><td><pre></pre></td></tr><tr><td data-num="3"></td><td><pre><span class="token comment">#然后写入：</span></pre></td></tr><tr><td data-num="4"></td><td><pre><span class="token string">"insecure-registries"</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span><span class="token string">"192.168.8.75"</span><span class="token punctuation">]</span></pre></td></tr><tr><td data-num="5"></td><td><pre>***</pre></td></tr></table></figure><p><ins class="dot warning">注意写入正确，不然 systemctl restart docker 会报错</ins></p>
+<p>以下是一个正确的例子：</p>
+<p><img data-src="https://ooo.0x0.ooo/2024/01/04/OZa26P.png" alt="image-20231228151901809" /></p>
+</li>
+<li>
+<p>客户和本机都不信任 CA 证书，这里需要</p>
+<p><img data-src="https://ooo.0x0.ooo/2024/01/04/OZa8kb.png" alt="image-20231228144125516" /></p>
+<p>解决这个问题，需要将 CA 证书传递给本机可信域里面，更新证书即可：</p>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token comment">#参考 ubantu:</span></pre></td></tr><tr><td data-num="2"></td><td><pre><span class="token function">cp</span> /etc/harbor/ca.crt /usr/local/share/ca-certificates/harbor-ca.crt <span class="token comment">#这里可以 scp 上传下载证书</span></pre></td></tr><tr><td data-num="3"></td><td><pre>update-ca-certificates</pre></td></tr><tr><td data-num="4"></td><td><pre>systemctl restart <span class="token function">docker</span></pre></td></tr><tr><td data-num="5"></td><td><pre></pre></td></tr><tr><td data-num="6"></td><td><pre><span class="token comment">#参考 centos:</span></pre></td></tr><tr><td data-num="7"></td><td><pre><span class="token function">cp</span> your-ca.crt /etc/pki/ca-trust/source/anchors/<span class="token comment">#这里可以 scp 上传下载证书</span></pre></td></tr><tr><td data-num="8"></td><td><pre>update-ca-trust</pre></td></tr><tr><td data-num="9"></td><td><pre>systemctl restart <span class="token function">docker</span></pre></td></tr></table></figure><p>获取到证书之后。</p>
+<ul>
+<li>
+<p>最后重启本地 docker 即可</p>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>systemctl daemon-reload</pre></td></tr><tr><td data-num="2"></td><td><pre>systemctl restart <span class="token function">docker</span></pre></td></tr></table></figure><p><ins class="wavy success">到此为止，客户端就可以正确使用 Harbor 管理镜像了</ins></p>
+<p>以下是一个正确的实例</p>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>$ <span class="token function">docker</span> login XXX.XXX.XXX.XXX</pre></td></tr><tr><td data-num="2"></td><td><pre>Username: </pre></td></tr><tr><td data-num="3"></td><td><pre>Password: </pre></td></tr><tr><td data-num="4"></td><td><pre>Login Succeeded</pre></td></tr><tr><td data-num="5"></td><td><pre><span class="token comment"># 上传之前先打 tag</span></pre></td></tr><tr><td data-num="6"></td><td><pre><span class="token function">docker</span> pull k8s.gcr.io/kubernetes-dashboard</pre></td></tr><tr><td data-num="7"></td><td><pre><span class="token function">docker</span> tag k8s.gcr.io/kubernetes-dashboard XXX.XXX.XXX.XXX/library/k8s.gcr.io/kubernetes-dashboard</pre></td></tr><tr><td data-num="8"></td><td><pre><span class="token comment"># 上传镜像</span></pre></td></tr><tr><td data-num="9"></td><td><pre><span class="token function">docker</span> push XXX.XXX.XXX.XXX/library/k8s.gcr.io/kubernetes-dashboard</pre></td></tr><tr><td data-num="10"></td><td><pre><span class="token comment"># 下载镜像</span></pre></td></tr><tr><td data-num="11"></td><td><pre><span class="token function">docker</span> pull XXX.XXX.XXX.XXX/library/k8s.gcr.io/kubernetes-dashboard</pre></td></tr></table></figure><hr />
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+
+      <div class="tags">
+          <a href="/tags/%E6%95%99%E7%A8%8B/" rel="tag"><i class="ic i-tag"></i> 教程</a>
+          <a href="/tags/centos8/" rel="tag"><i class="ic i-tag"></i> centos8</a>
+          <a href="/tags/docker-images/" rel="tag"><i class="ic i-tag"></i> docker_images</a>
+          <a href="/tags/harbor/" rel="tag"><i class="ic i-tag"></i> harbor</a>
+      </div>
+  </div>
+
+   <footer>
+
+    <div class="meta">
+  <span class="item">
+    <span class="icon">
+      <i class="ic i-calendar-check"></i>
+    </span>
+    <span class="text">更新于</span>
+    <time title="修改时间：2024-01-04 09:31:24" itemprop="dateModified" datetime="2024-01-04T09:31:24+08:00">2024-01-04</time>
+  </span>
+  <span id="2021/08/13/linux/实验室搭建Harbor记录/" class="item leancloud_visitors" data-flag-title="实验室搭建K8s教程" title="阅读次数">
+      <span class="icon">
+        <i class="ic i-eye"></i>
+      </span>
+      <span class="text">阅读次数</span>
+      <span class="leancloud-visitors-count"></span>
+      <span class="text">次</span>
+  </span>
+</div>
+
+      
+<div class="reward">
+  <button><i class="ic i-heartbeat"></i> 赞赏</button>
+  <p>请我喝[茶]~(￣▽￣)~*</p>
+  <div id="qr">
+      
+      <div>
+        <img data-src="/images/wechatpay.png" alt="Watsmal 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div>
+        <img data-src="/images/alipay.png" alt="Watsmal 支付宝">
+        <p>支付宝</p>
+      </div>
+      
+      <div>
+        <img data-src="/images/paypal.png" alt="Watsmal 贝宝">
+        <p>贝宝</p>
+      </div>
+  </div>
+</div>
+
+      
+
+<div id="copyright">
+<ul>
+  <li class="author">
+    <strong>本文作者： </strong>Watsmal <i class="ic i-at"><em>@</em></i>有几个头大的博客
+  </li>
+  <li class="link">
+    <strong>本文链接：</strong>
+    <a href="https://watsmal.github.io/2021/08/13/linux/%E5%AE%9E%E9%AA%8C%E5%AE%A4%E6%90%AD%E5%BB%BAHarbor%E8%AE%B0%E5%BD%95/" title="实验室搭建K8s教程">https://watsmal.github.io/2021/08/13/linux/实验室搭建Harbor记录/</a>
+  </li>
+  <li class="license">
+    <strong>版权声明： </strong>本站所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC96aC1DTg=="><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+  </footer>
+
+</article>
+
+  </div>
+  
+
+<div class="post-nav">
+    <div class="item left">
+      
+
+  <a href="/2021/08/13/other/switch%E9%81%87%E8%A7%81%20i++/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;i.imgtg.com&#x2F;2023&#x2F;03&#x2F;09&#x2F;YSj7p.jpg" title="C语言里面的switch偶遇i++">
+  <span class="type">上一篇</span>
+  <span class="category"><i class="ic i-flag"></i> 其他</span>
+  <h3>C语言里面的switch偶遇i++</h3>
+  </a>
+
+    </div>
+    <div class="item right">
+      
+
+  <a href="/2024/01/02/hello-world/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;i.imgtg.com&#x2F;2023&#x2F;03&#x2F;09&#x2F;Y0iNK.jpg" title="Hello World">
+  <span class="type">下一篇</span>
+  <span class="category"><i class="ic i-flag"></i> </span>
+  <h3>Hello World</h3>
+  </a>
+
+    </div>
+</div>
+
+  
+  <div class="wrap" id="comments"></div>
+
+
+        </div>
+        <div id="sidebar">
+          
+
+<div class="inner">
+
+  <div class="panels">
+    <div class="inner">
+      <div class="contents panel pjax" data-title="文章目录">
+          <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E5%AE%A4%E6%90%AD%E5%BB%BAharbor%E8%AE%B0%E5%BD%95"><span class="toc-number">1.</span> <span class="toc-text"> 实验室搭建 Harbor 记录</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#harbor%E7%A7%81%E6%9C%89%E9%95%9C%E5%83%8F%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.0.0.1.</span> <span class="toc-text"> harbor，私有镜像管理系统。</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%AD%A5%E9%AA%A4%E6%8C%89%E7%85%A7httpsxieinfoqcnarticlefaa9ee456452891828cc080b8%E6%9D%A5%E5%B0%B1%E5%A5%BD"><span class="toc-number">1.0.0.2.</span> <span class="toc-text"> 配置步骤：按照 https:&#x2F;&#x2F;xie.infoq.cn&#x2F;article&#x2F;faa9ee456452891828cc080b8  来就好</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%80%E8%88%AC%E9%85%8D%E7%BD%AEhttp%E5%8D%B3%E5%8F%AF%E4%B8%8B%E9%9D%A2%E6%98%AF%E7%BB%A7%E7%BB%AD%E9%85%8D%E7%BD%AEhttps%E7%9A%84%E6%AD%A5%E9%AA%A4"><span class="toc-number">1.0.0.3.</span> <span class="toc-text"> 一般配置 http 即可，下面是继续配置 https 的步骤</span></a></li></ol></li></ol></li></ol></li></ol>
+      </div>
+      <div class="related panel pjax" data-title="系列文章">
+        <ul>
+          <li><a href="/2020/08/13/linux/%E5%AE%9E%E9%AA%8C%E5%AE%A4%E6%90%AD%E5%BB%BAK8s%E6%95%99%E7%A8%8B/" rel="bookmark" title="实验室搭建K8s教程">实验室搭建K8s教程</a></li><li><a href="/2020/08/13/linux/chatgpt/chatgpt-token%E5%88%B6%E4%BD%9C%E6%96%B9%E6%A1%88/" rel="bookmark" title="chatgpt-token制作方案">chatgpt-token制作方案</a></li><li class="active"><a href="/2021/08/13/linux/%E5%AE%9E%E9%AA%8C%E5%AE%A4%E6%90%AD%E5%BB%BAHarbor%E8%AE%B0%E5%BD%95/" rel="bookmark" title="实验室搭建K8s教程">实验室搭建K8s教程</a></li>
+        </ul>
+      </div>
+      <div class="overview panel" data-title="站点概览">
+        <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="image" itemprop="image" alt="Watsmal"
+      data-src="/images/avatar.jpg">
+  <p class="name" itemprop="name">Watsmal</p>
+  <div class="description" itemprop="description">有几个头大的博客</div>
+</div>
+
+<nav class="state">
+    <div class="item posts">
+      <a href="/archives/">
+        <span class="count">12</span>
+        <span class="name">文章</span>
+      </a>
+    </div>
+    <div class="item categories">
+      <a href="/categories/">
+        <span class="count">6</span>
+        <span class="name">分类</span>
+      </a>
+    </div>
+    <div class="item tags">
+      <a href="/tags/">
+        <span class="count">14</span>
+        <span class="name">标签</span>
+      </a>
+    </div>
+</nav>
+
+<div class="social">
+      <span class="exturl item github" data-url="aHR0cHM6Ly9naXRodWIuY29tLzE0Njk1MzgxMzhjaGlycw==" title="https:&#x2F;&#x2F;github.com&#x2F;1469538138chirs"><i class="ic i-github"></i></span>
+      <span class="exturl item zhihu" data-url="aHR0cHM6Ly93d3cuemhpaHUuY29tL3Blb3BsZS95b3UtamktZ2UtdG91LWRh" title="https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;you-ji-ge-tou-da"><i class="ic i-zhihu"></i></span>
+      <span class="exturl item weibo" data-url="aHR0cHM6Ly93ZWliby5jb20veW91cm5hbWU=" title="https:&#x2F;&#x2F;weibo.com&#x2F;yourname"><i class="ic i-weibo"></i></span>
+      <a href="/17671200459@163.com" title="17671200459@163.com" class="item email"><i class="ic i-envelope"></i></a>
+      <span class="exturl item stackoverflow" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS91c2Vycy8yMzE5MDAzNC8lRTYlOUMlODklRTUlODclQTAlRTQlQjglQUElRTUlQTQlQjQlRTUlQTQlQTc=" title="https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;23190034&#x2F;%E6%9C%89%E5%87%A0%E4%B8%AA%E5%A4%B4%E5%A4%A7"><i class="ic i-stack-overflow"></i></span>
+</div>
+
+<ul class="menu">
+  
+    
+  <li class="item">
+    <a href="/" rel="section"><i class="ic i-home"></i>首页</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/about/" rel="section"><i class="ic i-user"></i>关于</a>
+  </li>
+
+        
+  <li class="item dropdown">
+      <a href="javascript:void(0);"><i class="ic i-feather"></i>文章</a>
+    <ul class="submenu">
+
+        
+  <li class="item">
+    <a href="/archives/" rel="section"><i class="ic i-list-alt"></i>归档</a>
+  </li>
+
+        
+  <li class="item">
+    <a href="/categories/" rel="section"><i class="ic i-th"></i>分类</a>
+  </li>
+
+        
+  <li class="item">
+    <a href="/tags/" rel="section"><i class="ic i-tags"></i>标签</a>
+  </li>
+
+  </ul>
+    
+  <li class="item">
+    <a href="/friends/" rel="section"><i class="ic i-heart"></i>友链</a>
+  </li>
+
+
+</ul>
+
+      </div>
+    </div>
+  </div>
+
+  <ul id="quick">
+    <li class="prev pjax">
+        <a href="/2021/08/13/other/switch%E9%81%87%E8%A7%81%20i++/" rel="prev" title="上一篇"><i class="ic i-chevron-left"></i></a>
+    </li>
+    <li class="up"><i class="ic i-arrow-up"></i></li>
+    <li class="down"><i class="ic i-arrow-down"></i></li>
+    <li class="next pjax">
+        <a href="/2024/01/02/hello-world/" rel="next" title="下一篇"><i class="ic i-chevron-right"></i></a>
+    </li>
+    <li class="percent"></li>
+  </ul>
+</div>
+
+
+        </div>
+        <div class="dimmer"></div>
+      </div>
+    </main>
+    <footer id="footer">
+      <div class="inner">
+        <div class="widgets">
+          
+<div class="rpost pjax">
+  <h2>随机文章</h2>
+  <ul>
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/linux/" title="分类于 Linux">Linux</a>
+</div>
+
+    <span><a href="/2021/08/13/linux/%E5%AE%9E%E9%AA%8C%E5%AE%A4%E6%90%AD%E5%BB%BAHarbor%E8%AE%B0%E5%BD%95/" title="实验室搭建K8s教程">实验室搭建K8s教程</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/linux/" title="分类于 Linux">Linux</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/linux/chatgpt/" title="分类于 chatgpt搭建">chatgpt搭建</a>
+</div>
+
+    <span><a href="/2020/08/13/linux/chatgpt/chatgpt-token%E5%88%B6%E4%BD%9C%E6%96%B9%E6%A1%88/" title="chatgpt-token制作方案">chatgpt-token制作方案</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/other/" title="分类于 其他">其他</a>
+</div>
+
+    <span><a href="/2021/08/13/other/switch%E9%81%87%E8%A7%81%20i++/" title="C语言里面的switch偶遇i++">C语言里面的switch偶遇i++</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/hexo/" title="分类于 hexo搭建">hexo搭建</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/hexo/theme-shoka/" title="分类于 Theme Shoka">Theme Shoka</a>
+</div>
+
+    <span><a href="/2020/08/13/hexo/theme-shoka-doc/" title="Hexo主题Shoka搭建">Hexo主题Shoka搭建</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+</div>
+
+    <span><a href="/2024/01/02/hello-world/" title="Hello World">Hello World</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/linux/" title="分类于 Linux">Linux</a>
+</div>
+
+    <span><a href="/2020/08/13/linux/%E5%AE%9E%E9%AA%8C%E5%AE%A4%E6%90%AD%E5%BB%BAK8s%E6%95%99%E7%A8%8B/" title="实验室搭建K8s教程">实验室搭建K8s教程</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/hexo/" title="分类于 hexo搭建">hexo搭建</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/hexo/theme-shoka/" title="分类于 Theme Shoka">Theme Shoka</a>
+</div>
+
+    <span><a href="/2020/08/13/hexo/theme-shoka/dependents/" title="Step.1 依赖插件">Step.1 依赖插件</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/hexo/" title="分类于 hexo搭建">hexo搭建</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/hexo/theme-shoka/" title="分类于 Theme Shoka">Theme Shoka</a>
+</div>
+
+    <span><a href="/2020/08/13/hexo/theme-shoka/display/" title="Step.3 界面显示">Step.3 界面显示</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/hexo/" title="分类于 hexo搭建">hexo搭建</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/hexo/theme-shoka/" title="分类于 Theme Shoka">Theme Shoka</a>
+</div>
+
+    <span><a href="/2020/08/13/hexo/theme-shoka/special/" title="Step.4 主题特殊功能">Step.4 主题特殊功能</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/hexo/" title="分类于 hexo搭建">hexo搭建</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/hexo/theme-shoka/" title="分类于 Theme Shoka">Theme Shoka</a>
+</div>
+
+    <span><a href="/2020/08/13/hexo/theme-shoka/config/" title="Step.2 基本配置">Step.2 基本配置</a></span>
+  </li>
+
+  </ul>
+</div>
+<div>
+  <h2>最新评论</h2>
+  <ul class="leancloud-recent-comment"></ul>
+</div>
+
+        </div>
+        <div class="status">
+  <div class="copyright">
+    
+    &copy; 2022 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="ic i-watsmal"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Watsmal @ Watsmal</span>
+  </div>
+  <div class="count">
+    <span class="post-meta-item-icon">
+      <i class="ic i-chart-area"></i>
+    </span>
+    <span title="站点总字数">53k 字</span>
+
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="ic i-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:12</span>
+  </div>
+  <div class="powered-by">
+    基于 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span>
+  </div>
+</div>
+
+      </div>
+    </footer>
+  </div>
+<script data-config type="text/javascript">
+  var LOCAL = {
+    path: '2021/08/13/linux/实验室搭建Harbor记录/',
+    favicon: {
+      show: "（●´3｀●）博客",
+      hide: "(´Д｀)Watsmal"
+    },
+    search : {
+      placeholder: "文章搜索",
+      empty: "关于 「 ${query} 」，什么也没搜到",
+      stats: "${time} ms 内找到 ${hits} 条结果"
+    },
+    valine: true,fancybox: true,
+    copyright: '复制成功，转载请遵守 <i class="ic i-creative-commons"></i>BY-NC-SA 协议。',
+    ignores : [
+      function(uri) {
+        return uri.includes('#');
+      },
+      function(uri) {
+        return new RegExp(LOCAL.path+"$").test(uri);
+      }
+    ]
+  };
+</script>
+
+<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>
+
+<script src="//cdn.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js,npm/animejs@3.2.0/lib/anime.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script>
+
+<script src="/js/app.js?v=0.2.5"></script>
+
+
+
+
+</body>
+</html>
