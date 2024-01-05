@@ -32,7 +32,7 @@
 
 
   <title>
-实验室搭建K8s教程 - Linux |
+实验室搭建Harbor教程 - Linux |
 Watsmal = 有几个头大的博客 = 天生我材必有用，我是高手！我是高手！</title>
 <meta name="generator" content="Hexo 6.0.0"></head>
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -60,7 +60,7 @@ Watsmal = 有几个头大的博客 = 天生我材必有用，我是高手！我�
         <div id="brand">
           <div class="pjax">
           
-  <h1 itemprop="name headline">实验室搭建K8s教程
+  <h1 itemprop="name headline">实验室搭建Harbor教程
   </h1>
   
 <div class="meta">
@@ -118,11 +118,11 @@ Watsmal = 有几个头大的博客 = 天生我材必有用，我是高手！我�
       <div id="imgs" class="pjax">
         <ul>
           <li class="item" data-background-image="https://i.imgtg.com/2023/03/09/Y0hOs.jpg"></li>
-          <li class="item" data-background-image="https://i.imgtg.com/2023/03/09/Y0zdB.jpg"></li>
-          <li class="item" data-background-image="https://th.bing.com/th/id/R.7d744ba41f907e4446e8a2d9b2df22c2?rik=Ji973MJxwTrk%2fA&riu=http%3a%2f%2fpic.bizhi360.com%2fbbpic%2f36%2f1936.jpg&ehk=jc46kt%2fE6qbtaQXKqCH7A5d8x0yNQVOFQu0rHA5oQ5U%3d&risl=&pid=ImgRaw&r=0"></li>
           <li class="item" data-background-image="https://ooo.0x0.ooo/2024/01/03/OZMq6c.jpg"></li>
           <li class="item" data-background-image="https://i.imgtg.com/2023/03/09/YSIlc.jpg"></li>
-          <li class="item" data-background-image="https://i.imgtg.com/2023/03/09/Y0kTl.jpg"></li>
+          <li class="item" data-background-image="https://i.imgtg.com/2023/03/09/Y0iNK.jpg"></li>
+          <li class="item" data-background-image="https://i.imgtg.com/2023/03/09/Y0xvg.jpg"></li>
+          <li class="item" data-background-image="https://i.imgtg.com/2023/03/09/YQSYM.jpg"></li>
         </ul>
       </div>
     </header>
@@ -171,7 +171,7 @@ Watsmal = 有几个头大的博客 = 天生我材必有用，我是高手！我�
     <h2 id="实验室搭建harbor记录"><a class="anchor" href="#实验室搭建harbor记录">#</a> 实验室搭建 Harbor 记录</h2>
 <hr />
 <p>前置条件：</p>
-<p><code>docker-conpose</code>  安装 <code>https://blog.csdn.net/liu_chen_yang/article/details/124688952</code></p>
+<p><code>docker-conpose</code>  安装  <code>https://blog.csdn.net/liu_chen_yang/article/details/124688952</code></p>
 <p><code>docker</code>  安装  <code>https://xie.infoq.cn/link?target=https%3A%2F%2Fblog.csdn.net%2Fliu_chen_yang%2Farticle%2Fdetails%2F123842609</code></p>
 <ol>
 <li>
@@ -179,19 +179,19 @@ Watsmal = 有几个头大的博客 = 天生我材必有用，我是高手！我�
 <p><img data-src="https://static001.geekbang.org/infoq/47/47478a2ae4dff83b6233e8962adfdae8.png" alt="img" /></p>
 </li>
 <li>
-<h5 id="配置步骤按照httpsxieinfoqcnarticlefaa9ee456452891828cc080b8来就好"><a class="anchor" href="#配置步骤按照httpsxieinfoqcnarticlefaa9ee456452891828cc080b8来就好">#</a> 配置步骤：按照 <code>https://xie.infoq.cn/article/faa9ee456452891828cc080b8</code>  来就好</h5>
+<h5 id="配置步骤按照-httpsxieinfoqcnarticlefaa9ee456452891828cc080b8来就好"><a class="anchor" href="#配置步骤按照-httpsxieinfoqcnarticlefaa9ee456452891828cc080b8来就好">#</a> 配置步骤：按照  <code>https://xie.infoq.cn/article/faa9ee456452891828cc080b8</code>  来就好</h5>
 </li>
 </ol>
 <hr />
 <ol start="3">
 <li>
 <h5 id="一般配置http即可下面是继续配置https的步骤"><a class="anchor" href="#一般配置http即可下面是继续配置https的步骤">#</a> 一般配置 http 即可，下面是继续配置 https 的步骤</h5>
-<p>按照 <code>https://juejin.cn/post/7030414239181307918 </code> 步骤配置（<ins class="wavy warning">参考前 5 步，第六步客户端参考本文第 4 点</ins>）。</p>
+<p>按照  <code>https://juejin.cn/post/7030414239181307918 </code> 步骤配置（<ins class="wavy warning">参考前 5 步，第六步客户端参考本文第 4 点</ins>）。</p>
 <p>一般配置 http 主要面对的问题：</p>
 <ul>
 <li>
 <p><strong>docekr 重启失败</strong></p>
-<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token punctuation">[</span>root@AY13091717064020986bZ ~<span class="token punctuation">]</span><span class="token comment"># service docker start</span></pre></td></tr><tr><td data-num="2"></td><td><pre>Redirecting to /bin/systemctl start  docker.service</pre></td></tr><tr><td data-num="3"></td><td><pre>Job <span class="token keyword">for</span> docker.service failed because the control process exited with error code. See <span class="token string">"systemctl status docker.service"</span> and <span class="token string">"journalctl -xe"</span> <span class="token keyword">for</span> details.</pre></td></tr></table></figure><p>这个问题主要出现在修改 <code>vi /etc/docker/daemon.json </code> 之后，重启 docker 错误，一般就是 daemon.json 的文件内容出现格式错误。</p>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token punctuation">[</span>root@AY13091717064020986bZ ~<span class="token punctuation">]</span><span class="token comment"># service docker start</span></pre></td></tr><tr><td data-num="2"></td><td><pre>Redirecting to /bin/systemctl start  docker.service</pre></td></tr><tr><td data-num="3"></td><td><pre>Job <span class="token keyword">for</span> docker.service failed because the control process exited with error code. See <span class="token string">"systemctl status docker.service"</span> and <span class="token string">"journalctl -xe"</span> <span class="token keyword">for</span> details.</pre></td></tr></table></figure><p>这个问题主要出现在修改  <code>vi /etc/docker/daemon.json </code> 之后，重启 docker 错误，一般就是 daemon.json 的文件内容出现格式错误。</p>
 </li>
 <li>
 <p><strong>客户端不信任证书</strong></p>
@@ -210,11 +210,11 @@ Watsmal = 有几个头大的博客 = 天生我材必有用，我是高手！我�
 <p><img data-src="https://ooo.0x0.ooo/2024/01/04/OZaYQI.png" alt="image-20231228151020233" /></p>
 <p>改正为：</p>
 <p><img data-src="https://ooo.0x0.ooo/2024/01/04/OZaVA1.png" alt="image-20231228150851767" /></p>
+<p>当然这里也有其他解决办法：</p>
 </li>
-</ul>
-<p>​			当然这里也有其他解决办法：</p>
-<ul>
-<li>去掉 external_url</li>
+<li>
+<p>去掉 external_url</p>
+</li>
 </ul>
 <ol start="2">
 <li>docker login -uadmin -pHarbor12345 10.0.21.20:10010</li>
@@ -264,9 +264,9 @@ Watsmal = 有几个头大的博客 = 天生我材必有用，我是高手！我�
       <i class="ic i-calendar-check"></i>
     </span>
     <span class="text">更新于</span>
-    <time title="修改时间：2024-01-04 09:31:24" itemprop="dateModified" datetime="2024-01-04T09:31:24+08:00">2024-01-04</time>
+    <time title="修改时间：2024-01-05 18:48:13" itemprop="dateModified" datetime="2024-01-05T18:48:13+08:00">2024-01-05</time>
   </span>
-  <span id="2021/08/13/linux/实验室搭建Harbor记录/" class="item leancloud_visitors" data-flag-title="实验室搭建K8s教程" title="阅读次数">
+  <span id="2021/08/13/linux/实验室搭建Harbor记录/" class="item leancloud_visitors" data-flag-title="实验室搭建Harbor教程" title="阅读次数">
       <span class="icon">
         <i class="ic i-eye"></i>
       </span>
@@ -308,7 +308,7 @@ Watsmal = 有几个头大的博客 = 天生我材必有用，我是高手！我�
   </li>
   <li class="link">
     <strong>本文链接：</strong>
-    <a href="https://watsmal.github.io/2021/08/13/linux/%E5%AE%9E%E9%AA%8C%E5%AE%A4%E6%90%AD%E5%BB%BAHarbor%E8%AE%B0%E5%BD%95/" title="实验室搭建K8s教程">https://watsmal.github.io/2021/08/13/linux/实验室搭建Harbor记录/</a>
+    <a href="https://watsmal.github.io/2021/08/13/linux/%E5%AE%9E%E9%AA%8C%E5%AE%A4%E6%90%AD%E5%BB%BAHarbor%E8%AE%B0%E5%BD%95/" title="实验室搭建Harbor教程">https://watsmal.github.io/2021/08/13/linux/实验室搭建Harbor记录/</a>
   </li>
   <li class="license">
     <strong>版权声明： </strong>本站所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC96aC1DTg=="><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> 许可协议。转载请注明出处！
@@ -327,7 +327,7 @@ Watsmal = 有几个头大的博客 = 天生我材必有用，我是高手！我�
     <div class="item left">
       
 
-  <a href="/2021/08/13/other/switch%E9%81%87%E8%A7%81%20i++/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;i.imgtg.com&#x2F;2023&#x2F;03&#x2F;09&#x2F;Y0kTl.jpg" title="C语言里面的switch偶遇i++">
+  <a href="/2021/08/13/other/switch%E9%81%87%E8%A7%81%20i++/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;i.imgtg.com&#x2F;2023&#x2F;03&#x2F;09&#x2F;Y0hOs.jpg" title="C语言里面的switch偶遇i++">
   <span class="type">上一篇</span>
   <span class="category"><i class="ic i-flag"></i> 其他</span>
   <h3>C语言里面的switch偶遇i++</h3>
@@ -337,7 +337,7 @@ Watsmal = 有几个头大的博客 = 天生我材必有用，我是高手！我�
     <div class="item right">
       
 
-  <a href="/2024/01/02/hello-world/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;i.imgtg.com&#x2F;2023&#x2F;03&#x2F;09&#x2F;YS2LU.jpg" title="Hello World">
+  <a href="/2024/01/02/hello-world/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;i.imgtg.com&#x2F;2023&#x2F;03&#x2F;09&#x2F;Y0iNK.jpg" title="Hello World">
   <span class="type">下一篇</span>
   <span class="category"><i class="ic i-flag"></i> </span>
   <h3>Hello World</h3>
@@ -359,11 +359,11 @@ Watsmal = 有几个头大的博客 = 天生我材必有用，我是高手！我�
   <div class="panels">
     <div class="inner">
       <div class="contents panel pjax" data-title="文章目录">
-          <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E5%AE%A4%E6%90%AD%E5%BB%BAharbor%E8%AE%B0%E5%BD%95"><span class="toc-number">1.</span> <span class="toc-text"> 实验室搭建 Harbor 记录</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#harbor%E7%A7%81%E6%9C%89%E9%95%9C%E5%83%8F%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.0.0.1.</span> <span class="toc-text"> harbor，私有镜像管理系统。</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%AD%A5%E9%AA%A4%E6%8C%89%E7%85%A7httpsxieinfoqcnarticlefaa9ee456452891828cc080b8%E6%9D%A5%E5%B0%B1%E5%A5%BD"><span class="toc-number">1.0.0.2.</span> <span class="toc-text"> 配置步骤：按照 https:&#x2F;&#x2F;xie.infoq.cn&#x2F;article&#x2F;faa9ee456452891828cc080b8  来就好</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%80%E8%88%AC%E9%85%8D%E7%BD%AEhttp%E5%8D%B3%E5%8F%AF%E4%B8%8B%E9%9D%A2%E6%98%AF%E7%BB%A7%E7%BB%AD%E9%85%8D%E7%BD%AEhttps%E7%9A%84%E6%AD%A5%E9%AA%A4"><span class="toc-number">1.0.0.3.</span> <span class="toc-text"> 一般配置 http 即可，下面是继续配置 https 的步骤</span></a></li></ol></li></ol></li></ol></li></ol>
+          <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E5%AE%A4%E6%90%AD%E5%BB%BAharbor%E8%AE%B0%E5%BD%95"><span class="toc-number">1.</span> <span class="toc-text"> 实验室搭建 Harbor 记录</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#harbor%E7%A7%81%E6%9C%89%E9%95%9C%E5%83%8F%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.0.0.1.</span> <span class="toc-text"> harbor，私有镜像管理系统。</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%AD%A5%E9%AA%A4%E6%8C%89%E7%85%A7-httpsxieinfoqcnarticlefaa9ee456452891828cc080b8%E6%9D%A5%E5%B0%B1%E5%A5%BD"><span class="toc-number">1.0.0.2.</span> <span class="toc-text"> 配置步骤：按照  https:&#x2F;&#x2F;xie.infoq.cn&#x2F;article&#x2F;faa9ee456452891828cc080b8  来就好</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%80%E8%88%AC%E9%85%8D%E7%BD%AEhttp%E5%8D%B3%E5%8F%AF%E4%B8%8B%E9%9D%A2%E6%98%AF%E7%BB%A7%E7%BB%AD%E9%85%8D%E7%BD%AEhttps%E7%9A%84%E6%AD%A5%E9%AA%A4"><span class="toc-number">1.0.0.3.</span> <span class="toc-text"> 一般配置 http 即可，下面是继续配置 https 的步骤</span></a></li></ol></li></ol></li></ol></li></ol>
       </div>
       <div class="related panel pjax" data-title="系列文章">
         <ul>
-          <li><a href="/2020/08/13/linux/%E5%AE%9E%E9%AA%8C%E5%AE%A4%E6%90%AD%E5%BB%BAK8s%E6%95%99%E7%A8%8B/" rel="bookmark" title="实验室搭建K8s教程">实验室搭建K8s教程</a></li><li><a href="/2020/08/13/linux/chatgpt/chatgpt-token%E5%88%B6%E4%BD%9C%E6%96%B9%E6%A1%88/" rel="bookmark" title="chatgpt-token制作方案">chatgpt-token制作方案</a></li><li class="active"><a href="/2021/08/13/linux/%E5%AE%9E%E9%AA%8C%E5%AE%A4%E6%90%AD%E5%BB%BAHarbor%E8%AE%B0%E5%BD%95/" rel="bookmark" title="实验室搭建K8s教程">实验室搭建K8s教程</a></li><li><a href="/2024/01/05/linux/chatgpt/chatgpt_web%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/" rel="bookmark" title="chatgpt_web搭建教程">chatgpt_web搭建教程</a></li>
+          <li><a href="/2020/08/13/linux/%E5%AE%9E%E9%AA%8C%E5%AE%A4%E6%90%AD%E5%BB%BAK8s%E6%95%99%E7%A8%8B/" rel="bookmark" title="实验室搭建K8s教程">实验室搭建K8s教程</a></li><li><a href="/2020/08/13/linux/chatgpt/chatgpt-token%E5%88%B6%E4%BD%9C%E6%96%B9%E6%A1%88/" rel="bookmark" title="chatgpt-token制作方案">chatgpt-token制作方案</a></li><li class="active"><a href="/2021/08/13/linux/%E5%AE%9E%E9%AA%8C%E5%AE%A4%E6%90%AD%E5%BB%BAHarbor%E8%AE%B0%E5%BD%95/" rel="bookmark" title="实验室搭建Harbor教程">实验室搭建Harbor教程</a></li><li><a href="/2024/01/05/linux/chatgpt/chatgpt_web%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/" rel="bookmark" title="chatgpt_web搭建教程">chatgpt_web搭建教程</a></li>
         </ul>
       </div>
       <div class="overview panel" data-title="站点概览">
@@ -482,7 +482,50 @@ Watsmal = 有几个头大的博客 = 天生我材必有用，我是高手！我�
 <a href="/categories/hexo/theme-shoka/" title="分类于 Theme Shoka">Theme Shoka</a>
 </div>
 
+    <span><a href="/2020/08/13/hexo/theme-shoka/special/" title="Step.4 主题特殊功能">Step.4 主题特殊功能</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/linux/" title="分类于 Linux">Linux</a>
+</div>
+
+    <span><a href="/2021/08/13/linux/%E5%AE%9E%E9%AA%8C%E5%AE%A4%E6%90%AD%E5%BB%BAHarbor%E8%AE%B0%E5%BD%95/" title="实验室搭建Harbor教程">实验室搭建Harbor教程</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+</div>
+
+    <span><a href="/2024/01/02/hello-world/" title="Hello World">Hello World</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/hexo/" title="分类于 hexo搭建">hexo搭建</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/hexo/theme-shoka/" title="分类于 Theme Shoka">Theme Shoka</a>
+</div>
+
     <span><a href="/2020/08/13/hexo/theme-shoka/display/" title="Step.3 界面显示">Step.3 界面显示</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/hexo/" title="分类于 hexo搭建">hexo搭建</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/hexo/theme-shoka/" title="分类于 Theme Shoka">Theme Shoka</a>
+</div>
+
+    <span><a href="/2020/08/13/hexo/theme-shoka/config/" title="Step.2 基本配置">Step.2 基本配置</a></span>
   </li>
 
       
@@ -501,31 +544,10 @@ Watsmal = 有几个头大的博客 = 天生我材必有用，我是高手！我�
   <li class="item">
     
 <div class="breadcrumb">
-<a href="/categories/hexo/" title="分类于 hexo搭建">hexo搭建</a>
-<i class="ic i-angle-right"></i>
-<a href="/categories/hexo/theme-shoka/" title="分类于 Theme Shoka">Theme Shoka</a>
+<a href="/categories/other/" title="分类于 其他">其他</a>
 </div>
 
-    <span><a href="/2020/08/13/hexo/theme-shoka/dependents/" title="Step.1 依赖插件">Step.1 依赖插件</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/rust/" title="分类于 rust学习">rust学习</a>
-</div>
-
-    <span><a href="/2020/08/13/rust/rust%20%E4%BA%8C%E5%8F%89%E6%A0%91%E6%9E%84%E5%BB%BA/" title="rust 二叉树构建">rust 二叉树构建</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-</div>
-
-    <span><a href="/2024/01/02/hello-world/" title="Hello World">Hello World</a></span>
+    <span><a href="/2024/01/03/other/github+hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE%EF%BC%8C%E5%B9%B6%E9%85%8D%E7%BD%AE%E4%B8%BB%E9%A2%98/" title="github+hexo搭建blog">github+hexo搭建blog</a></span>
   </li>
 
       
@@ -547,17 +569,7 @@ Watsmal = 有几个头大的博客 = 天生我材必有用，我是高手！我�
 <a href="/categories/other/" title="分类于 其他">其他</a>
 </div>
 
-    <span><a href="/2024/01/03/other/github+hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE%EF%BC%8C%E5%B9%B6%E9%85%8D%E7%BD%AE%E4%B8%BB%E9%A2%98/" title="github+hexo搭建blog">github+hexo搭建blog</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/linux/" title="分类于 Linux">Linux</a>
-</div>
-
-    <span><a href="/2021/08/13/linux/%E5%AE%9E%E9%AA%8C%E5%AE%A4%E6%90%AD%E5%BB%BAHarbor%E8%AE%B0%E5%BD%95/" title="实验室搭建K8s教程">实验室搭建K8s教程</a></span>
+    <span><a href="/2021/08/13/other/switch%E9%81%87%E8%A7%81%20i++/" title="C语言里面的switch偶遇i++">C语言里面的switch偶遇i++</a></span>
   </li>
 
       
@@ -569,17 +581,7 @@ Watsmal = 有几个头大的博客 = 天生我材必有用，我是高手！我�
 <a href="/categories/hexo/theme-shoka/" title="分类于 Theme Shoka">Theme Shoka</a>
 </div>
 
-    <span><a href="/2020/08/13/hexo/theme-shoka/special/" title="Step.4 主题特殊功能">Step.4 主题特殊功能</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/other/" title="分类于 其他">其他</a>
-</div>
-
-    <span><a href="/2021/08/13/other/switch%E9%81%87%E8%A7%81%20i++/" title="C语言里面的switch偶遇i++">C语言里面的switch偶遇i++</a></span>
+    <span><a href="/2020/08/13/hexo/theme-shoka-doc/" title="Hexo主题Shoka搭建">Hexo主题Shoka搭建</a></span>
   </li>
 
   </ul>
