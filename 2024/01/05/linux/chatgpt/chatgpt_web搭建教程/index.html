@@ -1,0 +1,664 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#FFF">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+<link rel="alternate" type="application/rss+xml" title="有几个头大的博客" href="https://watsmal.github.io/rss.xml" />
+<link rel="alternate" type="application/atom+xml" title="有几个头大的博客" href="https://watsmal.github.io/atom.xml" />
+<link rel="alternate" type="application/json" title="有几个头大的博客" href="https://watsmal.github.io/feed.json" />
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="/css/app.css?v=0.2.5">
+
+  
+  <meta name="keywords" content="教程,chagpt,web,docker,ninjia,clash" />
+
+
+<link rel="canonical" href="https://watsmal.github.io/2024/01/05/linux/chatgpt/chatgpt_web%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/">
+
+
+
+  <title>
+chatgpt_web搭建教程 - chatgpt搭建 - Linux |
+Watsmal = 有几个头大的博客 = 天生我材必有用，我是高手！我是高手！</title>
+<meta name="generator" content="Hexo 6.0.0"></head>
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div id="loading">
+    <div class="cat">
+      <div class="body"></div>
+      <div class="head">
+        <div class="face"></div>
+      </div>
+      <div class="foot">
+        <div class="tummy-end"></div>
+        <div class="bottom"></div>
+        <div class="legs left"></div>
+        <div class="legs right"></div>
+      </div>
+      <div class="paw">
+        <div class="hands left"></div>
+        <div class="hands right"></div>
+      </div>
+    </div>
+  </div>
+  <div id="container">
+    <header id="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="inner">
+        <div id="brand">
+          <div class="pjax">
+          
+  <h1 itemprop="name headline">chatgpt_web搭建教程
+  </h1>
+  
+<div class="meta">
+  <span class="item" title="创建时间：2024-01-05 18:35:44">
+    <span class="icon">
+      <i class="ic i-calendar"></i>
+    </span>
+    <span class="text">发表于</span>
+    <time itemprop="dateCreated datePublished" datetime="2024-01-05T18:35:44+08:00">2024-01-05</time>
+  </span>
+  <span class="item" title="本文字数">
+    <span class="icon">
+      <i class="ic i-pen"></i>
+    </span>
+    <span class="text">本文字数</span>
+    <span>2.9k</span>
+    <span class="text">字</span>
+  </span>
+  <span class="item" title="阅读时长">
+    <span class="icon">
+      <i class="ic i-clock"></i>
+    </span>
+    <span class="text">阅读时长</span>
+    <span>7 分钟</span>
+  </span>
+</div>
+
+
+          </div>
+        </div>
+        <nav id="nav">
+  <div class="inner">
+    <div class="toggle">
+      <div class="lines" aria-label="切换导航栏">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </div>
+    </div>
+    <ul class="menu">
+      <li class="item title"><a href="/" rel="start">Watsmal</a></li>
+    </ul>
+    <ul class="right">
+      <li class="item theme">
+        <i class="ic i-sun"></i>
+      </li>
+      <li class="item search">
+        <i class="ic i-search"></i>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+      </div>
+      <div id="imgs" class="pjax">
+        <ul>
+          <li class="item" data-background-image="https://i.imgtg.com/2023/03/09/Y0kTl.jpg"></li>
+          <li class="item" data-background-image="https://pic4.zhimg.com/v2-c326fcfdd903de8535927295f821224c_r.jpg"></li>
+          <li class="item" data-background-image="https://i.imgtg.com/2023/03/09/Y0hOs.jpg"></li>
+          <li class="item" data-background-image="https://i.imgtg.com/2023/03/09/YSIlc.jpg"></li>
+          <li class="item" data-background-image="https://i.imgtg.com/2023/03/09/YQSYM.jpg"></li>
+          <li class="item" data-background-image="https://i.imgtg.com/2023/03/09/YS2LU.jpg"></li>
+        </ul>
+      </div>
+    </header>
+    <div id="waves">
+      <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" />
+          <use xlink:href="#gentle-wave" x="48" y="3" />
+          <use xlink:href="#gentle-wave" x="48" y="5" />
+          <use xlink:href="#gentle-wave" x="48" y="7" />
+        </g>
+      </svg>
+    </div>
+    <main>
+      <div class="inner">
+        <div id="main" class="pjax">
+          
+  <div class="article wrap">
+    
+<div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+<i class="ic i-home"></i>
+<span><a href="/">首页</a></span><i class="ic i-angle-right"></i>
+<span  itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/linux/" itemprop="item" rel="index" title="分类于 Linux"><span itemprop="name">Linux</span></a>
+<meta itemprop="position" content="1" /></span>
+<i class="ic i-angle-right"></i>
+<span  class="current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/linux/chatgpt/" itemprop="item" rel="index" title="分类于 chatgpt搭建"><span itemprop="name">chatgpt搭建</span></a>
+<meta itemprop="position" content="2" /></span>
+</div>
+
+    <article itemscope itemtype="http://schema.org/Article" class="post block" lang="zh-CN">
+  <link itemprop="mainEntityOfPage" href="https://watsmal.github.io/2024/01/05/linux/chatgpt/chatgpt_web%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/">
+
+  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="image" content="/images/avatar.jpg">
+    <meta itemprop="name" content="Watsmal">
+    <meta itemprop="description" content="天生我材必有用，我是高手！我是高手！, 有几个头大的博客">
+  </span>
+
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="有几个头大的博客">
+  </span>
+
+  <div class="body md" itemprop="articleBody">
+    
+
+    <h1 id="服务器搭建chatgpt_web"><a class="anchor" href="#服务器搭建chatgpt_web">#</a> 服务器搭建 [chatgpt_web]</h1>
+<h2 id="预了解dockerninjiaclash"><a class="anchor" href="#预了解dockerninjiaclash">#</a> 预了解（docker+ninjia+clash）</h2>
+<p><span class="label primary">目的:</span> 在自己的服务器上实现一个 web 端 chatgpt，可以不挂 vpn 使用 chatgpt，也可以与自己的好朋友共用。</p>
+<p><span class="label primary">呈现:</span></p>
+<p><img data-src="https://ooo.0x0.ooo/2024/01/05/OZn91P.png" alt="image-20240105162041371" /></p>
+<p><span class="label primary">准备：</span></p>
+<ol>
+<li>
+<p>一个 chatgpt 账号：用于提供  <code>API key </code> 或者  <code> token</code>  <span class="label info">二选一即可，本文选择 token 方式</span></p>
+</li>
+<li>
+<p>一个代理：服务端需要设置代理与 OPAI 服务器通信</p>
+<p><img data-src="https://ooo.0x0.ooo/2024/01/05/OZnjHb.png" alt="image-20240105162041371" /></p>
+</li>
+</ol>
+<p><span class="green">优点：  简单、易上手、实用性强、全 docker 操作</span></p>
+<hr />
+<h2 id="利用docker开始搭建全部"><a class="anchor" href="#利用docker开始搭建全部">#</a> 利用 docker 开始搭建全部：</h2>
+<p><span class="label warning">warning</span> ：以下涉及的端口，89，24218，24212，9090，9536 都需要防火墙开放和主机安全组规则开放（TCP/UDP 均需要）</p>
+<ol>
+<li>
+<p>解决代理<span class="label"> clash</span>：</p>
+<p>自己有代理吗？用 clash 吗？有的话就可以往下继续看了</p>
+<ul>
+<li>
+<p>在自己服务器里面创建如下目录以及文件：</p>
+<p><img data-src="https://ooo.0x0.ooo/2024/01/05/OZnXJB.png" alt="image-20240105171139176" /></p>
+<p><code>docker-compose.yml</code>  文件里面内容如下：</p>
+<figure class="highlight yaml"><figcaption data-lang="YAML"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token key atrule">version</span><span class="token punctuation">:</span> <span class="token string">"3"</span></pre></td></tr><tr><td data-num="2"></td><td><pre></pre></td></tr><tr><td data-num="3"></td><td><pre><span class="token key atrule">services</span><span class="token punctuation">:</span></pre></td></tr><tr><td data-num="4"></td><td><pre>  <span class="token comment"># Clash</span></pre></td></tr><tr><td data-num="5"></td><td><pre>  <span class="token key atrule">svc-clash</span><span class="token punctuation">:</span></pre></td></tr><tr><td data-num="6"></td><td><pre>    <span class="token key atrule">image</span><span class="token punctuation">:</span> dreamacro/clash<span class="token punctuation">:</span>latest</pre></td></tr><tr><td data-num="7"></td><td><pre>    <span class="token key atrule">container_name</span><span class="token punctuation">:</span> svc<span class="token punctuation">-</span>clash</pre></td></tr><tr><td data-num="8"></td><td><pre>    <span class="token key atrule">volumes</span><span class="token punctuation">:</span></pre></td></tr><tr><td data-num="9"></td><td><pre>      <span class="token punctuation">-</span> ./svc<span class="token punctuation">-</span>clash/config.yaml<span class="token punctuation">:</span>/root/.config/clash/config.yaml</pre></td></tr><tr><td data-num="10"></td><td><pre>    <span class="token key atrule">ports</span><span class="token punctuation">:</span></pre></td></tr><tr><td data-num="11"></td><td><pre>      <span class="token punctuation">-</span> <span class="token string">"9536:7890/tcp"</span> <span class="token comment"># Clash 代理端口映射</span></pre></td></tr><tr><td data-num="12"></td><td><pre>      <span class="token punctuation">-</span> <span class="token string">"9536:7890/udp"</span></pre></td></tr><tr><td data-num="13"></td><td><pre>      <span class="token punctuation">-</span> <span class="token string">"9090:9090"</span> <span class="token comment"># Clash 的 dashboard 控制端口映射</span></pre></td></tr><tr><td data-num="14"></td><td><pre>    <span class="token key atrule">restart</span><span class="token punctuation">:</span> always</pre></td></tr><tr><td data-num="15"></td><td><pre>    <span class="token key atrule">networks</span><span class="token punctuation">:</span></pre></td></tr><tr><td data-num="16"></td><td><pre>      <span class="token punctuation">-</span> default</pre></td></tr><tr><td data-num="17"></td><td><pre>  <span class="token comment"># Clash Dashboard</span></pre></td></tr><tr><td data-num="18"></td><td><pre>  <span class="token key atrule">svc-clash-dashboard</span><span class="token punctuation">:</span></pre></td></tr><tr><td data-num="19"></td><td><pre>    <span class="token key atrule">image</span><span class="token punctuation">:</span> centralx/clash<span class="token punctuation">-</span>dashboard</pre></td></tr><tr><td data-num="20"></td><td><pre>    <span class="token key atrule">container_name</span><span class="token punctuation">:</span> svc<span class="token punctuation">-</span>clash<span class="token punctuation">-</span>dashboard</pre></td></tr><tr><td data-num="21"></td><td><pre>    <span class="token key atrule">ports</span><span class="token punctuation">:</span></pre></td></tr><tr><td data-num="22"></td><td><pre>      <span class="token punctuation">-</span> <span class="token string">"89:80"</span> <span class="token comment"># Clash 的 dashboard 控制端口</span></pre></td></tr><tr><td data-num="23"></td><td><pre>    <span class="token key atrule">restart</span><span class="token punctuation">:</span> always</pre></td></tr><tr><td data-num="24"></td><td><pre>    <span class="token key atrule">networks</span><span class="token punctuation">:</span></pre></td></tr><tr><td data-num="25"></td><td><pre>      <span class="token punctuation">-</span> default</pre></td></tr><tr><td data-num="26"></td><td><pre><span class="token comment"># Networks</span></pre></td></tr><tr><td data-num="27"></td><td><pre><span class="token key atrule">networks</span><span class="token punctuation">:</span></pre></td></tr><tr><td data-num="28"></td><td><pre>  <span class="token key atrule">default</span><span class="token punctuation">:</span></pre></td></tr><tr><td data-num="29"></td><td><pre>    <span class="token key atrule">driver</span><span class="token punctuation">:</span> bridge <span class="token comment"># 一定是 bridge 模式</span></pre></td></tr><tr><td data-num="30"></td><td><pre>    <span class="token key atrule">name</span><span class="token punctuation">:</span> svc</pre></td></tr></table></figure><p><span class="label info">info</span> : 解释一下端口映射，89 是 clash 的 dashboard 控制端口，浏览器可以访问这个端口，控制代理（全局、局部、节点等信息）；9090 是 dashboard 控制 clash 的端口；9536 是代理端口，这里为了安全，由 7890 默认端口做了映射。</p>
+</li>
+<li>
+<p>配置 config.yaml</p>
+<p>打卡自己 win 上的 clash，点击 profiles-&gt; 选择可以用的 yaml 文件 -&gt; 右键 -&gt;Edit</p>
+<p><img data-src="https://ooo.0x0.ooo/2024/01/05/OZn28l.png" alt="111" /></p>
+<p>复制里面的 yaml 内容到 config.yaml 文件里面。</p>
+<p><img data-src="https://ooo.0x0.ooo/2024/01/05/OZnufs.png" alt="image-20240105170838861" /></p>
+<p><span class="label info">info</span> : 这里解释一下 config.yaml 一些参数</p>
+<figure class="highlight yaml"><figcaption data-lang="YAML"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token key atrule">mixed-port</span><span class="token punctuation">:</span> <span class="token number">7890</span> </pre></td></tr><tr><td data-num="2"></td><td><pre><span class="token key atrule">allow-lan</span><span class="token punctuation">:</span> <span class="token boolean important">true</span></pre></td></tr><tr><td data-num="3"></td><td><pre><span class="token key atrule">bind-address</span><span class="token punctuation">:</span> <span class="token string">'*'</span></pre></td></tr><tr><td data-num="4"></td><td><pre><span class="token key atrule">secret</span><span class="token punctuation">:</span> <span class="token string">'******'</span> <span class="token comment">#（配置 dashboard 访问 clash 密码，89 访问的时候，若要控制 clash 需要输入密码）</span></pre></td></tr><tr><td data-num="5"></td><td><pre><span class="token key atrule">mode</span><span class="token punctuation">:</span> rule <span class="token comment">#（默认模式为规则）</span></pre></td></tr><tr><td data-num="6"></td><td><pre><span class="token key atrule">log-level</span><span class="token punctuation">:</span> info</pre></td></tr><tr><td data-num="7"></td><td><pre><span class="token key atrule">external-controller</span><span class="token punctuation">:</span> <span class="token string">'0.0.0.0:9090'</span></pre></td></tr></table></figure><p>上面工作做完之后，之后在 svc 目录下面， <code>docker-compose up -d</code>  ，然后  <code>docker ps</code>  查看两个容器是否启动如下：</p>
+<p><img data-src="https://ooo.0x0.ooo/2024/01/05/OZnw0S.png" alt="image-20240105174349774" /></p>
+<p><span class="label warning">warning</span> ：<ins class="danger">以下涉及的端口，89，24218，24212，9090，9536 都需要防火墙开放和主机安全组规则开放（TCP/UDP 均需要）</ins></p>
+<p>然后就可以在浏览器访问：89 端口</p>
+<p><img data-src="https://ooo.0x0.ooo/2024/01/05/OZnCZa.png" alt="image-20240105174150923" /></p>
+<p><span class="label info">info</span> : 最好先测一下 global 网速，看看是否成功，在挑选一个<ins>美国节点</ins>。</p>
+<p><img data-src="https://ooo.0x0.ooo/2024/01/05/OZ1OMN.png" alt="image-20240105174855925" /></p>
+<p><span class="rainbow">Your 代理地址为： IP: 端口</span></p>
+</li>
+</ul>
+<p><span class="label success">✔️clash</span> 恭喜恭喜！！！</p>
+</li>
+<li>
+<p>解决反向代理<span class="label"> ninjia</span>：</p>
+<p><span class="label info">info</span> 反向代理十分有必要，而且反向代理也需要挂 vpn</p>
+<p>在建一个文件夹 ninjia，与 svc 同一级目录</p>
+<p><img data-src="https://ooo.0x0.ooo/2024/01/05/OZ1a1C.png" alt="image-20240105175252274" /></p>
+<p>里面创建一个  <code>docker-compose.yml</code>  文件，写入一下内容</p>
+<figure class="highlight yaml"><figcaption data-lang="YAML"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token key atrule">version</span><span class="token punctuation">:</span> <span class="token string">'3'</span></pre></td></tr><tr><td data-num="2"></td><td><pre></pre></td></tr><tr><td data-num="3"></td><td><pre><span class="token key atrule">services</span><span class="token punctuation">:</span></pre></td></tr><tr><td data-num="4"></td><td><pre>  <span class="token key atrule">ninja</span><span class="token punctuation">:</span></pre></td></tr><tr><td data-num="5"></td><td><pre>    <span class="token key atrule">image</span><span class="token punctuation">:</span> gngpp/ninja<span class="token punctuation">:</span>latest</pre></td></tr><tr><td data-num="6"></td><td><pre>    <span class="token key atrule">container_name</span><span class="token punctuation">:</span> ninja</pre></td></tr><tr><td data-num="7"></td><td><pre>    <span class="token key atrule">environment</span><span class="token punctuation">:</span></pre></td></tr><tr><td data-num="8"></td><td><pre>      <span class="token punctuation">-</span> TZ=Asia/Shanghai</pre></td></tr><tr><td data-num="9"></td><td><pre>      <span class="token punctuation">-</span> PROXIES=socks5<span class="token punctuation">:</span>//YourIP<span class="token punctuation">:</span><span class="token number">9536</span></pre></td></tr><tr><td data-num="10"></td><td><pre>    <span class="token key atrule">ports</span><span class="token punctuation">:</span></pre></td></tr><tr><td data-num="11"></td><td><pre>      <span class="token punctuation">-</span> <span class="token string">"24212:7999"</span></pre></td></tr><tr><td data-num="12"></td><td><pre>    <span class="token key atrule">command</span><span class="token punctuation">:</span> <span class="token string">"run"</span></pre></td></tr></table></figure><p>在 ninjia 目录下面， <code>docker-compose up -d</code>  ，然后  <code>docker ps</code>  查看容器是否启动，可以在前端访问  <code>IP:24212</code>  如下：</p>
+<p><img data-src="https://ooo.0x0.ooo/2024/01/05/OZ1oHL.png" alt="image-20240105175525246" /></p>
+<p><span class="rainbow">Your 反向代理地址为：<span class="exturl" data-url="aHR0cDovL0lQOjI0MjEyL2JhY2tlbmQtYXBpL2NvbnZlcnNhdGlvbg==">http://IP:24212/backend-api/conversation</span></span></p>
+<p><span class="label success">✔️ninjia</span></p>
+</li>
+<li>
+<p>解决<span class="label"> chatgpt_web</span>:</p>
+<p>首先利用 docker 拉去镜像：</p>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>$ <span class="token function">docker</span> pull watsmal/tokengpt:latest</pre></td></tr></table></figure><p>创建一个 chatgpt 文件夹，与 ninjia、svc 同一级目录，里面创建一个  <code>docker-compose.yml</code>  写入一下东西</p>
+<figure class="highlight yaml"><figcaption data-lang="YAML"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token key atrule">version</span><span class="token punctuation">:</span> <span class="token string">'3'</span></pre></td></tr><tr><td data-num="2"></td><td><pre><span class="token key atrule">services</span><span class="token punctuation">:</span></pre></td></tr><tr><td data-num="3"></td><td><pre>  <span class="token key atrule">Tokengpt-web</span><span class="token punctuation">:</span></pre></td></tr><tr><td data-num="4"></td><td><pre>    <span class="token key atrule">image</span><span class="token punctuation">:</span> watsmal/tokengpt<span class="token punctuation">:</span>latest</pre></td></tr><tr><td data-num="5"></td><td><pre>    <span class="token key atrule">container_name</span><span class="token punctuation">:</span> Tokengpt<span class="token punctuation">-</span>web</pre></td></tr><tr><td data-num="6"></td><td><pre>    <span class="token key atrule">ports</span><span class="token punctuation">:</span></pre></td></tr><tr><td data-num="7"></td><td><pre>      <span class="token punctuation">-</span> 24218<span class="token punctuation">:</span><span class="token number">3002</span></pre></td></tr><tr><td data-num="8"></td><td><pre>    <span class="token key atrule">environment</span><span class="token punctuation">:</span></pre></td></tr><tr><td data-num="9"></td><td><pre>      <span class="token punctuation">-</span> OPENAI_ACCESS_TOKEN=</pre></td></tr><tr><td data-num="10"></td><td><pre>      <span class="token punctuation">-</span> TIMEOUT_MS=60000</pre></td></tr><tr><td data-num="11"></td><td><pre>      <span class="token punctuation">-</span> AUTH_SECRET_KEY=.wcl.7676</pre></td></tr><tr><td data-num="12"></td><td><pre>      <span class="token punctuation">-</span> SOCKS_PROXY_HOST=IP</pre></td></tr><tr><td data-num="13"></td><td><pre>      <span class="token punctuation">-</span> SOCKS_PROXY_PORT=9536</pre></td></tr><tr><td data-num="14"></td><td><pre>      <span class="token punctuation">-</span> API_REVERSE_PROXY=http<span class="token punctuation">:</span>//IP<span class="token punctuation">:</span>24212/backend<span class="token punctuation">-</span>api/conversation</pre></td></tr></table></figure><p><span class="label info">info</span> 解释一下如下参数： <code>image: tokengpt:latest</code> ：后面我会提供镜像来源，替换一下； <code>environment</code>  环境变量里面，需要注意 token 需要自己获得，见下文； <code>AUTH_SECRET_KEY</code>  是 chatgpt_web 端密码，输入密码，才可使用；注意代理和反向代理。</p>
+<p>然后你就可以在 web 浏览器访问自己的 chatgpt_web 了。</p>
+<p><img data-src="https://ooo.0x0.ooo/2024/01/05/OZn91P.png" alt="image-20240105162041371" /></p>
+<p><span class="rainbow">Your web 端地址为：IP:24218</span></p>
+<p><span class="label success">✔️chatgpt_web</span></p>
+</li>
+</ol>
+<hr />
+<h2 id="注意与问题"><a class="anchor" href="#注意与问题">#</a> 注意与问题：</h2>
+<ol>
+<li>
+<p>有些时候由于 clash 网络问题，导致 chatgpt_web 端出现反向代理错误，这个时候，需要重启 clash 容器、反向代理容器、chatgpt_web 容器</p>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>$ <span class="token function">docker</span> <span class="token function">ps</span> 查看容器</pre></td></tr><tr><td data-num="2"></td><td><pre></pre></td></tr><tr><td data-num="3"></td><td><pre><span class="token comment">#进入三个目录 chatgpt、svc、ninjia，分别执行 docker-compose down </span></pre></td></tr><tr><td data-num="4"></td><td><pre>$ <span class="token function">docker-compose</span> down </pre></td></tr><tr><td data-num="5"></td><td><pre></pre></td></tr><tr><td data-num="6"></td><td><pre><span class="token comment">#然后在逐一 (注意顺序) docker-compose up -d</span></pre></td></tr><tr><td data-num="7"></td><td><pre>$ <span class="token function">docker-compose</span> up <span class="token parameter variable">-d</span></pre></td></tr></table></figure></li>
+<li>
+<p>token 获取：</p>
+<ul>
+<li>设置本机全局代理</li>
+<li>浏览器无痕模式访问  <code>https://chat.openai.com/auth/login</code></li>
+<li>登录成功之后，在新页面访问  <code>https://chat.openai.com/api/auth/session</code>  就可以得到长串 token，复制过去即可。</li>
+</ul>
+<p><span class="label info">info</span> token 会过期，需要重新操作。</p>
+</li>
+</ol>
+
+      <div class="tags">
+          <a href="/tags/%E6%95%99%E7%A8%8B/" rel="tag"><i class="ic i-tag"></i> 教程</a>
+          <a href="/tags/chagpt/" rel="tag"><i class="ic i-tag"></i> chagpt</a>
+          <a href="/tags/web/" rel="tag"><i class="ic i-tag"></i> web</a>
+          <a href="/tags/docker/" rel="tag"><i class="ic i-tag"></i> docker</a>
+          <a href="/tags/ninjia/" rel="tag"><i class="ic i-tag"></i> ninjia</a>
+          <a href="/tags/clash/" rel="tag"><i class="ic i-tag"></i> clash</a>
+      </div>
+  </div>
+
+   <footer>
+
+    <div class="meta">
+  <span class="item">
+    <span class="icon">
+      <i class="ic i-calendar-check"></i>
+    </span>
+    <span class="text">更新于</span>
+    <time title="修改时间：2024-01-05 18:43:58" itemprop="dateModified" datetime="2024-01-05T18:43:58+08:00">2024-01-05</time>
+  </span>
+  <span id="2024/01/05/linux/chatgpt/chatgpt_web搭建教程/" class="item leancloud_visitors" data-flag-title="chatgpt_web搭建教程" title="阅读次数">
+      <span class="icon">
+        <i class="ic i-eye"></i>
+      </span>
+      <span class="text">阅读次数</span>
+      <span class="leancloud-visitors-count"></span>
+      <span class="text">次</span>
+  </span>
+</div>
+
+      
+<div class="reward">
+  <button><i class="ic i-heartbeat"></i> 赞赏</button>
+  <p>请我喝[茶]~(￣▽￣)~*</p>
+  <div id="qr">
+      
+      <div>
+        <img data-src="/images/wechatpay.png" alt="Watsmal 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div>
+        <img data-src="/images/alipay.png" alt="Watsmal 支付宝">
+        <p>支付宝</p>
+      </div>
+      
+      <div>
+        <img data-src="/images/paypal.png" alt="Watsmal 贝宝">
+        <p>贝宝</p>
+      </div>
+  </div>
+</div>
+
+      
+
+<div id="copyright">
+<ul>
+  <li class="author">
+    <strong>本文作者： </strong>Watsmal <i class="ic i-at"><em>@</em></i>有几个头大的博客
+  </li>
+  <li class="link">
+    <strong>本文链接：</strong>
+    <a href="https://watsmal.github.io/2024/01/05/linux/chatgpt/chatgpt_web%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/" title="chatgpt_web搭建教程">https://watsmal.github.io/2024/01/05/linux/chatgpt/chatgpt_web搭建教程/</a>
+  </li>
+  <li class="license">
+    <strong>版权声明： </strong>本站所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC96aC1DTg=="><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+  </footer>
+
+</article>
+
+  </div>
+  
+
+<div class="post-nav">
+    <div class="item left">
+      
+
+  <a href="/2024/01/03/other/github+hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE%EF%BC%8C%E5%B9%B6%E9%85%8D%E7%BD%AE%E4%B8%BB%E9%A2%98/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;i.imgtg.com&#x2F;2023&#x2F;03&#x2F;09&#x2F;YQSYM.jpg" title="github+hexo搭建blog">
+  <span class="type">上一篇</span>
+  <span class="category"><i class="ic i-flag"></i> 其他</span>
+  <h3>github+hexo搭建blog</h3>
+  </a>
+
+    </div>
+    <div class="item right">
+    </div>
+</div>
+
+  
+  <div class="wrap" id="comments"></div>
+
+
+        </div>
+        <div id="sidebar">
+          
+
+<div class="inner">
+
+  <div class="panels">
+    <div class="inner">
+      <div class="contents panel pjax" data-title="文章目录">
+          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BAchatgpt_web"><span class="toc-number">1.</span> <span class="toc-text"> 服务器搭建 [chatgpt_web]</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%84%E4%BA%86%E8%A7%A3dockerninjiaclash"><span class="toc-number">1.1.</span> <span class="toc-text"> 预了解（docker+ninjia+clash）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A9%E7%94%A8docker%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E5%85%A8%E9%83%A8"><span class="toc-number">1.2.</span> <span class="toc-text"> 利用 docker 开始搭建全部：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E4%B8%8E%E9%97%AE%E9%A2%98"><span class="toc-number">1.3.</span> <span class="toc-text"> 注意与问题：</span></a></li></ol></li></ol>
+      </div>
+      <div class="related panel pjax" data-title="系列文章">
+        <ul>
+          <li><a href="/2020/08/13/linux/chatgpt/chatgpt-token%E5%88%B6%E4%BD%9C%E6%96%B9%E6%A1%88/" rel="bookmark" title="chatgpt-token制作方案">chatgpt-token制作方案</a></li><li class="active"><a href="/2024/01/05/linux/chatgpt/chatgpt_web%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/" rel="bookmark" title="chatgpt_web搭建教程">chatgpt_web搭建教程</a></li>
+        </ul>
+      </div>
+      <div class="overview panel" data-title="站点概览">
+        <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="image" itemprop="image" alt="Watsmal"
+      data-src="/images/avatar.jpg">
+  <p class="name" itemprop="name">Watsmal</p>
+  <div class="description" itemprop="description">有几个头大的博客</div>
+</div>
+
+<nav class="state">
+    <div class="item posts">
+      <a href="/archives/">
+        <span class="count">13</span>
+        <span class="name">文章</span>
+      </a>
+    </div>
+    <div class="item categories">
+      <a href="/categories/">
+        <span class="count">6</span>
+        <span class="name">分类</span>
+      </a>
+    </div>
+    <div class="item tags">
+      <a href="/tags/">
+        <span class="count">16</span>
+        <span class="name">标签</span>
+      </a>
+    </div>
+</nav>
+
+<div class="social">
+      <span class="exturl item github" data-url="aHR0cHM6Ly9naXRodWIuY29tLzE0Njk1MzgxMzhjaGlycw==" title="https:&#x2F;&#x2F;github.com&#x2F;1469538138chirs"><i class="ic i-github"></i></span>
+      <span class="exturl item zhihu" data-url="aHR0cHM6Ly93d3cuemhpaHUuY29tL3Blb3BsZS95b3UtamktZ2UtdG91LWRh" title="https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;you-ji-ge-tou-da"><i class="ic i-zhihu"></i></span>
+      <span class="exturl item weibo" data-url="aHR0cHM6Ly93ZWliby5jb20veW91cm5hbWU=" title="https:&#x2F;&#x2F;weibo.com&#x2F;yourname"><i class="ic i-weibo"></i></span>
+      <a href="/17671200459@163.com" title="17671200459@163.com" class="item email"><i class="ic i-envelope"></i></a>
+      <span class="exturl item stackoverflow" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS91c2Vycy8yMzE5MDAzNC8lRTYlOUMlODklRTUlODclQTAlRTQlQjglQUElRTUlQTQlQjQlRTUlQTQlQTc=" title="https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;23190034&#x2F;%E6%9C%89%E5%87%A0%E4%B8%AA%E5%A4%B4%E5%A4%A7"><i class="ic i-stack-overflow"></i></span>
+</div>
+
+<ul class="menu">
+  
+    
+  <li class="item">
+    <a href="/" rel="section"><i class="ic i-home"></i>首页</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/about/" rel="section"><i class="ic i-user"></i>关于</a>
+  </li>
+
+        
+  <li class="item dropdown">
+      <a href="javascript:void(0);"><i class="ic i-feather"></i>文章</a>
+    <ul class="submenu">
+
+        
+  <li class="item">
+    <a href="/archives/" rel="section"><i class="ic i-list-alt"></i>归档</a>
+  </li>
+
+        
+  <li class="item">
+    <a href="/categories/" rel="section"><i class="ic i-th"></i>分类</a>
+  </li>
+
+        
+  <li class="item">
+    <a href="/tags/" rel="section"><i class="ic i-tags"></i>标签</a>
+  </li>
+
+  </ul>
+    
+  <li class="item">
+    <a href="/friends/" rel="section"><i class="ic i-heart"></i>友链</a>
+  </li>
+
+
+</ul>
+
+      </div>
+    </div>
+  </div>
+
+  <ul id="quick">
+    <li class="prev pjax">
+    </li>
+    <li class="up"><i class="ic i-arrow-up"></i></li>
+    <li class="down"><i class="ic i-arrow-down"></i></li>
+    <li class="next pjax">
+    </li>
+    <li class="percent"></li>
+  </ul>
+</div>
+
+
+        </div>
+        <div class="dimmer"></div>
+      </div>
+    </main>
+    <footer id="footer">
+      <div class="inner">
+        <div class="widgets">
+          
+<div class="rpost pjax">
+  <h2>随机文章</h2>
+  <ul>
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/linux/" title="分类于 Linux">Linux</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/linux/chatgpt/" title="分类于 chatgpt搭建">chatgpt搭建</a>
+</div>
+
+    <span><a href="/2024/01/05/linux/chatgpt/chatgpt_web%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/" title="chatgpt_web搭建教程">chatgpt_web搭建教程</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/hexo/" title="分类于 hexo搭建">hexo搭建</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/hexo/theme-shoka/" title="分类于 Theme Shoka">Theme Shoka</a>
+</div>
+
+    <span><a href="/2020/08/13/hexo/theme-shoka/config/" title="Step.2 基本配置">Step.2 基本配置</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/hexo/" title="分类于 hexo搭建">hexo搭建</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/hexo/theme-shoka/" title="分类于 Theme Shoka">Theme Shoka</a>
+</div>
+
+    <span><a href="/2020/08/13/hexo/theme-shoka/dependents/" title="Step.1 依赖插件">Step.1 依赖插件</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/hexo/" title="分类于 hexo搭建">hexo搭建</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/hexo/theme-shoka/" title="分类于 Theme Shoka">Theme Shoka</a>
+</div>
+
+    <span><a href="/2020/08/13/hexo/theme-shoka/display/" title="Step.3 界面显示">Step.3 界面显示</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/linux/" title="分类于 Linux">Linux</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/linux/chatgpt/" title="分类于 chatgpt搭建">chatgpt搭建</a>
+</div>
+
+    <span><a href="/2020/08/13/linux/chatgpt/chatgpt-token%E5%88%B6%E4%BD%9C%E6%96%B9%E6%A1%88/" title="chatgpt-token制作方案">chatgpt-token制作方案</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/linux/" title="分类于 Linux">Linux</a>
+</div>
+
+    <span><a href="/2020/08/13/linux/%E5%AE%9E%E9%AA%8C%E5%AE%A4%E6%90%AD%E5%BB%BAK8s%E6%95%99%E7%A8%8B/" title="实验室搭建K8s教程">实验室搭建K8s教程</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/linux/" title="分类于 Linux">Linux</a>
+</div>
+
+    <span><a href="/2021/08/13/linux/%E5%AE%9E%E9%AA%8C%E5%AE%A4%E6%90%AD%E5%BB%BAHarbor%E8%AE%B0%E5%BD%95/" title="实验室搭建K8s教程">实验室搭建K8s教程</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/other/" title="分类于 其他">其他</a>
+</div>
+
+    <span><a href="/2024/01/03/other/github+hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE%EF%BC%8C%E5%B9%B6%E9%85%8D%E7%BD%AE%E4%B8%BB%E9%A2%98/" title="github+hexo搭建blog">github+hexo搭建blog</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/other/" title="分类于 其他">其他</a>
+</div>
+
+    <span><a href="/2021/08/13/other/switch%E9%81%87%E8%A7%81%20i++/" title="C语言里面的switch偶遇i++">C语言里面的switch偶遇i++</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/hexo/" title="分类于 hexo搭建">hexo搭建</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/hexo/theme-shoka/" title="分类于 Theme Shoka">Theme Shoka</a>
+</div>
+
+    <span><a href="/2020/08/13/hexo/theme-shoka/special/" title="Step.4 主题特殊功能">Step.4 主题特殊功能</a></span>
+  </li>
+
+  </ul>
+</div>
+<div>
+  <h2>最新评论</h2>
+  <ul class="leancloud-recent-comment"></ul>
+</div>
+
+        </div>
+        <div class="status">
+  <div class="copyright">
+    
+    &copy; 2022 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="ic i-watsmal"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Watsmal @ Watsmal</span>
+  </div>
+  <div class="count">
+    <span class="post-meta-item-icon">
+      <i class="ic i-chart-area"></i>
+    </span>
+    <span title="站点总字数">56k 字</span>
+
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="ic i-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:19</span>
+  </div>
+  <div class="powered-by">
+    基于 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span>
+  </div>
+</div>
+
+      </div>
+    </footer>
+  </div>
+<script data-config type="text/javascript">
+  var LOCAL = {
+    path: '2024/01/05/linux/chatgpt/chatgpt_web搭建教程/',
+    favicon: {
+      show: "（●´3｀●）博客",
+      hide: "(´Д｀)Watsmal"
+    },
+    search : {
+      placeholder: "文章搜索",
+      empty: "关于 「 ${query} 」，什么也没搜到",
+      stats: "${time} ms 内找到 ${hits} 条结果"
+    },
+    valine: true,fancybox: true,
+    copyright: '复制成功，转载请遵守 <i class="ic i-creative-commons"></i>BY-NC-SA 协议。',
+    ignores : [
+      function(uri) {
+        return uri.includes('#');
+      },
+      function(uri) {
+        return new RegExp(LOCAL.path+"$").test(uri);
+      }
+    ]
+  };
+</script>
+
+<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>
+
+<script src="//cdn.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js,npm/animejs@3.2.0/lib/anime.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script>
+
+<script src="/js/app.js?v=0.2.5"></script>
+
+
+
+
+</body>
+</html>
