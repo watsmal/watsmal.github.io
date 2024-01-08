@@ -82,7 +82,7 @@ Watsmal = 有几个头大的博客 = 天生我材必有用，我是高手！我�
       <i class="ic i-clock"></i>
     </span>
     <span class="text">阅读时长</span>
-    <span>27 分钟</span>
+    <span>28 分钟</span>
   </span>
 </div>
 
@@ -115,12 +115,12 @@ Watsmal = 有几个头大的博客 = 天生我材必有用，我是高手！我�
       </div>
       <div id="imgs" class="pjax">
         <ul>
-          <li class="item" data-background-image="https://pic4.zhimg.com/v2-c326fcfdd903de8535927295f821224c_r.jpg"></li>
-          <li class="item" data-background-image="https://i.imgtg.com/2023/03/09/Y0iNK.jpg"></li>
-          <li class="item" data-background-image="https://i.imgtg.com/2023/03/09/Y0xvg.jpg"></li>
-          <li class="item" data-background-image="https://th.bing.com/th/id/R.f7530826ebfe6b42c6d42253bac6153d?rik=JYIKz8yEvjuRmg&riu=http%3a%2f%2fwww.quazero.com%2fuploads%2fallimg%2f140303%2f1-140303215013.jpg&ehk=feA%2f5sUIHbzCYEj7Mq8o2hZrIFNOsnnwOBX0gVUVpOI%3d&risl=&pid=ImgRaw&r=0"></li>
-          <li class="item" data-background-image="https://i.imgtg.com/2023/03/09/YQSYM.jpg"></li>
-          <li class="item" data-background-image="https://i.imgtg.com/2023/03/09/Y0kTl.jpg"></li>
+          <li class="item" data-background-image="https://ooo.0x0.ooo/2024/01/05/OZ7MUG.jpg"></li>
+          <li class="item" data-background-image="https://ooo.0x0.ooo/2024/01/05/OZ1CjM.jpg"></li>
+          <li class="item" data-background-image="https://ooo.0x0.ooo/2024/01/05/OZ1IFc.jpg"></li>
+          <li class="item" data-background-image="https://ooo.0x0.ooo/2024/01/05/OZ7Oy1.jpg"></li>
+          <li class="item" data-background-image="https://ooo.0x0.ooo/2024/01/05/OZ18Ev.jpg"></li>
+          <li class="item" data-background-image="https://ooo.0x0.ooo/2024/01/05/OZ19dp.jpg"></li>
         </ul>
       </div>
     </header>
@@ -214,14 +214,14 @@ Watsmal = 有几个头大的博客 = 天生我材必有用，我是高手！我�
 </tr>
 </tbody>
 </table>
-<p><strong>主机名</strong>：利用 <code>hostnamectl</code>  去设置主机名</p>
+<p><strong>主机名</strong>：利用  <code>hostnamectl</code>  去设置主机名</p>
 <ol>
 <li>
-<p>（每台执行）安装镜像过程不在叙述这里只需要注意安装之后 &lt;u&gt;<em> 访问不了互联网</em> &lt;/u&gt; 问题？</p>
-<p>因为默认是不可以访问互联网的，所以需要去设定一个 <code>ONBOOT=yes</code> ，此外安装 <code>k8s</code>  最好选择静态 IP（因为集群需要共享节点信息等）。</p>
+<p>（每台执行）安装镜像过程不在叙述这里只需要注意安装之后  <code>&lt;u&gt;</code> <em> 访问不了互联网</em> <code>&lt;/u&gt;</code>  问题？</p>
+<p>因为默认是不可以访问互联网的，所以需要去设定一个  <code>ONBOOT=yes</code> ，此外安装  <code>k8s</code>  最好选择静态 IP（因为集群需要共享节点信息等）。</p>
 <ul>
 <li>
-<p>首先在  <code>etc/sysconfig/network-scripts/</code>  找到网卡 &lt;u&gt;ifcfg - 你的网卡名字 &lt;/u&gt; （我这里是 <code>ifcfg-ens192</code> ）</p>
+<p>首先在  <code>etc/sysconfig/network-scripts/</code>  找到网卡  <code>&lt;u&gt;</code> ifcfg - 你的网卡名字 <code>&lt;/u&gt;</code>  （我这里是  <code>ifcfg-ens192</code> ）</p>
 <p><img data-src="C:%5CUsers%5CAdministrator%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20230326185531504.png" alt="image-20230326185531504" /></p>
 </li>
 <li>
@@ -235,35 +235,35 @@ Watsmal = 有几个头大的博客 = 天生我材必有用，我是高手！我�
 </ul>
 </li>
 <li>
-<p>再去修改 <code>/etc/sysconfig/network</code>  里面的内容</p>
+<p>再去修改  <code>/etc/sysconfig/network</code>  里面的内容</p>
 <ul>
 <li><code>NETWORKING=yes</code></li>
 <li><code>GATEWAY=10.0.21.254</code></li>
 </ul>
 </li>
 <li>
-<p>最后重启网络服务即可 <code>service network restart</code></p>
+<p>最后重启网络服务即可  <code>service network restart</code></p>
 </li>
 </ul>
 </li>
 <li>
 <p>（每台执行）这个时候镜像可以访问网络了，那么需要对 centos7 镜像 tools 等的安装 ( <code>gcc glibc gcc-c++ make net-tools screen vim lrzsz tree dos2unix lsof tcpdump bash-completion ntp</code> )</p>
-<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token comment">#安装 wget</span></pre></td></tr><tr><td data-num="2"></td><td><pre><span class="token punctuation">[</span>root@localhost ~<span class="token punctuation">]</span><span class="token comment"># yum -y install wget</span></pre></td></tr><tr><td data-num="3"></td><td><pre> </pre></td></tr><tr><td data-num="4"></td><td><pre><span class="token comment">#​​​​​​​备份 CentOS-Base.repo</span></pre></td></tr><tr><td data-num="5"></td><td><pre><span class="token punctuation">[</span>root@localhost ~<span class="token punctuation">]</span><span class="token comment"># mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup</span></pre></td></tr><tr><td data-num="6"></td><td><pre> </pre></td></tr><tr><td data-num="7"></td><td><pre><span class="token comment">#​​​​​​​下载新的 CentOS-Base.repo 到 /etc/yum.repos.d/</span></pre></td></tr><tr><td data-num="8"></td><td><pre><span class="token punctuation">[</span>root@localhost ~<span class="token punctuation">]</span><span class="token comment"># wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo</span></pre></td></tr><tr><td data-num="9"></td><td><pre> </pre></td></tr><tr><td data-num="10"></td><td><pre><span class="token comment">#​​​​​​​生成缓存</span></pre></td></tr><tr><td data-num="11"></td><td><pre><span class="token punctuation">[</span>root@localhost ~<span class="token punctuation">]</span><span class="token comment"># yum makecache</span></pre></td></tr><tr><td data-num="12"></td><td><pre><span class="token punctuation">[</span>root@localhost ~<span class="token punctuation">]</span><span class="token comment"># yum update</span></pre></td></tr><tr><td data-num="13"></td><td><pre><span class="token comment">#​​​​​​​安装必要软件</span></pre></td></tr><tr><td data-num="14"></td><td><pre><span class="token punctuation">[</span>root@localhost ~<span class="token punctuation">]</span><span class="token comment"># yum -y install gcc glibc gcc-c++ make net-tools screen vim lrzsz tree dos2unix lsof tcpdump bash-completion ntp</span></pre></td></tr></table></figure></li>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token comment">#安装 wget</span></pre></td></tr><tr><td data-num="2"></td><td><pre><span class="token punctuation">[</span>root@localhost ~<span class="token punctuation">]</span><span class="token comment"># yum -y install wget</span></pre></td></tr><tr><td data-num="3"></td><td><pre></pre></td></tr><tr><td data-num="4"></td><td><pre><span class="token comment">#备份 CentOS-Base.repo</span></pre></td></tr><tr><td data-num="5"></td><td><pre><span class="token punctuation">[</span>root@localhost ~<span class="token punctuation">]</span><span class="token comment"># mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup</span></pre></td></tr><tr><td data-num="6"></td><td><pre></pre></td></tr><tr><td data-num="7"></td><td><pre><span class="token comment">#下载新的 CentOS-Base.repo 到 /etc/yum.repos.d/</span></pre></td></tr><tr><td data-num="8"></td><td><pre><span class="token punctuation">[</span>root@localhost ~<span class="token punctuation">]</span><span class="token comment"># wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo</span></pre></td></tr><tr><td data-num="9"></td><td><pre></pre></td></tr><tr><td data-num="10"></td><td><pre><span class="token comment">#生成缓存</span></pre></td></tr><tr><td data-num="11"></td><td><pre><span class="token punctuation">[</span>root@localhost ~<span class="token punctuation">]</span><span class="token comment"># yum makecache</span></pre></td></tr><tr><td data-num="12"></td><td><pre><span class="token punctuation">[</span>root@localhost ~<span class="token punctuation">]</span><span class="token comment"># yum update</span></pre></td></tr><tr><td data-num="13"></td><td><pre><span class="token comment">#安装必要软件</span></pre></td></tr><tr><td data-num="14"></td><td><pre><span class="token punctuation">[</span>root@localhost ~<span class="token punctuation">]</span><span class="token comment"># yum -y install gcc glibc gcc-c++ make net-tools screen vim lrzsz tree dos2unix lsof tcpdump bash-completion ntp</span></pre></td></tr></table></figure></li>
 <li>
-<p>（分别执行）设置主机名字，四个主机（看文主机详细信息），分别是 <code>master,node1,node2,node3</code></p>
+<p>（分别执行）设置主机名字，四个主机（看文主机详细信息），分别是  <code>master,node1,node2,node3</code></p>
 <ul>
 <li>
 <p>在 master 主机上运行  <code>hostnamectl set-hostname master</code>  即可，其余类似。</p>
-<p>可以看到设置完之后，运行 <code>hostnamectl status</code>  如下：</p>
+<p>可以看到设置完之后，运行  <code>hostnamectl status</code>  如下：</p>
 <p><img data-src="C:%5CUsers%5CAdministrator%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20230326190708475.png" alt="image-20230326190708475" /></p>
 </li>
 </ul>
 </li>
 <li>
-<p>（每台执行） <code>hosts文件</code> 设置：[host 文件作用](<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hvbmdrYWlodWExOTg3L2FydGljbGUvZGV0YWlscy8xMTEyMTQzNDM/b3BzX3JlcXVlc3RfbWlzYz0lN0IlMjJyZXF1ZXN0JTVGaWQlMjIlM0ElMjIxNjc5ODIwNjkxMTY3ODI0Mjc0OTQyMDglMjIlMkMlMjJzY20lMjIlM0ElMjIyMDE0MDcxMy4xMzAxMDIzMzQuLiUyMiU3RCZhbXA7cmVxdWVzdF9pZD0xNjc5ODIwNjkxMTY3ODI0Mjc0OTQyMDgmYW1wO2Jpel9pZD0wJmFtcDt1dG1fbWVkaXVtPWRpc3RyaWJ1dGUucGNfc2VhcmNoX3Jlc3VsdC5ub25lLXRhc2stYmxvZy0yfmFsbH5zb2JhaWR1ZW5kfmRlZmF1bHQtNC0xMTEyMTQzNDMtbnVsbC1udWxsLjE0MiU1RXY3NiU1RXdlY2hhdCwyMDElNUV2NCU1RWFkZF9hc2ssMjM5JTVFdjIlNUVpbnNlcnRfY2hhdGdwdCZhbXA7dXRtX3Rlcm09aG9zdHMlRTYlOTYlODclRTQlQkIlQjYmYW1wO3NwbT0xMDE4LjIyMjYuMzAwMS40MTg3">(25 条消息) hosts 文件简析_host 格式_Finder_Way 的博客 - CSDN 博客</span>) 设置如下：</p>
+<p>（每台执行） <code>hosts文件</code> 设置：<a href="%5B(25%E6%9D%A1%E6%B6%88%E6%81%AF)">host 文件作用</a> hosts 文件简析_host 格式_Finder_Way 的博客 - CSDN 博客](<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hvbmdrYWlodWExOTg3L2FydGljbGUvZGV0YWlscy8xMTEyMTQzNDM/b3BzX3JlcXVlc3RfbWlzYz0lN0IlMjJyZXF1ZXN0JTVGaWQlMjIlM0ElMjIxNjc5ODIwNjkxMTY3ODI0Mjc0OTQyMDglMjIlMkMlMjJzY20lMjIlM0ElMjIyMDE0MDcxMy4xMzAxMDIzMzQuLiUyMiU3RCZhbXA7cmVxdWVzdF9pZD0xNjc5ODIwNjkxMTY3ODI0Mjc0OTQyMDgmYW1wO2Jpel9pZD0wJmFtcDt1dG1fbWVkaXVtPWRpc3RyaWJ1dGUucGNfc2VhcmNoX3Jlc3VsdC5ub25lLXRhc2stYmxvZy0y">https://blog.csdn.net/hongkaihua1987/article/details/111214343?ops_request_misc={&quot;request_id&quot;%3A&quot;167982069116782427494208&quot;%2C&quot;scm&quot;%3A&quot;20140713.130102334..&quot;}&amp;request_id=167982069116782427494208&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2</span><sub>all</sub>sobaiduend~default-4-111214343-null-null.142<sup>v76</sup>wechat,201<sup>v4</sup>add_ask,239<sup>v2</sup>insert_chatgpt&amp;utm_term=hosts 文件 &amp; spm=1018.2226.3001.4187)) 设置如下：</p>
 <figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>每台都执行</pre></td></tr><tr><td data-num="2"></td><td><pre><span class="token function">cat</span> <span class="token operator">>></span> /etc/hosts <span class="token operator">&lt;&lt;</span><span class="token string">EOF</pre></td></tr><tr><td data-num="3"></td><td><pre>10.0.21.215  master</pre></td></tr><tr><td data-num="4"></td><td><pre>10.0.21.216  node1</pre></td></tr><tr><td data-num="5"></td><td><pre>10.0.21.217  node2</pre></td></tr><tr><td data-num="6"></td><td><pre>10.0.21.218  node3</pre></td></tr><tr><td data-num="7"></td><td><pre>EOF</span></pre></td></tr></table></figure></li>
 <li>
-<p>（每台执行）关闭防火墙和 selinux &lt;u&gt;<strong> 推荐永久关闭（否则重启报错）</strong>&lt;/u&gt;，具体代码执行如下：</p>
+<p>（每台执行）关闭防火墙和 selinux  <code>&lt;u&gt;</code> <strong> 推荐永久关闭（否则重启报错）</strong> <code>&lt;/u&gt;</code> ，具体代码执行如下：</p>
 <figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>三台都执行，以下无特殊说明，则三台都执行</pre></td></tr><tr><td data-num="2"></td><td><pre>systemctl stop firewalld</pre></td></tr><tr><td data-num="3"></td><td><pre>systemctl disable firewalld</pre></td></tr><tr><td data-num="4"></td><td><pre></pre></td></tr><tr><td data-num="5"></td><td><pre><span class="token comment"># 临时禁用 selinux</span></pre></td></tr><tr><td data-num="6"></td><td><pre>setenforce <span class="token number">0</span></pre></td></tr><tr><td data-num="7"></td><td><pre></pre></td></tr><tr><td data-num="8"></td><td><pre><span class="token comment"># 永久关闭 selinux 继续运行下面</span></pre></td></tr><tr><td data-num="9"></td><td><pre><span class="token comment"># 修改 /etc/sysconfig/selinux 文件设置</span></pre></td></tr><tr><td data-num="10"></td><td><pre><span class="token function">sed</span> <span class="token parameter variable">-i</span> <span class="token string">'s/SELINUX=permissive/SELINUX=disabled/'</span> /etc/sysconfig/selinux</pre></td></tr><tr><td data-num="11"></td><td><pre><span class="token function">sed</span> <span class="token parameter variable">-i</span> <span class="token string">"s/SELINUX=enforcing/SELINUX=disabled/g"</span> /etc/selinux/config</pre></td></tr></table></figure></li>
 <li>
 <p>（每台执行）关闭 swap 分区</p>
@@ -306,16 +306,16 @@ Watsmal = 有几个头大的博客 = 天生我材必有用，我是高手！我�
 </ul>
 <figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token function">sudo</span> <span class="token function">mkdir</span> <span class="token parameter variable">-p</span> /etc/docker</pre></td></tr><tr><td data-num="2"></td><td><pre><span class="token function">sudo</span> <span class="token function">tee</span> /etc/docker/daemon.json <span class="token operator">&lt;&lt;-</span><span class="token string">'EOF'</pre></td></tr><tr><td data-num="3"></td><td><pre>&#123;</pre></td></tr><tr><td data-num="4"></td><td><pre>"registry-mirrors" : [</pre></td></tr><tr><td data-num="5"></td><td><pre>    "https://jkfdsf2u.mirror.aliyuncs.com",</pre></td></tr><tr><td data-num="6"></td><td><pre>    "https://registry.docker-cn.com"</pre></td></tr><tr><td data-num="7"></td><td><pre>  ],</pre></td></tr><tr><td data-num="8"></td><td><pre>  "insecure-registries" : [</pre></td></tr><tr><td data-num="9"></td><td><pre>    "docker-registry.zjq.com"</pre></td></tr><tr><td data-num="10"></td><td><pre>  ],</pre></td></tr><tr><td data-num="11"></td><td><pre>  "log-driver": "json-file",</pre></td></tr><tr><td data-num="12"></td><td><pre>  "log-opts": &#123;</pre></td></tr><tr><td data-num="13"></td><td><pre>    "max-size": "10m",</pre></td></tr><tr><td data-num="14"></td><td><pre>    "max-file": "10"</pre></td></tr><tr><td data-num="15"></td><td><pre>  &#125;,</pre></td></tr><tr><td data-num="16"></td><td><pre>  "data-root": "/data/docker"</pre></td></tr><tr><td data-num="17"></td><td><pre>&#125;</pre></td></tr><tr><td data-num="18"></td><td><pre>EOF</span></pre></td></tr><tr><td data-num="19"></td><td><pre><span class="token function">sudo</span> systemctl daemon-reload</pre></td></tr><tr><td data-num="20"></td><td><pre><span class="token function">sudo</span> systemctl restart <span class="token function">docker</span></pre></td></tr></table></figure></li>
 <li>
-<p>（每台执行，例外初始化）安装 <code>kubeadm</code></p>
+<p>（每台执行，例外初始化）安装  <code>kubeadm</code></p>
 <ul>
-<li>添加阿里云 <code>K8s</code>  的 yum 源</li>
+<li>添加阿里云  <code>K8s</code>  的 yum 源</li>
 </ul>
 <figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token function">cat</span> <span class="token operator">>></span> /etc/yum.repos.d/kubernetes.repo <span class="token operator">&lt;&lt;</span> <span class="token string">EOF</pre></td></tr><tr><td data-num="2"></td><td><pre>[kubernetes]</pre></td></tr><tr><td data-num="3"></td><td><pre>name=Kubernetes Repo</pre></td></tr><tr><td data-num="4"></td><td><pre>baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64/</pre></td></tr><tr><td data-num="5"></td><td><pre>gpgcheck=1</pre></td></tr><tr><td data-num="6"></td><td><pre>gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg</pre></td></tr><tr><td data-num="7"></td><td><pre>enabled=1</pre></td></tr><tr><td data-num="8"></td><td><pre>EOF</span></pre></td></tr></table></figure><ul>
 <li>
-<p>安装 <code>Kubeadm、Kubelet、Kubectl</code>  组件</p>
+<p>安装  <code>Kubeadm、Kubelet、Kubectl</code>  组件</p>
 <figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>yum  list  <span class="token operator">|</span><span class="token function">grep</span> kubeadm<span class="token comment">#查看版本</span></pre></td></tr><tr><td data-num="2"></td><td><pre>yum <span class="token parameter variable">-y</span> <span class="token function">install</span> kubelet-1.26.3-0 kubeadm-1.26.3-0 kubectl-1.26.3-0 </pre></td></tr><tr><td data-num="3"></td><td><pre>systemctl <span class="token builtin class-name">enable</span> kubelet <span class="token operator">&amp;&amp;</span> systemctl start kubelet</pre></td></tr></table></figure></li>
 <li>
-<p>（仅 master 节点）始化 <code>Kubernetes Master </code></p>
+<p>（仅 master 节点）始化  <code>Kubernetes Master </code></p>
 <figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>kubeadm init --kubernetes-version<span class="token operator">=</span>v1.26.3 <span class="token punctuation">\</span></pre></td></tr><tr><td data-num="2"></td><td><pre>--apiserver-advertise-address<span class="token operator">=</span><span class="token number">10.0</span>.21.215   <span class="token punctuation">\</span></pre></td></tr><tr><td data-num="3"></td><td><pre>--image-repository registry.aliyuncs.com/google_containers  <span class="token punctuation">\</span></pre></td></tr><tr><td data-num="4"></td><td><pre>--service-cidr<span class="token operator">=</span><span class="token number">10.96</span>.0.0/16 --pod-network-cidr<span class="token operator">=</span><span class="token number">10.244</span>.0.0/16<span class="token punctuation">\</span></pre></td></tr><tr><td data-num="5"></td><td><pre>--cri-socket unix:///var/run/cri-dockerd.sock <span class="token punctuation">\</span></pre></td></tr><tr><td data-num="6"></td><td><pre>--ignore-preflight-errors<span class="token operator">=</span>all</pre></td></tr><tr><td data-num="7"></td><td><pre><span class="token comment">#可能会报错 [ERROR CRI]: container runtime is not running，解决：https://blog.csdn.net/qq_43580215/article/details/125153959</span></pre></td></tr><tr><td data-num="8"></td><td><pre></pre></td></tr><tr><td data-num="9"></td><td><pre><span class="token comment">#如果有其他错误看 11 点纠错即可。</span></pre></td></tr></table></figure><ul>
 <li>image-repository 是镜像源，由于 kubeadm 默认从官网<span class="exturl" data-url="aHR0cHM6Ly9saW5rLnpoaWh1LmNvbS8/dGFyZ2V0PWh0dHAlM0EvL2s4cy5ncmMuaW8="> http://k8s.grc.io</span> 下载所需镜像，国内无法访问，因此需要通过 image-repository 指定阿里云镜像仓库地址。</li>
 <li>apiserver-advertise-address 是 Master 机的 IP 地址，在本例中是 10.0.21.215</li>
@@ -323,7 +323,7 @@ Watsmal = 有几个头大的博客 = 天生我材必有用，我是高手！我�
 </ul>
 </li>
 <li>
-<p>得到加入密钥即可（先不要执行，因为从节点还没有配置 <code>admin.conf</code> ）：</p>
+<p>得到加入密钥即可（先不要执行，因为从节点还没有配置  <code>admin.conf</code> ）：</p>
 </li>
 <li>
 <figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>kubeadm <span class="token function">join</span> <span class="token number">10.0</span>.21.215:6443 <span class="token parameter variable">--token</span> wy4b2n.k0mkkevck8devjm8 <span class="token punctuation">\</span></pre></td></tr><tr><td data-num="2"></td><td><pre>        --discovery-token-ca-cert-hash sha256:50ffa9744ca72782901e83341f6458164e1b7bc9032015176f5014a69207add4</pre></td></tr></table></figure><p><strong>注意</strong> ：从节点需要加上  <code>--cri-socket unix:///var/run/cri-dockerd.sock</code> ，因为没有整合 kubelet 和 cri-dockerd 所以需要。</p>
@@ -349,55 +349,41 @@ Watsmal = 有几个头大的博客 = 天生我材必有用，我是高手！我�
 <p>纠错：</p>
 </li>
 </ol>
-<pre><code>* ```bash
-  error execution phase preflight: [preflight] Some fatal errors occurred:         [ERROR FileAvailabl
-  ```
+<ul>
+<li>
+<p><code>bash error execution phase preflight: [preflight] Some fatal errors occurred:         [ERROR FileAvailabl </code></p>
+<p>解决方案：kubeadm reset</p>
+</li>
+<li>
+<pre><code class="language-bash"></code></pre>
+</li>
+</ul>
+<p>[wait-control-plane] Waiting for the kubelet to boot up the control plane as static Pods from directory &quot;/etc/kubernetes/manifests&quot;. This can take up to 4m0s<br />
+[kubelet-check] Initial timeout of 40s passed.</p>
+<pre><code>
+解决方案需要安装cri-dockerd（所有节点）
 
-  ​	解决方案：kubeadm reset
+```bash
+#从https://github.com/Mirantis/cri-dockerd/releases中下载最新的rpm包,手动下载后上传到服务器里
+rpm -ivh cri-dockerd-0.3.1-3.el7.x86_64.rpm
 
-  
+#修改/usr/lib/systemd/system/cri-docker.service文件中的ExecStart配置
+vim /usr/lib/systemd/system/cri-docker.service
+ExecStart=/usr/bin/cri-dockerd --network-plugin=cni --pod-infra-container-image=registry.aliyuncs.com/google_containers/pause:3.7
 
-* ```bash
-  [wait-control-plane] Waiting for the kubelet to boot up the control plane as static Pods from directory &quot;/etc/kubernetes/manifests&quot;. This can take up to 4m0s
-  [kubelet-check] Initial timeout of 40s passed.
-  
-  ```
-
-  解决方案需要安装cri-dockerd（所有节点）
-
-  ```bash
-  #从https://github.com/Mirantis/cri-dockerd/releases中下载最新的rpm包,手动下载后上传到服务器里
-  rpm -ivh cri-dockerd-0.3.1-3.el7.x86_64.rpm
-  
-  #修改/usr/lib/systemd/system/cri-docker.service文件中的ExecStart配置
-  vim /usr/lib/systemd/system/cri-docker.service
-  ExecStart=/usr/bin/cri-dockerd --network-plugin=cni --pod-infra-container-image=registry.aliyuncs.com/google_containers/pause:3.7
-  
-  systemctl daemon-reload
-  systemctl enable --now cri-docker
-  ```
-
-  之后在运行下面代码，初始化即可。
-
-  ```bash
-  kubeadm init \
-  --apiserver-advertise-address=10.0.21.215 \
-  --image-repository registry.aliyuncs.com/google_containers \
-  --kubernetes-version v1.26.3 \
-  --service-cidr=10.96.0.0/12 \
-  --pod-network-cidr=10.244.0.0/16 \
-  --cri-socket unix:///var/run/cri-dockerd.sock \
-  --ignore-preflight-errors=all
-  ```
+systemctl daemon-reload
+systemctl enable --now cri-docker
 </code></pre>
+<p>之后在运行下面代码，初始化即可。</p>
+<p><code>bash kubeadm init \ --apiserver-advertise-address=10.0.21.215 \ --image-repository registry.aliyuncs.com/google_containers \ --kubernetes-version v1.26.3 \ --service-cidr=10.96.0.0/12 \ --pod-network-cidr=10.244.0.0/16 \ --cri-socket unix:///var/run/cri-dockerd.sock \ --ignore-preflight-errors=all </code></p>
 <h1 id="到目前位置就安装完k8s了"><a class="anchor" href="#到目前位置就安装完k8s了">#</a> 到目前位置就安装完 k8s 了</h1>
 <h1 id="下面进行网络等初始化配置"><a class="anchor" href="#下面进行网络等初始化配置">#</a> 下面进行网络等初始化配置：</h1>
 </li>
 <li>
 <p>使用 wget 命令，地址为：(<span class="exturl" data-url="aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL2NvcmVvcy9mbGFubmVsL21hc3Rlci9Eb2N1bWVudGF0aW9uL2t1YmUtZmxhbm5lbC55bWw=">https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml</span>)，这个地址国内访问不了，所以我把内容复制下来，为了避免前面文章过长，我把它粘贴到文章末尾了。这个 yml 配置文件中配置了一个国内无法访问的地址 (<span class="exturl" data-url="aHR0cDovL3F1YXkuaW8=">quay.io</span>)，我已经将其改为国内可以访问的地址 (<span class="exturl" data-url="aHR0cDovL3F1YXktbWlycm9yLnFpbml1LmNvbQ==">quay-mirror.qiniu.com</span>)。我们新建一个 kube-flannel.yml 文件，复制粘贴该内容即可。</p>
+<p>之后运行：</p>
 </li>
 </ul>
-<p>​	之后运行：</p>
 <figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>kubectl apply <span class="token parameter variable">-f</span> kube-flannel.yml</pre></td></tr></table></figure><p><img data-src="C:%5CUsers%5CAdministrator%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20230328102951128.png" alt="image-20230328102951128" /></p>
 <h1 id="下面进行一个小实验体会一下k8s"><a class="anchor" href="#下面进行一个小实验体会一下k8s">#</a> 下面进行一个小实验体会一下 k8s：</h1>
 <ul>
@@ -412,10 +398,10 @@ Watsmal = 有几个头大的博客 = 天生我材必有用，我是高手！我�
 <li>
 <p>然后：</p>
 <figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>kubectl apply <span class="token parameter variable">-f</span> nginx-app.yaml</pre></td></tr></table></figure><p><img data-src="C:%5CUsers%5CAdministrator%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20230328201357001.png" alt="image-20230328201357001" /></p>
-<p>可以看到 <code>kubectl</code>  帮建立了一个 <code>service</code>  和 <code>deployment</code> , <code>deployment</code>  里面 <code> replicas: 3</code> ，所以得到 3 个 pod。</p>
+<p>可以看到  <code>kubectl</code>  帮建立了一个  <code>service</code>  和  <code>deployment</code> , <code>deployment</code>  里面  <code> replicas: 3</code> ，所以得到 3 个 pod。</p>
 </li>
 <li>
-<p>然后在相当于服务暴露到 <code>10.0.21.215:31497</code> , <code>10.0.21.216:31497</code> , <code>10.0.21.217:31497</code> , <code>10.0.21.218:31497</code>  去浏览器访问即可。</p>
+<p>然后在相当于服务暴露到  <code>10.0.21.215:31497</code> , <code>10.0.21.216:31497</code> , <code>10.0.21.217:31497</code> , <code>10.0.21.218:31497</code>  去浏览器访问即可。</p>
 </li>
 </ol>
 <p>如下图：</p>
@@ -437,7 +423,7 @@ Watsmal = 有几个头大的博客 = 天生我材必有用，我是高手！我�
       <i class="ic i-calendar-check"></i>
     </span>
     <span class="text">更新于</span>
-    <time title="修改时间：2024-01-03 19:29:57" itemprop="dateModified" datetime="2024-01-03T19:29:57+08:00">2024-01-03</time>
+    <time title="修改时间：2024-01-05 21:21:21" itemprop="dateModified" datetime="2024-01-05T21:21:21+08:00">2024-01-05</time>
   </span>
   <span id="2020/08/13/linux/实验室搭建K8s教程/" class="item leancloud_visitors" data-flag-title="实验室搭建K8s教程" title="阅读次数">
       <span class="icon">
@@ -500,7 +486,7 @@ Watsmal = 有几个头大的博客 = 天生我材必有用，我是高手！我�
     <div class="item left">
       
 
-  <a href="/2020/08/13/rust/rust%20%E4%BA%8C%E5%8F%89%E6%A0%91%E6%9E%84%E5%BB%BA/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;th.bing.com&#x2F;th&#x2F;id&#x2F;R.7d744ba41f907e4446e8a2d9b2df22c2?rik&#x3D;Ji973MJxwTrk%2fA&amp;riu&#x3D;http%3a%2f%2fpic.bizhi360.com%2fbbpic%2f36%2f1936.jpg&amp;ehk&#x3D;jc46kt%2fE6qbtaQXKqCH7A5d8x0yNQVOFQu0rHA5oQ5U%3d&amp;risl&#x3D;&amp;pid&#x3D;ImgRaw&amp;r&#x3D;0" title="rust 二叉树构建">
+  <a href="/2020/08/13/rust/rust%20%E4%BA%8C%E5%8F%89%E6%A0%91%E6%9E%84%E5%BB%BA/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;ooo.0x0.ooo&#x2F;2024&#x2F;01&#x2F;05&#x2F;OZ7qaD.jpg" title="rust 二叉树构建">
   <span class="type">上一篇</span>
   <span class="category"><i class="ic i-flag"></i> rust学习</span>
   <h3>rust 二叉树构建</h3>
@@ -510,7 +496,7 @@ Watsmal = 有几个头大的博客 = 天生我材必有用，我是高手！我�
     <div class="item right">
       
 
-  <a href="/2020/08/13/hexo/theme-shoka-doc/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;th.bing.com&#x2F;th&#x2F;id&#x2F;R.f7530826ebfe6b42c6d42253bac6153d?rik&#x3D;JYIKz8yEvjuRmg&amp;riu&#x3D;http%3a%2f%2fwww.quazero.com%2fuploads%2fallimg%2f140303%2f1-140303215013.jpg&amp;ehk&#x3D;feA%2f5sUIHbzCYEj7Mq8o2hZrIFNOsnnwOBX0gVUVpOI%3d&amp;risl&#x3D;&amp;pid&#x3D;ImgRaw&amp;r&#x3D;0" title="Hexo主题Shoka搭建">
+  <a href="/2020/08/13/hexo/theme-shoka-doc/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;ooo.0x0.ooo&#x2F;2024&#x2F;01&#x2F;05&#x2F;OZ19dp.jpg" title="Hexo主题Shoka搭建">
   <span class="type">下一篇</span>
   <span class="category"><i class="ic i-flag"></i> Theme Shoka</span>
   <h3>Hexo主题Shoka搭建</h3>
@@ -650,30 +636,6 @@ Watsmal = 有几个头大的博客 = 天生我材必有用，我是高手！我�
   <li class="item">
     
 <div class="breadcrumb">
-<a href="/categories/hexo/" title="分类于 hexo搭建">hexo搭建</a>
-<i class="ic i-angle-right"></i>
-<a href="/categories/hexo/theme-shoka/" title="分类于 Theme Shoka">Theme Shoka</a>
-</div>
-
-    <span><a href="/2020/08/13/hexo/theme-shoka/special/" title="Step.4 主题特殊功能">Step.4 主题特殊功能</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/hexo/" title="分类于 hexo搭建">hexo搭建</a>
-<i class="ic i-angle-right"></i>
-<a href="/categories/hexo/theme-shoka/" title="分类于 Theme Shoka">Theme Shoka</a>
-</div>
-
-    <span><a href="/2020/08/13/hexo/theme-shoka/display/" title="Step.3 界面显示">Step.3 界面显示</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
 <a href="/categories/linux/" title="分类于 Linux">Linux</a>
 <i class="ic i-angle-right"></i>
 <a href="/categories/linux/chatgpt/" title="分类于 chatgpt搭建">chatgpt搭建</a>
@@ -688,10 +650,56 @@ Watsmal = 有几个头大的博客 = 天生我材必有用，我是高手！我�
 <div class="breadcrumb">
 <a href="/categories/hexo/" title="分类于 hexo搭建">hexo搭建</a>
 <i class="ic i-angle-right"></i>
-<a href="/categories/hexo/theme-shoka/" title="分类于 Theme Shoka">Theme Shoka</a>
+<a href="/categories/hexo/Theme-Shoka/" title="分类于 Theme Shoka">Theme Shoka</a>
+</div>
+
+    <span><a href="/2020/08/13/hexo/theme-shoka/special/" title="Step.4 主题特殊功能">Step.4 主题特殊功能</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/hexo/" title="分类于 hexo搭建">hexo搭建</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/hexo/Theme-Shoka/" title="分类于 Theme Shoka">Theme Shoka</a>
 </div>
 
     <span><a href="/2020/08/13/hexo/theme-shoka-doc/" title="Hexo主题Shoka搭建">Hexo主题Shoka搭建</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/linux/" title="分类于 Linux">Linux</a>
+</div>
+
+    <span><a href="/2021/08/13/linux/%E5%AE%9E%E9%AA%8C%E5%AE%A4%E6%90%AD%E5%BB%BAHarbor%E8%AE%B0%E5%BD%95/" title="实验室搭建Harbor教程">实验室搭建Harbor教程</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/hexo/" title="分类于 hexo搭建">hexo搭建</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/hexo/Theme-Shoka/" title="分类于 Theme Shoka">Theme Shoka</a>
+</div>
+
+    <span><a href="/2020/08/13/hexo/theme-shoka/dependents/" title="Step.1 依赖插件">Step.1 依赖插件</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/hexo/" title="分类于 hexo搭建">hexo搭建</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/hexo/Theme-Shoka/" title="分类于 Theme Shoka">Theme Shoka</a>
+</div>
+
+    <span><a href="/2020/08/13/hexo/theme-shoka/config/" title="Step.2 基本配置">Step.2 基本配置</a></span>
   </li>
 
       
@@ -710,10 +718,20 @@ Watsmal = 有几个头大的博客 = 天生我材必有用，我是高手！我�
   <li class="item">
     
 <div class="breadcrumb">
-<a href="/categories/linux/" title="分类于 Linux">Linux</a>
+<a href="/categories/other/" title="分类于 其他">其他</a>
 </div>
 
-    <span><a href="/2021/08/13/linux/%E5%AE%9E%E9%AA%8C%E5%AE%A4%E6%90%AD%E5%BB%BAHarbor%E8%AE%B0%E5%BD%95/" title="实验室搭建Harbor教程">实验室搭建Harbor教程</a></span>
+    <span><a href="/2021/08/13/other/switch%E9%81%87%E8%A7%81%20i++/" title="C语言里面的switch偶遇i++">C语言里面的switch偶遇i++</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/rust/" title="分类于 rust学习">rust学习</a>
+</div>
+
+    <span><a href="/2020/08/13/rust/rust%20%E4%BA%8C%E5%8F%89%E6%A0%91%E6%9E%84%E5%BB%BA/" title="rust 二叉树构建">rust 二叉树构建</a></span>
   </li>
 
       
@@ -723,38 +741,6 @@ Watsmal = 有几个头大的博客 = 天生我材必有用，我是高手！我�
 </div>
 
     <span><a href="/2024/01/02/hello-world/" title="Hello World">Hello World</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/hexo/" title="分类于 hexo搭建">hexo搭建</a>
-<i class="ic i-angle-right"></i>
-<a href="/categories/hexo/theme-shoka/" title="分类于 Theme Shoka">Theme Shoka</a>
-</div>
-
-    <span><a href="/2020/08/13/hexo/theme-shoka/config/" title="Step.2 基本配置">Step.2 基本配置</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/other/" title="分类于 其他">其他</a>
-</div>
-
-    <span><a href="/2024/01/03/other/github+hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE%EF%BC%8C%E5%B9%B6%E9%85%8D%E7%BD%AE%E4%B8%BB%E9%A2%98/" title="github+hexo搭建blog">github+hexo搭建blog</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/other/" title="分类于 其他">其他</a>
-</div>
-
-    <span><a href="/2021/08/13/other/switch%E9%81%87%E8%A7%81%20i++/" title="C语言里面的switch偶遇i++">C语言里面的switch偶遇i++</a></span>
   </li>
 
   </ul>
@@ -785,7 +771,7 @@ Watsmal = 有几个头大的博客 = 天生我材必有用，我是高手！我�
     <span class="post-meta-item-icon">
       <i class="ic i-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:19</span>
+    <span title="站点阅读时长">2:20</span>
   </div>
   <div class="powered-by">
     基于 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span>
