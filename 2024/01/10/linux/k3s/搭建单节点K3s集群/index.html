@@ -1,0 +1,727 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#FFF">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+<link rel="alternate" type="application/rss+xml" title="有几个头大的博客" href="https://watsmal.github.io/rss.xml" />
+<link rel="alternate" type="application/atom+xml" title="有几个头大的博客" href="https://watsmal.github.io/atom.xml" />
+<link rel="alternate" type="application/json" title="有几个头大的博客" href="https://watsmal.github.io/feed.json" />
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="/css/app.css?v=0.2.5">
+
+  
+  <meta name="keywords" content="docker,k3s,ubuntu,Raspberry Pi" />
+
+
+<link rel="canonical" href="https://watsmal.github.io/2024/01/10/linux/k3s/%E6%90%AD%E5%BB%BA%E5%8D%95%E8%8A%82%E7%82%B9K3s%E9%9B%86%E7%BE%A4/">
+
+
+
+  <title>
+搭建单节点K3s集群 - k3s学习 - Linux |
+Watsmal = 有几个头大的博客 = 天生我材必有用，我是高手！我是高手！</title>
+<meta name="generator" content="Hexo 6.0.0"></head>
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div id="loading">
+    <div class="cat">
+      <div class="body"></div>
+      <div class="head">
+        <div class="face"></div>
+      </div>
+      <div class="foot">
+        <div class="tummy-end"></div>
+        <div class="bottom"></div>
+        <div class="legs left"></div>
+        <div class="legs right"></div>
+      </div>
+      <div class="paw">
+        <div class="hands left"></div>
+        <div class="hands right"></div>
+      </div>
+    </div>
+  </div>
+  <div id="container">
+    <header id="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="inner">
+        <div id="brand">
+          <div class="pjax">
+          
+  <h1 itemprop="name headline">搭建单节点K3s集群
+  </h1>
+  
+<div class="meta">
+  <span class="item" title="创建时间：2024-01-10 11:29:21">
+    <span class="icon">
+      <i class="ic i-calendar"></i>
+    </span>
+    <span class="text">发表于</span>
+    <time itemprop="dateCreated datePublished" datetime="2024-01-10T11:29:21+08:00">2024-01-10</time>
+  </span>
+  <span class="item" title="本文字数">
+    <span class="icon">
+      <i class="ic i-pen"></i>
+    </span>
+    <span class="text">本文字数</span>
+    <span>3.3k</span>
+    <span class="text">字</span>
+  </span>
+  <span class="item" title="阅读时长">
+    <span class="icon">
+      <i class="ic i-clock"></i>
+    </span>
+    <span class="text">阅读时长</span>
+    <span>8 分钟</span>
+  </span>
+</div>
+
+
+          </div>
+        </div>
+        <nav id="nav">
+  <div class="inner">
+    <div class="toggle">
+      <div class="lines" aria-label="切换导航栏">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </div>
+    </div>
+    <ul class="menu">
+      <li class="item title"><a href="/" rel="start">Watsmal</a></li>
+    </ul>
+    <ul class="right">
+      <li class="item theme">
+        <i class="ic i-sun"></i>
+      </li>
+      <li class="item search">
+        <i class="ic i-search"></i>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+      </div>
+      <div id="imgs" class="pjax">
+        <ul>
+          <li class="item" data-background-image="https://th.bing.com/th/id/R.7d744ba41f907e4446e8a2d9b2df22c2?rik=Ji973MJxwTrk%2fA&riu=http%3a%2f%2fpic.bizhi360.com%2fbbpic%2f36%2f1936.jpg&ehk=jc46kt%2fE6qbtaQXKqCH7A5d8x0yNQVOFQu0rHA5oQ5U%3d&risl=&pid=ImgRaw&r=0"></li>
+          <li class="item" data-background-image="https://c.53326.com/d/file/lan2019010710/3tdl50zpugw.jpg"></li>
+          <li class="item" data-background-image="https://i.imgtg.com/2023/03/09/YSj7p.jpg"></li>
+          <li class="item" data-background-image="https://pic4.zhimg.com/v2-c326fcfdd903de8535927295f821224c_r.jpg"></li>
+          <li class="item" data-background-image="https://th.bing.com/th/id/R.f7530826ebfe6b42c6d42253bac6153d?rik=JYIKz8yEvjuRmg&riu=http%3a%2f%2fwww.quazero.com%2fuploads%2fallimg%2f140303%2f1-140303215013.jpg&ehk=feA%2f5sUIHbzCYEj7Mq8o2hZrIFNOsnnwOBX0gVUVpOI%3d&risl=&pid=ImgRaw&r=0"></li>
+          <li class="item" data-background-image="https://i.imgtg.com/2023/03/09/Y0xvg.jpg"></li>
+        </ul>
+      </div>
+    </header>
+    <div id="waves">
+      <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" />
+          <use xlink:href="#gentle-wave" x="48" y="3" />
+          <use xlink:href="#gentle-wave" x="48" y="5" />
+          <use xlink:href="#gentle-wave" x="48" y="7" />
+        </g>
+      </svg>
+    </div>
+    <main>
+      <div class="inner">
+        <div id="main" class="pjax">
+          
+  <div class="article wrap">
+    
+<div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+<i class="ic i-home"></i>
+<span><a href="/">首页</a></span><i class="ic i-angle-right"></i>
+<span  itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/linux/" itemprop="item" rel="index" title="分类于 Linux"><span itemprop="name">Linux</span></a>
+<meta itemprop="position" content="1" /></span>
+<i class="ic i-angle-right"></i>
+<span  class="current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/linux/k3s/" itemprop="item" rel="index" title="分类于 k3s学习"><span itemprop="name">k3s学习</span></a>
+<meta itemprop="position" content="2" /></span>
+</div>
+
+    <article itemscope itemtype="http://schema.org/Article" class="post block" lang="zh-CN">
+  <link itemprop="mainEntityOfPage" href="https://watsmal.github.io/2024/01/10/linux/k3s/%E6%90%AD%E5%BB%BA%E5%8D%95%E8%8A%82%E7%82%B9K3s%E9%9B%86%E7%BE%A4/">
+
+  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="image" content="/images/avatar.jpg">
+    <meta itemprop="name" content="Watsmal">
+    <meta itemprop="description" content="天生我材必有用，我是高手！我是高手！, 有几个头大的博客">
+  </span>
+
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="有几个头大的博客">
+  </span>
+
+  <div class="body md" itemprop="articleBody">
+    
+
+    <h2 id="实验室搭建k3s环境"><a class="anchor" href="#实验室搭建k3s环境">#</a> 实验室搭建 k3s 环境</h2>
+<hr />
+<h3 id="搭建环境组成"><a class="anchor" href="#搭建环境组成">#</a> 搭建环境组成：</h3>
+<table>
+<thead>
+<tr>
+<th>VM</th>
+<th>主机名</th>
+<th>系统</th>
+<th>docker</th>
+<th>k3s</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10.0.21.13</td>
+<td>master</td>
+<td>ubuntu22.04</td>
+<td>24.0.1</td>
+<td>v1.28.5+k3s1</td>
+</tr>
+<tr>
+<td>10.0.21.238</td>
+<td>node1</td>
+<td>ubuntu22.04</td>
+<td>24.0.1</td>
+<td>v1.28.5+k3s1</td>
+</tr>
+<tr>
+<td>10.0.21.51</td>
+<td>node2</td>
+<td>ubuntu22.04</td>
+<td>24.0.1</td>
+<td>v1.28.5+k3s1</td>
+</tr>
+<tr>
+<td>10.0.21.34</td>
+<td>nodeResPi</td>
+<td>Linux version 6.1.0-rpi7-rpi-v8</td>
+<td>24.0.1</td>
+<td>v1.28.5+k3s1</td>
+</tr>
+</tbody>
+</table>
+<p><span class="label warning">warning</span> 这里的 nodeResPi 是树莓派 4B 设备，版本具体记不太清， <code>cat /proc/version</code>  是  <code>Linux version 6.1.0-rpi7-rpi-v8 (debian-kernel@lists.debian.org) (gcc-12 (Debian 12.2.0-14) 12.2.0, GNU ld (GNU Binutils for Debian) 2.40) #1 SMP PREEMPT Debian 1:6.1.63-1+rpt1 (2023-11-24)</code></p>
+<hr />
+<h3 id="搭建过程"><a class="anchor" href="#搭建过程">#</a> 搭建过程：</h3>
+<p><span class="label info">info</span> 这里搭建 <code>k3s</code>  单节点模式，<span class="exturl" data-url="aHR0cHM6Ly9kb2NzLnJhbmNoZXIuY24vZG9jcy9rM3MvYXJjaGl0ZWN0dXJlL19pbmRleA==">k3s 架构介绍</span></p>
+<p><img data-src="https://docs.rancher.cn/assets/images/k3s-architecture-single-server-42bb3c4899985b4f6d8fd0e2130e3c0e.png" alt="Architecture" /></p>
+<p>这里 master 作为主节点，其余三个作为子节点。</p>
+<h4 id="安装docker以及其余准备"><a class="anchor" href="#安装docker以及其余准备">#</a> 安装 docker 以及其余准备</h4>
+<div class="note primary">
+<p>树莓派节点需要操作，如下：(以下两个操作完成之后需要重启)</p>
+</div>
+<p><ins class="dot">1. 在 Raspberry Pi OS 上启用旧版 iptables<span class="exturl" data-url="aHR0cHM6Ly9kb2NzLnJhbmNoZXIuY24vZG9jcy9rM3MvYWR2YW5jZWQvX2luZGV4IyVFNSU5QyVBOC1yYXNwYmVycnktcGktb3MtJUU0JUI4JThBJUU1JTkwJUFGJUU3JTk0JUE4JUU2JTk3JUE3JUU3JTg5JTg4LWlwdGFibGVz">#</span></ins></p>
+<p>Raspberry Pi OS（以前称为 Raspbian）默认使用  <code>nftables</code>  而不是  <code>iptables</code> 。 <strong>K3s</strong> 网络功能需要  <code>iptables</code>  并且不能与  <code>nftables</code>  一起使用。按照以下步骤切换配置 <strong>Buster</strong> 以使用  <code>legacy iptables</code> ：</p>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token function">sudo</span> iptables <span class="token parameter variable">-F</span></pre></td></tr><tr><td data-num="2"></td><td><pre><span class="token function">sudo</span> update-alternatives <span class="token parameter variable">--set</span> iptables /usr/sbin/iptables-legacy</pre></td></tr><tr><td data-num="3"></td><td><pre><span class="token function">sudo</span> update-alternatives <span class="token parameter variable">--set</span> ip6tables /usr/sbin/ip6tables-legacy</pre></td></tr><tr><td data-num="4"></td><td><pre><span class="token function">sudo</span> root <span class="token comment">#官方参考重启，我建议下一步弄完，一起重启。</span></pre></td></tr></table></figure><p><span class="label info">info</span>   <code>sudo root</code>  官方文档这里写的重启，我觉得这里也可以不重启，因为你 <code>ls -l /sys/fs/cgroup</code>  之后有很多内容，感觉可能涉及到重新加载 <code>/boot/cmdline.txt</code> ，所以建议下一步弄完，一起重启。</p>
+<p><ins class="dot">2. 为 Raspberry Pi OS 启用 cgroups<span class="exturl" data-url="aHR0cHM6Ly9kb2NzLnJhbmNoZXIuY24vZG9jcy9rM3MvYWR2YW5jZWQvX2luZGV4IyVFNCVCOCVCQS1yYXNwYmVycnktcGktb3MtJUU1JTkwJUFGJUU3JTk0JUE4LWNncm91cHM=">#</span></ins></p>
+<p>标准 Raspberry Pi OS 安装不会启用  <code>cgroups</code> 。 <strong>K3S</strong> 需要  <code>cgroups</code>  来启动 systemd 服务。可通过将  <code>cgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory</code>  附加到  <code>/boot/cmdline.txt</code>  来启用  <code>cgroups</code> 。</p>
+<p><span class="label warning">warning</span> 插入应该是在<span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9xdWVzdGlvbnMvNzQyOTQ1NDgvazNzLWluc3RhbGwtb24tcmFzcGJlcnJ5LXBp">第一行最后面添加</span>：</p>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token assign-left variable">cgroup_enable</span><span class="token operator">=</span>cpuset <span class="token assign-left variable">cgroup_memory</span><span class="token operator">=</span><span class="token number">1</span> <span class="token assign-left variable">cgroup_enable</span><span class="token operator">=</span>memory</pre></td></tr></table></figure><p><img data-src="https://ooo.0x0.ooo/2024/01/10/OZQlOI.png" alt="image-20240109221613710" /></p>
+<p><span class="label danger">💔danger</span> 重启树莓派 <code>sudo reboot</code></p>
+<p><span class="label success">✔️树莓派单独配置部分完成</span></p>
+<div class="note primary">
+<p>除去树莓派节点的剩余节点均需要的操作，如下：</p>
+</div>
+<p><ins class="dot">关闭防火墙，否则主动开启对应端口</ins></p>
+<p>1. 关闭防火墙操作如下：</p>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token comment">#ubuntu 默认不安装 ufw，预先安装 ufw</span></pre></td></tr><tr><td data-num="2"></td><td><pre><span class="token function">apt-get</span> <span class="token function">install</span> ufw</pre></td></tr><tr><td data-num="3"></td><td><pre></pre></td></tr><tr><td data-num="4"></td><td><pre><span class="token comment">#查看状态</span></pre></td></tr><tr><td data-num="5"></td><td><pre>systemctl status ufw</pre></td></tr><tr><td data-num="6"></td><td><pre></pre></td></tr><tr><td data-num="7"></td><td><pre><span class="token comment">#关闭 ufw</span></pre></td></tr><tr><td data-num="8"></td><td><pre>systemctl stop ufw</pre></td></tr></table></figure><p>2. 若不关闭，端口开放如下：（不保证这是全部应该开放的端口）</p>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token function">sudo</span> ufw allow <span class="token number">6443</span>/tcp</pre></td></tr><tr><td data-num="2"></td><td><pre><span class="token function">sudo</span> ufw allow <span class="token number">443</span>/tcp</pre></td></tr></table></figure><div class="note primary">
+<p>所有节点均需要操作，如下：</p>
+</div>
+<blockquote>
+<p>为了方便 dns 访问，我们这里首先修改所有主机的 hosts，每台主句运行如下命令：</p>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token function">cat</span> <span class="token operator">>></span> /etc/hosts <span class="token operator">&lt;&lt;</span><span class="token string">EOF</pre></td></tr><tr><td data-num="2"></td><td><pre>10.0.21.13  master</pre></td></tr><tr><td data-num="3"></td><td><pre>10.0.21.238  node1</pre></td></tr><tr><td data-num="4"></td><td><pre>10.0.21.51  node2</pre></td></tr><tr><td data-num="5"></td><td><pre>10.0.21.34  nodeResPi</pre></td></tr><tr><td data-num="6"></td><td><pre>EOF</span></pre></td></tr></table></figure><p>检验：可以在主机上 <code>ping node1</code>  、 <code>ping master</code></p>
+</blockquote>
+<ul>
+<li>
+<p>预先安装 docker 这里直接<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3JhbmNoZXIvaW5zdGFsbC1kb2NrZXIvYmxvYi9tYXN0ZXIvZGlzdC8yNC4wLjEuc2g=">安装脚本</span>：</p>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token function">curl</span> https://releases.rancher.com/install-docker/24.0.1.sh <span class="token operator">|</span> <span class="token function">sh</span> <span class="token comment">#版本可以查看上面链接</span></pre></td></tr></table></figure><p>完成后，可以检查版本，和 docker 状态：</p>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>systemctl status <span class="token function">docker</span></pre></td></tr><tr><td data-num="2"></td><td><pre><span class="token function">docker</span> <span class="token parameter variable">--version</span></pre></td></tr><tr><td data-num="3"></td><td><pre><span class="token function">docker</span> <span class="token function">ps</span></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="安装k3s"><a class="anchor" href="#安装k3s">#</a> 安装 k3s</h4>
+<p><span class="label info">info</span> 这里主要分为 server 节点（master 节点）的安装和 agent 节点安装两个部分</p>
+<div class="note primary">
+<p>server 节点安装，如下：</p>
+</div>
+<p>这里注意区分国内外源：</p>
+<ul>
+<li>
+<p>国外源安装如下：</p>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token function">curl</span> <span class="token parameter variable">-sfL</span> https://get.k3s.io <span class="token operator">|</span> <span class="token function">sh</span> <span class="token parameter variable">-s</span> - <span class="token parameter variable">--docker</span></pre></td></tr></table></figure></li>
+<li>
+<p>国内源替换：</p>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token function">curl</span> <span class="token parameter variable">-sfL</span> https://rancher-mirror.rancher.cn/k3s/k3s-install.sh <span class="token operator">|</span> <span class="token assign-left variable">INSTALL_K3S_MIRROR</span><span class="token operator">=</span>cn <span class="token function">sh</span> <span class="token parameter variable">-s</span> - <span class="token parameter variable">--docker</span></pre></td></tr></table></figure><p>使用阿里云镜像</p>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token function">curl</span> <span class="token parameter variable">-sfL</span> https://rancher-mirror.oss-cn-beijing.aliyuncs.com/k3s/k3s-install.sh <span class="token operator">|</span> <span class="token assign-left variable">INSTALL_K3S_MIRROR</span><span class="token operator">=</span>cn <span class="token function">sh</span> <span class="token parameter variable">-s</span> - <span class="token parameter variable">--docker</span></pre></td></tr></table></figure><p>安装完成：</p>
+<p><img data-src="https://ooo.0x0.ooo/2024/01/10/OZQ9ND.png" alt="image-20240110105746867" /></p>
+<p>安装成功之后检验：</p>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token function">docker</span> <span class="token function">ps</span></pre></td></tr></table></figure><p><img data-src="https://ooo.0x0.ooo/2024/01/10/OZQ8FP.png" alt="image-20240110104918716" /></p>
+<p>也可以查看 <code>k3s</code>  服务状态：</p>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>systemctl status k3s</pre></td></tr></table></figure><p><img data-src="https://ooo.0x0.ooo/2024/01/10/OZQCyB.png" alt="image-20240110104959787" /></p>
+</li>
+</ul>
+<p><span class="label info">info</span> 运行此安装后：</p>
+<blockquote>
+<ul>
+<li>K3s 服务将被配置为在节点重启后或进程崩溃或被杀死时自动重启。</li>
+<li>将安装其他实用程序，包括  <code>kubectl</code> 、 <code>crictl</code> 、 <code>ctr</code> 、 <code>k3s-killall.sh</code>  和  <code>k3s-uninstall.sh</code> 。</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9rdWJlcm5ldGVzLmlvL2RvY3MvY29uY2VwdHMvY29uZmlndXJhdGlvbi9vcmdhbml6ZS1jbHVzdGVyLWFjY2Vzcy1rdWJlY29uZmlnLw==">kubeconfig</span> 文件将写入到  <code>/etc/rancher/k3s/k3s.yaml</code> ，由 K3s 安装的 kubectl 将自动使用该文件。</li>
+</ul>
+</blockquote>
+<div class="note primary">
+<p>agent 节点安装，如下：</p>
+</div>
+<p>agent 节点安装，和 server 节点有所区别：主要是<span class="exturl" data-url="aHR0cHM6Ly9kb2NzLmszcy5pby96aC9xdWljay1zdGFydA==">节点加入集群</span>。</p>
+<p><span class="label warning">warning</span> 安装前需要获取 master 节点的 token</p>
+<blockquote>
+<p><code>K3S_URL</code>  参数会导致安装程序将 K3s 配置为 Agent 而不是 Server。K3s Agent 将注册到在 URL 上监听的 K3s Server。 <code>K3S_TOKEN</code>  使用的值存储在 Server 节点上的  <code>/var/lib/rancher/k3s/server/node-token</code>  中。</p>
+</blockquote>
+<p>注意区分国内外源：</p>
+<ul>
+<li>
+<p>国外源安装如下：</p>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token function">curl</span> <span class="token parameter variable">-sfL</span> https://get.k3s.io <span class="token operator">|</span> <span class="token assign-left variable">K3S_URL</span><span class="token operator">=</span>https://myserver:6443 <span class="token assign-left variable">K3S_TOKEN</span><span class="token operator">=</span>mynodetoken <span class="token function">sh</span> <span class="token parameter variable">-s</span> - <span class="token parameter variable">--docker</span></pre></td></tr></table></figure></li>
+<li>
+<p>国内源替换：</p>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token function">curl</span> <span class="token parameter variable">-sfL</span> https://rancher-mirror.rancher.cn/k3s/k3s-install.sh <span class="token operator">|</span> <span class="token assign-left variable">INSTALL_K3S_MIRROR</span><span class="token operator">=</span>cn <span class="token assign-left variable">K3S_URL</span><span class="token operator">=</span>https://myserver:6443 <span class="token assign-left variable">K3S_TOKEN</span><span class="token operator">=</span>mynodetoken <span class="token function">sh</span> <span class="token parameter variable">-s</span> - <span class="token parameter variable">--docker</span></pre></td></tr></table></figure><p>使用阿里云镜像</p>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token function">curl</span> <span class="token parameter variable">-sfL</span> https://rancher-mirror.oss-cn-beijing.aliyuncs.com/k3s/k3s-install.sh <span class="token operator">|</span> <span class="token assign-left variable">INSTALL_K3S_MIRROR</span><span class="token operator">=</span>cn <span class="token assign-left variable">K3S_URL</span><span class="token operator">=</span>https://myserver:6443 <span class="token assign-left variable">K3S_TOKEN</span><span class="token operator">=</span>mynodetoken <span class="token function">sh</span> <span class="token parameter variable">-s</span> - <span class="token parameter variable">--docker</span></pre></td></tr></table></figure><p>安装成功：</p>
+<p><img data-src="https://ooo.0x0.ooo/2024/01/10/OZQjEF.png" alt="image-20240110105826361" /></p>
+<p>检验：</p>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>dicker <span class="token function">ps</span></pre></td></tr></table></figure><p><img data-src="https://ooo.0x0.ooo/2024/01/10/OZQXRb.png" alt="image-20240110105901851" /></p>
+<p>检测 <code>k3s-agent</code>  服务状态</p>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>systemctl status k3s-agent</pre></td></tr></table></figure><p><img data-src="https://ooo.0x0.ooo/2024/01/10/OZQ3Ug.png" alt="image-20240110105950373" /></p>
+</li>
+</ul>
+<div class="note success">
+<p>K3s 集群安装成功， <code>kubectl get nodes -o wide</code>  如下</p>
+</div>
+<p><img data-src="https://ooo.0x0.ooo/2024/01/10/OZQu9l.png" alt="image-20240110110246498" /></p>
+<hr />
+<h2 id="参考链接"><a class="anchor" href="#参考链接">#</a> 参考链接：</h2>
+<p>[1] <span class="exturl" data-url="aHR0cHM6Ly9mb3J1bXMucmFuY2hlci5jbi9jL2xvbmdob3JuLzk=">Rancher 中文社区！</span></p>
+<p>[2] <span class="exturl" data-url="aHR0cHM6Ly9kb2NzLmszcy5pby9yZWxlYXNlLW5vdGVzL3YxLjI4Llg=">K3s 版本的插入件对应版本 - 官方</span></p>
+<p>[3] <span class="exturl" data-url="aHR0cHM6Ly9kb2NzLnJhbmNoZXIuY24vZG9jcy9rM3MvYWR2YW5jZWQvX2luZGV4LyMlRTUlOUMlQTgtcmFzcGJlcnJ5LXBpLW9zLSVFNCVCOCU4QSVFNSU5MCVBRiVFNyU5NCVBOCVFNiU5NyVBNyVFNyU4OSU4OC1pcHRhYmxlcw==">K3s 安装以及高级选项配置 - 官方</span></p>
+<p>[4] <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3JhbmNoZXIvaW5zdGFsbC1kb2NrZXIvYmxvYi9tYXN0ZXIvZGlzdC8yNC4wLjEuc2g=">docker 不同版本安装</span> <span class="rainbow">docker 安装参考</span></p>
+<p>[5] <span class="exturl" data-url="aHR0cHM6Ly9kb2NzLmszcy5pby96aC9xdWljay1zdGFydA==">快速安装 K3s-K3s 社区</span></p>
+<p>[6] <span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vaHVqaW56aG9uZy9wLzE1MDE0NDg3Lmh0bWw=">centos 上单节点 k3s 集群安装</span></p>
+<p>[7] <span class="exturl" data-url="aHR0cHM6Ly93d3cubGludXhidXp6LmNvbS9pbnN0YWxsLWszcy1rdWJlcm5ldGVzLWNsdXN0ZXItb24tdWJ1bnR1Lw==">如何在 Ubuntu 22.04 上安装 k3s Kubernetes 集群</span></p>
+<p>[8] <span class="exturl" data-url="aHR0cHM6Ly9jb21wdXRpbmdmb3JnZWVrcy5jb20vaW5zdGFsbC1rdWJlcm5ldGVzLW9uLXVidW50dS11c2luZy1rM3Mv">使用 K3s 在 Ubuntu 20.04 上安装 Kubernetes 集群</span> <span class="rainbow">本文重点参考</span></p>
+<p>[9] <span class="exturl" data-url="aHR0cHM6Ly9qdWVqaW4uY24vcG9zdC83MTY2NjE0NzAzMzA0NTQwMTY3">Kubernetes 入门到实践：搭建 K3s 集群初体验</span> <span class="rainbow">换源 aliyun 参考</span></p>
+
+      <div class="tags">
+          <a href="/tags/docker/" rel="tag"><i class="ic i-tag"></i> docker</a>
+          <a href="/tags/k3s/" rel="tag"><i class="ic i-tag"></i> k3s</a>
+          <a href="/tags/ubuntu/" rel="tag"><i class="ic i-tag"></i> ubuntu</a>
+          <a href="/tags/Raspberry-Pi/" rel="tag"><i class="ic i-tag"></i> Raspberry Pi</a>
+      </div>
+  </div>
+
+   <footer>
+
+    <div class="meta">
+  <span class="item">
+    <span class="icon">
+      <i class="ic i-calendar-check"></i>
+    </span>
+    <span class="text">更新于</span>
+    <time title="修改时间：2024-01-10 12:29:18" itemprop="dateModified" datetime="2024-01-10T12:29:18+08:00">2024-01-10</time>
+  </span>
+  <span id="2024/01/10/linux/k3s/搭建单节点K3s集群/" class="item leancloud_visitors" data-flag-title="搭建单节点K3s集群" title="阅读次数">
+      <span class="icon">
+        <i class="ic i-eye"></i>
+      </span>
+      <span class="text">阅读次数</span>
+      <span class="leancloud-visitors-count"></span>
+      <span class="text">次</span>
+  </span>
+</div>
+
+      
+<div class="reward">
+  <button><i class="ic i-heartbeat"></i> 赞赏</button>
+  <p>请我喝[茶]~(￣▽￣)~*</p>
+  <div id="qr">
+      
+      <div>
+        <img data-src="/images/wechatpay.png" alt="Watsmal 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div>
+        <img data-src="/images/alipay.png" alt="Watsmal 支付宝">
+        <p>支付宝</p>
+      </div>
+      
+      <div>
+        <img data-src="/images/paypal.png" alt="Watsmal 贝宝">
+        <p>贝宝</p>
+      </div>
+  </div>
+</div>
+
+      
+
+<div id="copyright">
+<ul>
+  <li class="author">
+    <strong>本文作者： </strong>Watsmal <i class="ic i-at"><em>@</em></i>有几个头大的博客
+  </li>
+  <li class="link">
+    <strong>本文链接：</strong>
+    <a href="https://watsmal.github.io/2024/01/10/linux/k3s/%E6%90%AD%E5%BB%BA%E5%8D%95%E8%8A%82%E7%82%B9K3s%E9%9B%86%E7%BE%A4/" title="搭建单节点K3s集群">https://watsmal.github.io/2024/01/10/linux/k3s/搭建单节点K3s集群/</a>
+  </li>
+  <li class="license">
+    <strong>版权声明： </strong>本站所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC96aC1DTg=="><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+  </footer>
+
+</article>
+
+  </div>
+  
+
+<div class="post-nav">
+    <div class="item left">
+      
+
+  <a href="/2024/01/03/other/github+hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE%EF%BC%8C%E5%B9%B6%E9%85%8D%E7%BD%AE%E4%B8%BB%E9%A2%98/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;pic4.zhimg.com&#x2F;v2-c326fcfdd903de8535927295f821224c_r.jpg" title="github+hexo搭建blog">
+  <span class="type">上一篇</span>
+  <span class="category"><i class="ic i-flag"></i> 其他</span>
+  <h3>github+hexo搭建blog</h3>
+  </a>
+
+    </div>
+    <div class="item right">
+    </div>
+</div>
+
+  
+  <div class="wrap" id="comments"></div>
+
+
+        </div>
+        <div id="sidebar">
+          
+
+<div class="inner">
+
+  <div class="panels">
+    <div class="inner">
+      <div class="contents panel pjax" data-title="文章目录">
+          <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E5%AE%A4%E6%90%AD%E5%BB%BAk3s%E7%8E%AF%E5%A2%83"><span class="toc-number">1.</span> <span class="toc-text"> 实验室搭建 k3s 环境</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%90%AD%E5%BB%BA%E7%8E%AF%E5%A2%83%E7%BB%84%E6%88%90"><span class="toc-number">1.1.</span> <span class="toc-text"> 搭建环境组成：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%90%AD%E5%BB%BA%E8%BF%87%E7%A8%8B"><span class="toc-number">1.2.</span> <span class="toc-text"> 搭建过程：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85docker%E4%BB%A5%E5%8F%8A%E5%85%B6%E4%BD%99%E5%87%86%E5%A4%87"><span class="toc-number">1.2.1.</span> <span class="toc-text"> 安装 docker 以及其余准备</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85k3s"><span class="toc-number">1.2.2.</span> <span class="toc-text"> 安装 k3s</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="toc-number">2.</span> <span class="toc-text"> 参考链接：</span></a></li></ol>
+      </div>
+      <div class="related panel pjax" data-title="系列文章">
+        <ul>
+          <li class="active"><a href="/2024/01/10/linux/k3s/%E6%90%AD%E5%BB%BA%E5%8D%95%E8%8A%82%E7%82%B9K3s%E9%9B%86%E7%BE%A4/" rel="bookmark" title="搭建单节点K3s集群">搭建单节点K3s集群</a></li>
+        </ul>
+      </div>
+      <div class="overview panel" data-title="站点概览">
+        <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="image" itemprop="image" alt="Watsmal"
+      data-src="/images/avatar.jpg">
+  <p class="name" itemprop="name">Watsmal</p>
+  <div class="description" itemprop="description">有几个头大的博客</div>
+</div>
+
+<nav class="state">
+    <div class="item posts">
+      <a href="/archives/">
+        <span class="count">14</span>
+        <span class="name">文章</span>
+      </a>
+    </div>
+    <div class="item categories">
+      <a href="/categories/">
+        <span class="count">7</span>
+        <span class="name">分类</span>
+      </a>
+    </div>
+    <div class="item tags">
+      <a href="/tags/">
+        <span class="count">19</span>
+        <span class="name">标签</span>
+      </a>
+    </div>
+</nav>
+
+<div class="social">
+      <span class="exturl item github" data-url="aHR0cHM6Ly9naXRodWIuY29tLzE0Njk1MzgxMzhjaGlycw==" title="https:&#x2F;&#x2F;github.com&#x2F;1469538138chirs"><i class="ic i-github"></i></span>
+      <span class="exturl item zhihu" data-url="aHR0cHM6Ly93d3cuemhpaHUuY29tL3Blb3BsZS95b3UtamktZ2UtdG91LWRh" title="https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;you-ji-ge-tou-da"><i class="ic i-zhihu"></i></span>
+      <span class="exturl item weibo" data-url="aHR0cHM6Ly93ZWliby5jbi9wcm9maWxlLzc3NTI2MzM2MzI=" title="https:&#x2F;&#x2F;weibo.cn&#x2F;profile&#x2F;7752633632"><i class="ic i-weibo"></i></span>
+      <a href="/17671200459@163.com" title="17671200459@163.com" class="item email"><i class="ic i-envelope"></i></a>
+      <span class="exturl item stackoverflow" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS91c2Vycy8yMzE5MDAzNC8lRTYlOUMlODklRTUlODclQTAlRTQlQjglQUElRTUlQTQlQjQlRTUlQTQlQTc=" title="https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;23190034&#x2F;%E6%9C%89%E5%87%A0%E4%B8%AA%E5%A4%B4%E5%A4%A7"><i class="ic i-stack-overflow"></i></span>
+</div>
+
+<ul class="menu">
+  
+    
+  <li class="item">
+    <a href="/" rel="section"><i class="ic i-home"></i>首页</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/about/" rel="section"><i class="ic i-user"></i>关于</a>
+  </li>
+
+        
+  <li class="item dropdown">
+      <a href="javascript:void(0);"><i class="ic i-feather"></i>文章</a>
+    <ul class="submenu">
+
+        
+  <li class="item">
+    <a href="/archives/" rel="section"><i class="ic i-list-alt"></i>归档</a>
+  </li>
+
+        
+  <li class="item">
+    <a href="/categories/" rel="section"><i class="ic i-th"></i>分类</a>
+  </li>
+
+        
+  <li class="item">
+    <a href="/tags/" rel="section"><i class="ic i-tags"></i>标签</a>
+  </li>
+
+  </ul>
+    
+  <li class="item">
+    <a href="/friends/" rel="section"><i class="ic i-heart"></i>友链</a>
+  </li>
+
+
+</ul>
+
+      </div>
+    </div>
+  </div>
+
+  <ul id="quick">
+    <li class="prev pjax">
+    </li>
+    <li class="up"><i class="ic i-arrow-up"></i></li>
+    <li class="down"><i class="ic i-arrow-down"></i></li>
+    <li class="next pjax">
+    </li>
+    <li class="percent"></li>
+  </ul>
+</div>
+
+
+        </div>
+        <div class="dimmer"></div>
+      </div>
+    </main>
+    <footer id="footer">
+      <div class="inner">
+        <div class="widgets">
+          
+<div class="rpost pjax">
+  <h2>随机文章</h2>
+  <ul>
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/other/" title="分类于 其他">其他</a>
+</div>
+
+    <span><a href="/2021/08/13/other/switch%E9%81%87%E8%A7%81%20i++/" title="C语言里面的switch偶遇i++">C语言里面的switch偶遇i++</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/hexo/" title="分类于 hexo搭建">hexo搭建</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/hexo/Theme-Shoka/" title="分类于 Theme Shoka">Theme Shoka</a>
+</div>
+
+    <span><a href="/2020/08/13/hexo/theme-shoka/special/" title="Step.4 主题特殊功能">Step.4 主题特殊功能</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/linux/" title="分类于 Linux">Linux</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/linux/chatgpt/" title="分类于 chatgpt搭建">chatgpt搭建</a>
+</div>
+
+    <span><a href="/2024/01/03/linux/chatgpt/chatgpt-token%E5%88%B6%E4%BD%9C%E6%96%B9%E6%A1%88/" title="chatgpt-token制作方案">chatgpt-token制作方案</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/hexo/" title="分类于 hexo搭建">hexo搭建</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/hexo/Theme-Shoka/" title="分类于 Theme Shoka">Theme Shoka</a>
+</div>
+
+    <span><a href="/2020/08/13/hexo/theme-shoka/dependents/" title="Step.1 依赖插件">Step.1 依赖插件</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/linux/" title="分类于 Linux">Linux</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/linux/chatgpt/" title="分类于 chatgpt搭建">chatgpt搭建</a>
+</div>
+
+    <span><a href="/2023/08/13/linux/chatgpt/chatgpt_web%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/" title="chatgpt_web搭建教程">chatgpt_web搭建教程</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/hexo/" title="分类于 hexo搭建">hexo搭建</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/hexo/Theme-Shoka/" title="分类于 Theme Shoka">Theme Shoka</a>
+</div>
+
+    <span><a href="/2020/08/13/hexo/theme-shoka/display/" title="Step.3 界面显示">Step.3 界面显示</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/linux/" title="分类于 Linux">Linux</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/linux/k3s/" title="分类于 k3s学习">k3s学习</a>
+</div>
+
+    <span><a href="/2024/01/10/linux/k3s/%E6%90%AD%E5%BB%BA%E5%8D%95%E8%8A%82%E7%82%B9K3s%E9%9B%86%E7%BE%A4/" title="搭建单节点K3s集群">搭建单节点K3s集群</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/linux/" title="分类于 Linux">Linux</a>
+</div>
+
+    <span><a href="/2020/08/13/linux/%E5%AE%9E%E9%AA%8C%E5%AE%A4%E6%90%AD%E5%BB%BAK8s%E6%95%99%E7%A8%8B/" title="实验室搭建K8s教程">实验室搭建K8s教程</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/other/" title="分类于 其他">其他</a>
+</div>
+
+    <span><a href="/2024/01/03/other/github+hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE%EF%BC%8C%E5%B9%B6%E9%85%8D%E7%BD%AE%E4%B8%BB%E9%A2%98/" title="github+hexo搭建blog">github+hexo搭建blog</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/hexo/" title="分类于 hexo搭建">hexo搭建</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/hexo/Theme-Shoka/" title="分类于 Theme Shoka">Theme Shoka</a>
+</div>
+
+    <span><a href="/2020/08/13/hexo/theme-shoka/config/" title="Step.2 基本配置">Step.2 基本配置</a></span>
+  </li>
+
+  </ul>
+</div>
+<div>
+  <h2>最新评论</h2>
+  <ul class="leancloud-recent-comment"></ul>
+</div>
+
+        </div>
+        <div class="status">
+  <div class="copyright">
+    
+    &copy; 2022 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="ic i-watsmal"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Watsmal @ Watsmal</span>
+  </div>
+  <div class="count">
+    <span class="post-meta-item-icon">
+      <i class="ic i-chart-area"></i>
+    </span>
+    <span title="站点总字数">59k 字</span>
+
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="ic i-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:28</span>
+  </div>
+  <div class="powered-by">
+    基于 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span>
+  </div>
+</div>
+
+      </div>
+    </footer>
+  </div>
+<script data-config type="text/javascript">
+  var LOCAL = {
+    path: '2024/01/10/linux/k3s/搭建单节点K3s集群/',
+    favicon: {
+      show: "（●´3｀●）博客",
+      hide: "(´Д｀)Watsmal"
+    },
+    search : {
+      placeholder: "文章搜索",
+      empty: "关于 「 ${query} 」，什么也没搜到",
+      stats: "${time} ms 内找到 ${hits} 条结果"
+    },
+    valine: true,fancybox: true,
+    copyright: '复制成功，转载请遵守 <i class="ic i-creative-commons"></i>BY-NC-SA 协议。',
+    ignores : [
+      function(uri) {
+        return uri.includes('#');
+      },
+      function(uri) {
+        return new RegExp(LOCAL.path+"$").test(uri);
+      }
+    ]
+  };
+</script>
+
+<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>
+
+<script src="//cdn.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js,npm/animejs@3.2.0/lib/anime.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script>
+
+<script src="/js/app.js?v=0.2.5"></script>
+
+
+
+
+</body>
+</html>
