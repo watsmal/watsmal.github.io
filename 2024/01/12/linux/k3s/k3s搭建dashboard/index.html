@@ -1,0 +1,661 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#FFF">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+<link rel="alternate" type="application/rss+xml" title="有几个头大的博客" href="https://watsmal.github.io/rss.xml" />
+<link rel="alternate" type="application/atom+xml" title="有几个头大的博客" href="https://watsmal.github.io/atom.xml" />
+<link rel="alternate" type="application/json" title="有几个头大的博客" href="https://watsmal.github.io/feed.json" />
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="/css/app.css?v=0.2.5">
+
+  
+  <meta name="keywords" content="k3s,dashboard,explorer,RancherUI" />
+
+
+<link rel="canonical" href="https://watsmal.github.io/2024/01/12/linux/k3s/k3s%E6%90%AD%E5%BB%BAdashboard/">
+
+
+
+  <title>
+K3S 安装-仪表盘及卸载K3s仪表盘 - k3s学习 - Linux |
+Watsmal = 有几个头大的博客 = 天生我材必有用，我是高手！我是高手！</title>
+<meta name="generator" content="Hexo 6.0.0"></head>
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div id="loading">
+    <div class="cat">
+      <div class="body"></div>
+      <div class="head">
+        <div class="face"></div>
+      </div>
+      <div class="foot">
+        <div class="tummy-end"></div>
+        <div class="bottom"></div>
+        <div class="legs left"></div>
+        <div class="legs right"></div>
+      </div>
+      <div class="paw">
+        <div class="hands left"></div>
+        <div class="hands right"></div>
+      </div>
+    </div>
+  </div>
+  <div id="container">
+    <header id="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="inner">
+        <div id="brand">
+          <div class="pjax">
+          
+  <h1 itemprop="name headline">K3S 安装-仪表盘及卸载K3s仪表盘
+  </h1>
+  
+<div class="meta">
+  <span class="item" title="创建时间：2024-01-12 15:01:44">
+    <span class="icon">
+      <i class="ic i-calendar"></i>
+    </span>
+    <span class="text">发表于</span>
+    <time itemprop="dateCreated datePublished" datetime="2024-01-12T15:01:44+08:00">2024-01-12</time>
+  </span>
+  <span class="item" title="本文字数">
+    <span class="icon">
+      <i class="ic i-pen"></i>
+    </span>
+    <span class="text">本文字数</span>
+    <span>3.3k</span>
+    <span class="text">字</span>
+  </span>
+  <span class="item" title="阅读时长">
+    <span class="icon">
+      <i class="ic i-clock"></i>
+    </span>
+    <span class="text">阅读时长</span>
+    <span>8 分钟</span>
+  </span>
+</div>
+
+
+          </div>
+        </div>
+        <nav id="nav">
+  <div class="inner">
+    <div class="toggle">
+      <div class="lines" aria-label="切换导航栏">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </div>
+    </div>
+    <ul class="menu">
+      <li class="item title"><a href="/" rel="start">Watsmal</a></li>
+    </ul>
+    <ul class="right">
+      <li class="item theme">
+        <i class="ic i-sun"></i>
+      </li>
+      <li class="item search">
+        <i class="ic i-search"></i>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+      </div>
+      <div id="imgs" class="pjax">
+        <ul>
+          <li class="item" data-background-image="https://dogefs.s3.ladydaily.com/~/source/wallhaven/full/x6/wallhaven-x6dr2d.png?w=2560&h=1440&fmt=webp"></li>
+          <li class="item" data-background-image="https://i.imgtg.com/2023/03/09/Y0zdB.jpg"></li>
+          <li class="item" data-background-image="https://i.imgtg.com/2023/03/09/YSIlc.jpg"></li>
+          <li class="item" data-background-image="https://i.imgtg.com/2023/03/09/Y0iNK.jpg"></li>
+          <li class="item" data-background-image="https://i.imgtg.com/2023/03/09/Y0xvg.jpg"></li>
+          <li class="item" data-background-image="https://dogefs.s3.ladydaily.com/~/source/wallhaven/full/ex/wallhaven-exvklr.jpg?w=2560&h=1440&fmt=webp"></li>
+        </ul>
+      </div>
+    </header>
+    <div id="waves">
+      <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" />
+          <use xlink:href="#gentle-wave" x="48" y="3" />
+          <use xlink:href="#gentle-wave" x="48" y="5" />
+          <use xlink:href="#gentle-wave" x="48" y="7" />
+        </g>
+      </svg>
+    </div>
+    <main>
+      <div class="inner">
+        <div id="main" class="pjax">
+          
+  <div class="article wrap">
+    
+<div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+<i class="ic i-home"></i>
+<span><a href="/">首页</a></span><i class="ic i-angle-right"></i>
+<span  itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/linux/" itemprop="item" rel="index" title="分类于 Linux"><span itemprop="name">Linux</span></a>
+<meta itemprop="position" content="1" /></span>
+<i class="ic i-angle-right"></i>
+<span  class="current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/linux/k3s/" itemprop="item" rel="index" title="分类于 k3s学习"><span itemprop="name">k3s学习</span></a>
+<meta itemprop="position" content="2" /></span>
+</div>
+
+    <article itemscope itemtype="http://schema.org/Article" class="post block" lang="zh-CN">
+  <link itemprop="mainEntityOfPage" href="https://watsmal.github.io/2024/01/12/linux/k3s/k3s%E6%90%AD%E5%BB%BAdashboard/">
+
+  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="image" content="/images/avatar.jpg">
+    <meta itemprop="name" content="Watsmal">
+    <meta itemprop="description" content="天生我材必有用，我是高手！我是高手！, 有几个头大的博客">
+  </span>
+
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="有几个头大的博客">
+  </span>
+
+  <div class="body md" itemprop="articleBody">
+    
+
+    <h2 id="k3s-安装-仪表盘及卸载k3s"><a class="anchor" href="#k3s-安装-仪表盘及卸载k3s">#</a> K3S 安装 - 仪表盘及卸载 K3s</h2>
+<h3 id="仪表盘介绍"><a class="anchor" href="#仪表盘介绍">#</a> 仪表盘介绍：</h3>
+<p>推荐使用三种仪表盘工具，分别是对应是  <code>Kubernetes Dashboard</code> 、 <code>kube-explorer</code>  和  <code>Rancher UI</code> ，其各自各有优劣。</p>
+<ol>
+<li><a href="#click_jump0">Kubernetes Dashboard</a></li>
+<li><a href="#click_jump1">kube-explorer</a></li>
+<li><a href="#click_jump2">Rancher UI</a></li>
+</ol>
+<h3 id="kubernetes-dashboard参考安装"><a class="anchor" href="#kubernetes-dashboard参考安装">#</a> Kubernetes Dashboard 参考安装</h3>
+<blockquote>
+<p>这里不参考官方的方法，但会记录官方的方法，如有需要看本文参考链接。</p>
+</blockquote>
+<p>一。官方参考安装 dashboard：</p>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token assign-left variable">GITHUB_URL</span><span class="token operator">=</span>https://github.com/kubernetes/dashboard/releases</pre></td></tr><tr><td data-num="2"></td><td><pre></pre></td></tr><tr><td data-num="3"></td><td><pre><span class="token assign-left variable">VERSION_KUBE_DASHBOARD</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token function">curl</span> <span class="token parameter variable">-w</span> <span class="token string">'%&#123;url_effective&#125;'</span> <span class="token parameter variable">-I</span> <span class="token parameter variable">-L</span> <span class="token parameter variable">-s</span> <span class="token parameter variable">-S</span> $<span class="token punctuation">&#123;</span>GITHUB_URL<span class="token punctuation">&#125;</span>/latest <span class="token parameter variable">-o</span> /dev/null <span class="token operator">|</span> <span class="token function">sed</span> <span class="token parameter variable">-e</span> <span class="token string">'s|.*/||'</span><span class="token variable">)</span></span></pre></td></tr><tr><td data-num="4"></td><td><pre></pre></td></tr><tr><td data-num="5"></td><td><pre><span class="token function">sudo</span> k3s kubectl create <span class="token parameter variable">-f</span> https://raw.githubusercontent.com/kubernetes/dashboard/<span class="token variable">$&#123;VERSION_KUBE_DASHBOARD&#125;</span>/aio/deploy/recommended.yaml</pre></td></tr></table></figure><blockquote>
+<p><span class="lable info">info</span> 这里安装的是最新版本，目前 k8s-dashboard 版本信息可参考<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2t1YmVybmV0ZXMvZGFzaGJvYXJkL3JlbGVhc2Vz">链接</span>。</p>
+<p>我们选择 v2.7.0 版本，因为<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2t1YmVybmV0ZXMvZGFzaGJvYXJkL3JlbGVhc2VzL3RhZy92My4wLjAtYWxwaGEw"> v3.0.0 版本差别过大</span><br />
+ Kubernetes 仪表板 v3.0.0 :<br />
+ 网络</p>
+<pre><code>docker.io/kubernetesui/dashboard-web:v1.0.0
+</code></pre>
+<p>应用程序编程接口</p>
+<pre><code>docker.io/kubernetesui/dashboard-api:v1.0.0
+</code></pre>
+<p>指标刮刀</p>
+<pre><code>docker.io/kubernetesui/metrics-scraper:v1.0.9
+</code></pre>
+</blockquote>
+<p>二。本文方法：</p>
+<ol>
+<li>
+<p>将 <code>https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml</code>  复制到本地浏览器即可打开，将其中内容复制到 <code>recommended.yaml</code> （需要自己建该文件）。</p>
+</li>
+<li>
+<p>将 <code>recommended.yaml</code>  文件拖入 master 节点的 root 目录。</p>
+</li>
+<li>
+<p>执行 <code>kubectl apply -f  recommended.yaml</code>  ，如下：</p>
+<p><img data-src="https://ooo.0x0.ooo/2024/01/12/OZfVMg.png" alt="image-20240112142715606" /></p>
+<p><span class="lable info">验证</span> 运行如下代码：</p>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>$ k3s kubectl proxy</pre></td></tr><tr><td data-num="2"></td><td><pre></pre></td></tr><tr><td data-num="3"></td><td><pre><span class="token comment">#可以看到前端代码</span></pre></td></tr><tr><td data-num="4"></td><td><pre>$ <span class="token function">curl</span> http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/</pre></td></tr></table></figure></li>
+</ol>
+<p><span class="label success">✔️k8s-bashboard success</span></p>
+<details class="primary"><summary>创建token，可用于登录k8s-dashboard</summary><div>
+<p>首先我们需要创建两个文件 <code>dashboard.admin-user.yml</code>  和  <code>dashboard.admin-user-role.yml</code> ，并将一下内容分别复制到对应文件内：</p>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token comment"># dashboard.admin-user.yml</span></pre></td></tr><tr><td data-num="2"></td><td><pre>apiVersion: v1</pre></td></tr><tr><td data-num="3"></td><td><pre>kind: ServiceAccount</pre></td></tr><tr><td data-num="4"></td><td><pre>metadata:</pre></td></tr><tr><td data-num="5"></td><td><pre>  name: admin-user</pre></td></tr><tr><td data-num="6"></td><td><pre>  namespace: kubernetes-dashboard</pre></td></tr><tr><td data-num="7"></td><td><pre></pre></td></tr><tr><td data-num="8"></td><td><pre><span class="token comment"># dashboard.admin-user-role.yml</span></pre></td></tr><tr><td data-num="9"></td><td><pre>apiVersion: rbac.authorization.k8s.io/v1</pre></td></tr><tr><td data-num="10"></td><td><pre>kind: ClusterRoleBinding</pre></td></tr><tr><td data-num="11"></td><td><pre>metadata:</pre></td></tr><tr><td data-num="12"></td><td><pre>  name: admin-user</pre></td></tr><tr><td data-num="13"></td><td><pre>roleRef:</pre></td></tr><tr><td data-num="14"></td><td><pre>  apiGroup: rbac.authorization.k8s.io</pre></td></tr><tr><td data-num="15"></td><td><pre>  kind: ClusterRole</pre></td></tr><tr><td data-num="16"></td><td><pre>  name: cluster-admin</pre></td></tr><tr><td data-num="17"></td><td><pre>subjects:</pre></td></tr><tr><td data-num="18"></td><td><pre>  - kind: ServiceAccount</pre></td></tr><tr><td data-num="19"></td><td><pre>    name: admin-user</pre></td></tr><tr><td data-num="20"></td><td><pre>    namespace: kubernetes-dashboard</pre></td></tr></table></figure><p>部署  <code>admin-user</code>  配置：</p>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token comment"># 仪表盘 RBAC 配置</span></pre></td></tr><tr><td data-num="2"></td><td><pre><span class="token comment"># 本指南中创建的 admin-user 将在仪表盘中拥有管理权限</span></pre></td></tr><tr><td data-num="3"></td><td><pre><span class="token function">sudo</span> k3s kubectl create <span class="token parameter variable">-f</span> dashboard.admin-user.yml <span class="token parameter variable">-f</span> dashboard.admin-user-role.yml</pre></td></tr></table></figure><p>获得 Token：</p>
+<p>​		v1.24+</p>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token comment"># 获得 Bearer-Token</span></pre></td></tr><tr><td data-num="2"></td><td><pre><span class="token function">sudo</span> k3s kubectl <span class="token parameter variable">-n</span> kubernetes-dashboard create token admin-user</pre></td></tr></table></figure><p>​       v1.23 及之前的版本</p>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token comment"># 获得 Bearer-Token</span></pre></td></tr><tr><td data-num="2"></td><td><pre><span class="token function">sudo</span> k3s kubectl <span class="token parameter variable">-n</span> kubernetes-dashboard describe secret admin-user-token <span class="token operator">|</span><span class="token function">grep</span> <span class="token string">'^token'</span></pre></td></tr></table></figure></div></details>
+<details class="info"><summary>端口转发&暴露端口</summary><div>
+<p>目前只能集群内部访问，因为这里都是 ClusterIP 模式，需要修改。<br />
+<img data-src="https://ooo.0x0.ooo/2024/01/12/OZfd0l.png" alt="image-20240112143657433" /><br />
+ 这里提供两种方式：</p>
+<ol>
+<li>
+<p>端口转发的方式暴露</p>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token comment"># 端口转发的方式暴露</span></pre></td></tr><tr><td data-num="2"></td><td><pre>kubectl port-forward <span class="token parameter variable">-n</span> kubernetes-dashboard <span class="token parameter variable">--address</span> <span class="token number">0.0</span>.0.0 svc/kubernetes-dashboard <span class="token number">8443</span>:443</pre></td></tr></table></figure></li>
+<li>
+<p>以 NodePort 的方式暴露</p>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token comment"># 以 NodePort 的方式暴露</span></pre></td></tr><tr><td data-num="2"></td><td><pre><span class="token comment"># kubectl edit svc -n kubernetes-dashboard kubernetes-dashboard</span></pre></td></tr><tr><td data-num="3"></td><td><pre><span class="token comment"># type: ClusterIP -> type: NodePort</span></pre></td></tr><tr><td data-num="4"></td><td><pre></pre></td></tr><tr><td data-num="5"></td><td><pre>$ kubectl patch svc kubernetes-dashboard <span class="token parameter variable">--namespace</span> kubernetes-dashboard <span class="token parameter variable">-p</span> <span class="token string">'&#123;"spec":&#123;"type": "NodePort"&#125;&#125;'</span></pre></td></tr><tr><td data-num="6"></td><td><pre>$ kubectl get svc <span class="token parameter variable">--namespace</span> kubernetes-dashboard kubernetes-dashboard</pre></td></tr><tr><td data-num="7"></td><td><pre></pre></td></tr><tr><td data-num="8"></td><td><pre>NAME                   TYPE       CLUSTER-IP      EXTERNAL-IP   PORT<span class="token punctuation">(</span>S<span class="token punctuation">)</span>         AGE</pre></td></tr><tr><td data-num="9"></td><td><pre>kubernetes-dashboard   NodePort   <span class="token number">10.43</span>.213.160   <span class="token operator">&lt;</span>none<span class="token operator">></span>        <span class="token number">443</span>:30891/TCP   2m12s</pre></td></tr></table></figure><p><span class="lable info">验证：</span> 这里直接 <code>https://IP:端口</code> 既可访问</p>
+<p><img data-src="https://ooo.0x0.ooo/2024/01/12/OZfY7B.png" alt="222" /><img data-src="https://ooo.0x0.ooo/2024/01/12/OZffHs.png" alt="1111" /></p>
+</li>
+</ol>
+</div></details>
+<ol start="3">
+<li>
+<p>升级 Kubernetes Dashboard</p>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token comment"># 升级仪表盘</span></pre></td></tr><tr><td data-num="2"></td><td><pre>$ <span class="token function">sudo</span> k3s kubectl delete ns kubernetes-dashboard</pre></td></tr><tr><td data-num="3"></td><td><pre>$ <span class="token assign-left variable">GITHUB_URL</span><span class="token operator">=</span>https://github.com/kubernetes/dashboard/releases</pre></td></tr><tr><td data-num="4"></td><td><pre>$ <span class="token assign-left variable">VERSION_KUBE_DASHBOARD</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token function">curl</span> <span class="token parameter variable">-w</span> <span class="token string">'%&#123;url_effective&#125;'</span> <span class="token parameter variable">-I</span> <span class="token parameter variable">-L</span> <span class="token parameter variable">-s</span> <span class="token parameter variable">-S</span> $<span class="token punctuation">&#123;</span>GITHUB_URL<span class="token punctuation">&#125;</span>/latest <span class="token parameter variable">-o</span> /dev/null <span class="token operator">|</span> <span class="token function">sed</span> <span class="token parameter variable">-e</span> <span class="token string">'s|.*/||'</span><span class="token variable">)</span></span></pre></td></tr><tr><td data-num="5"></td><td><pre>$ <span class="token function">sudo</span> k3s kubectl apply <span class="token parameter variable">-f</span> https://raw.githubusercontent.com/kubernetes/dashboard/<span class="token variable">$&#123;VERSION_KUBE_DASHBOARD&#125;</span>/aio/deploy/recommended.yaml <span class="token parameter variable">-f</span> dashboard.admin-user.yml <span class="token parameter variable">-f</span> dashboard.admin-user-role.yml</pre></td></tr></table></figure></li>
+<li>
+<p>删除仪表盘和 admin-user 配置</p>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token comment"># 删除仪表盘和 admin-user 配置</span></pre></td></tr><tr><td data-num="2"></td><td><pre>$ <span class="token function">sudo</span> k3s kubectl delete ns kubernetes-dashboard</pre></td></tr><tr><td data-num="3"></td><td><pre>$ <span class="token function">sudo</span> k3s kubectl delete clusterrolebinding kubernetes-dashboard</pre></td></tr><tr><td data-num="4"></td><td><pre>$ <span class="token function">sudo</span> k3s kubectl delete clusterrole kubernetes-dashboard</pre></td></tr></table></figure></li>
+</ol>
+<h3 id="kube-explorer"><a class="anchor" href="#kube-explorer">#</a> kube-explorer</h3>
+<p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MDI3NDY3OS9hcnRpY2xlL2RldGFpbHMvMTMwMTU1ODQ3">文 2 点</span></p>
+<h3 id="rancher-ui"><a class="anchor" href="#rancher-ui">#</a> Rancher UI</h3>
+<p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MDI3NDY3OS9hcnRpY2xlL2RldGFpbHMvMTMwMTU1ODQ3">文 3 点</span></p>
+<hr />
+<h2 id="参考资料"><a class="anchor" href="#参考资料">#</a> 参考资料：</h2>
+<p>[1] <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2t1YmVybmV0ZXMvZGFzaGJvYXJkL3JlbGVhc2Vz">k8s-dashboard 版本参考</span></p>
+<p>[2] <span class="exturl" data-url="aHR0cHM6Ly9kb2NzLnJhbmNoZXIuY24vZG9jcy9rM3MvaW5zdGFsbGF0aW9uL2t1YmUtZGFzaGJvYXJkL19pbmRleC8=">k8s 仪表盘 - 官方</span></p>
+<p>[3] <span class="exturl" data-url="aHR0cHM6Ly9rdWJlcm5ldGVzLmlvL2RvY3MvdGFza3MvYWNjZXNzLWFwcGxpY2F0aW9uLWNsdXN0ZXIvcG9ydC1mb3J3YXJkLWFjY2Vzcy1hcHBsaWNhdGlvbi1jbHVzdGVyLw==">k8s-dashboard 远程访问</span></p>
+<p>[4] <span class="exturl" data-url="aHR0cHM6Ly9rdWJlcm5ldGVzLmlvL2RvY3MvdGFza3MvYWNjZXNzLWFwcGxpY2F0aW9uLWNsdXN0ZXIvcG9ydC1mb3J3YXJkLWFjY2Vzcy1hcHBsaWNhdGlvbi1jbHVzdGVyLw==">blog 参考资料</span> <span class="rainbow">主要参考</span></p>
+
+      <div class="tags">
+          <a href="/tags/k3s/" rel="tag"><i class="ic i-tag"></i> k3s</a>
+          <a href="/tags/dashboard/" rel="tag"><i class="ic i-tag"></i> dashboard</a>
+          <a href="/tags/explorer/" rel="tag"><i class="ic i-tag"></i> explorer</a>
+          <a href="/tags/RancherUI/" rel="tag"><i class="ic i-tag"></i> RancherUI</a>
+      </div>
+  </div>
+
+   <footer>
+
+    <div class="meta">
+  <span class="item">
+    <span class="icon">
+      <i class="ic i-calendar-check"></i>
+    </span>
+    <span class="text">更新于</span>
+    <time title="修改时间：2024-01-12 15:20:08" itemprop="dateModified" datetime="2024-01-12T15:20:08+08:00">2024-01-12</time>
+  </span>
+  <span id="2024/01/12/linux/k3s/k3s搭建dashboard/" class="item leancloud_visitors" data-flag-title="K3S 安装-仪表盘及卸载K3s仪表盘" title="阅读次数">
+      <span class="icon">
+        <i class="ic i-eye"></i>
+      </span>
+      <span class="text">阅读次数</span>
+      <span class="leancloud-visitors-count"></span>
+      <span class="text">次</span>
+  </span>
+</div>
+
+      
+<div class="reward">
+  <button><i class="ic i-heartbeat"></i> 赞赏</button>
+  <p>请我喝[茶]~(￣▽￣)~*</p>
+  <div id="qr">
+      
+      <div>
+        <img data-src="/images/wechatpay.png" alt="Watsmal 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div>
+        <img data-src="/images/alipay.png" alt="Watsmal 支付宝">
+        <p>支付宝</p>
+      </div>
+      
+      <div>
+        <img data-src="/images/paypal.png" alt="Watsmal 贝宝">
+        <p>贝宝</p>
+      </div>
+  </div>
+</div>
+
+      
+
+<div id="copyright">
+<ul>
+  <li class="author">
+    <strong>本文作者： </strong>Watsmal <i class="ic i-at"><em>@</em></i>有几个头大的博客
+  </li>
+  <li class="link">
+    <strong>本文链接：</strong>
+    <a href="https://watsmal.github.io/2024/01/12/linux/k3s/k3s%E6%90%AD%E5%BB%BAdashboard/" title="K3S 安装-仪表盘及卸载K3s仪表盘">https://watsmal.github.io/2024/01/12/linux/k3s/k3s搭建dashboard/</a>
+  </li>
+  <li class="license">
+    <strong>版权声明： </strong>本站所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC96aC1DTg=="><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+  </footer>
+
+</article>
+
+  </div>
+  
+
+<div class="post-nav">
+    <div class="item left">
+      
+
+  <a href="/2024/01/10/linux/k3s/%E6%90%AD%E5%BB%BA%E5%8D%95%E8%8A%82%E7%82%B9K3s%E9%9B%86%E7%BE%A4/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;dogefs.s3.ladydaily.com&#x2F;~&#x2F;source&#x2F;wallhaven&#x2F;full&#x2F;3l&#x2F;wallhaven-3lgk6y.png?w&#x3D;2560&amp;h&#x3D;1440&amp;fmt&#x3D;webp" title="搭建单节点K3s集群">
+  <span class="type">上一篇</span>
+  <span class="category"><i class="ic i-flag"></i> k3s学习</span>
+  <h3>搭建单节点K3s集群</h3>
+  </a>
+
+    </div>
+    <div class="item right">
+    </div>
+</div>
+
+  
+  <div class="wrap" id="comments"></div>
+
+
+        </div>
+        <div id="sidebar">
+          
+
+<div class="inner">
+
+  <div class="panels">
+    <div class="inner">
+      <div class="contents panel pjax" data-title="文章目录">
+          <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#k3s-%E5%AE%89%E8%A3%85-%E4%BB%AA%E8%A1%A8%E7%9B%98%E5%8F%8A%E5%8D%B8%E8%BD%BDk3s"><span class="toc-number">1.</span> <span class="toc-text"> K3S 安装 - 仪表盘及卸载 K3s</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%AA%E8%A1%A8%E7%9B%98%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.1.</span> <span class="toc-text"> 仪表盘介绍：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#kubernetes-dashboard%E5%8F%82%E8%80%83%E5%AE%89%E8%A3%85"><span class="toc-number">1.2.</span> <span class="toc-text"> Kubernetes Dashboard 参考安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#kube-explorer"><span class="toc-number">1.3.</span> <span class="toc-text"> kube-explorer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#rancher-ui"><span class="toc-number">1.4.</span> <span class="toc-text"> Rancher UI</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">2.</span> <span class="toc-text"> 参考资料：</span></a></li></ol>
+      </div>
+      <div class="related panel pjax" data-title="系列文章">
+        <ul>
+          <li><a href="/2024/01/10/linux/k3s/%E6%90%AD%E5%BB%BA%E5%8D%95%E8%8A%82%E7%82%B9K3s%E9%9B%86%E7%BE%A4/" rel="bookmark" title="搭建单节点K3s集群">搭建单节点K3s集群</a></li><li class="active"><a href="/2024/01/12/linux/k3s/k3s%E6%90%AD%E5%BB%BAdashboard/" rel="bookmark" title="K3S 安装-仪表盘及卸载K3s仪表盘">K3S 安装-仪表盘及卸载K3s仪表盘</a></li>
+        </ul>
+      </div>
+      <div class="overview panel" data-title="站点概览">
+        <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="image" itemprop="image" alt="Watsmal"
+      data-src="/images/avatar.jpg">
+  <p class="name" itemprop="name">Watsmal</p>
+  <div class="description" itemprop="description">有几个头大的博客</div>
+</div>
+
+<nav class="state">
+    <div class="item posts">
+      <a href="/archives/">
+        <span class="count">15</span>
+        <span class="name">文章</span>
+      </a>
+    </div>
+    <div class="item categories">
+      <a href="/categories/">
+        <span class="count">7</span>
+        <span class="name">分类</span>
+      </a>
+    </div>
+    <div class="item tags">
+      <a href="/tags/">
+        <span class="count">22</span>
+        <span class="name">标签</span>
+      </a>
+    </div>
+</nav>
+
+<div class="social">
+      <span class="exturl item github" data-url="aHR0cHM6Ly9naXRodWIuY29tLzE0Njk1MzgxMzhjaGlycw==" title="https:&#x2F;&#x2F;github.com&#x2F;1469538138chirs"><i class="ic i-github"></i></span>
+      <span class="exturl item zhihu" data-url="aHR0cHM6Ly93d3cuemhpaHUuY29tL3Blb3BsZS95b3UtamktZ2UtdG91LWRh" title="https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;you-ji-ge-tou-da"><i class="ic i-zhihu"></i></span>
+      <span class="exturl item weibo" data-url="aHR0cHM6Ly93ZWliby5jbi9wcm9maWxlLzc3NTI2MzM2MzI=" title="https:&#x2F;&#x2F;weibo.cn&#x2F;profile&#x2F;7752633632"><i class="ic i-weibo"></i></span>
+      <a href="/17671200459@163.com" title="17671200459@163.com" class="item email"><i class="ic i-envelope"></i></a>
+      <span class="exturl item stackoverflow" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS91c2Vycy8yMzE5MDAzNC8lRTYlOUMlODklRTUlODclQTAlRTQlQjglQUElRTUlQTQlQjQlRTUlQTQlQTc=" title="https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;23190034&#x2F;%E6%9C%89%E5%87%A0%E4%B8%AA%E5%A4%B4%E5%A4%A7"><i class="ic i-stack-overflow"></i></span>
+</div>
+
+<ul class="menu">
+  
+    
+  <li class="item">
+    <a href="/" rel="section"><i class="ic i-home"></i>首页</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/about/" rel="section"><i class="ic i-user"></i>关于</a>
+  </li>
+
+        
+  <li class="item dropdown">
+      <a href="javascript:void(0);"><i class="ic i-feather"></i>文章</a>
+    <ul class="submenu">
+
+        
+  <li class="item">
+    <a href="/archives/" rel="section"><i class="ic i-list-alt"></i>归档</a>
+  </li>
+
+        
+  <li class="item">
+    <a href="/categories/" rel="section"><i class="ic i-th"></i>分类</a>
+  </li>
+
+        
+  <li class="item">
+    <a href="/tags/" rel="section"><i class="ic i-tags"></i>标签</a>
+  </li>
+
+  </ul>
+    
+  <li class="item">
+    <a href="/friends/" rel="section"><i class="ic i-heart"></i>友链</a>
+  </li>
+
+
+</ul>
+
+      </div>
+    </div>
+  </div>
+
+  <ul id="quick">
+    <li class="prev pjax">
+    </li>
+    <li class="up"><i class="ic i-arrow-up"></i></li>
+    <li class="down"><i class="ic i-arrow-down"></i></li>
+    <li class="next pjax">
+    </li>
+    <li class="percent"></li>
+  </ul>
+</div>
+
+
+        </div>
+        <div class="dimmer"></div>
+      </div>
+    </main>
+    <footer id="footer">
+      <div class="inner">
+        <div class="widgets">
+          
+<div class="rpost pjax">
+  <h2>随机文章</h2>
+  <ul>
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/other/" title="分类于 其他">其他</a>
+</div>
+
+    <span><a href="/2024/01/03/other/github+hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE%EF%BC%8C%E5%B9%B6%E9%85%8D%E7%BD%AE%E4%B8%BB%E9%A2%98/" title="github+hexo搭建blog">github+hexo搭建blog</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/hexo/" title="分类于 hexo搭建">hexo搭建</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/hexo/Theme-Shoka/" title="分类于 Theme Shoka">Theme Shoka</a>
+</div>
+
+    <span><a href="/2020/08/13/hexo/theme-shoka/special/" title="Step.4 主题特殊功能">Step.4 主题特殊功能</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/linux/" title="分类于 Linux">Linux</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/linux/k3s/" title="分类于 k3s学习">k3s学习</a>
+</div>
+
+    <span><a href="/2024/01/12/linux/k3s/k3s%E6%90%AD%E5%BB%BAdashboard/" title="K3S 安装-仪表盘及卸载K3s仪表盘">K3S 安装-仪表盘及卸载K3s仪表盘</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/rust/" title="分类于 rust学习">rust学习</a>
+</div>
+
+    <span><a href="/2020/08/13/rust/rust%20%E4%BA%8C%E5%8F%89%E6%A0%91%E6%9E%84%E5%BB%BA/" title="rust 二叉树构建">rust 二叉树构建</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/linux/" title="分类于 Linux">Linux</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/linux/k3s/" title="分类于 k3s学习">k3s学习</a>
+</div>
+
+    <span><a href="/2024/01/10/linux/k3s/%E6%90%AD%E5%BB%BA%E5%8D%95%E8%8A%82%E7%82%B9K3s%E9%9B%86%E7%BE%A4/" title="搭建单节点K3s集群">搭建单节点K3s集群</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/hexo/" title="分类于 hexo搭建">hexo搭建</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/hexo/Theme-Shoka/" title="分类于 Theme Shoka">Theme Shoka</a>
+</div>
+
+    <span><a href="/2020/08/13/hexo/theme-shoka-doc/" title="Hexo主题Shoka搭建">Hexo主题Shoka搭建</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/linux/" title="分类于 Linux">Linux</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/linux/chatgpt/" title="分类于 chatgpt搭建">chatgpt搭建</a>
+</div>
+
+    <span><a href="/2023/08/13/linux/chatgpt/chatgpt_web%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/" title="chatgpt_web搭建教程">chatgpt_web搭建教程</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/hexo/" title="分类于 hexo搭建">hexo搭建</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/hexo/Theme-Shoka/" title="分类于 Theme Shoka">Theme Shoka</a>
+</div>
+
+    <span><a href="/2020/08/13/hexo/theme-shoka/config/" title="Step.2 基本配置">Step.2 基本配置</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/linux/" title="分类于 Linux">Linux</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/linux/chatgpt/" title="分类于 chatgpt搭建">chatgpt搭建</a>
+</div>
+
+    <span><a href="/2024/01/03/linux/chatgpt/chatgpt-token%E5%88%B6%E4%BD%9C%E6%96%B9%E6%A1%88/" title="chatgpt-token制作方案">chatgpt-token制作方案</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/hexo/" title="分类于 hexo搭建">hexo搭建</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/hexo/Theme-Shoka/" title="分类于 Theme Shoka">Theme Shoka</a>
+</div>
+
+    <span><a href="/2020/08/13/hexo/theme-shoka/dependents/" title="Step.1 依赖插件">Step.1 依赖插件</a></span>
+  </li>
+
+  </ul>
+</div>
+<div>
+  <h2>最新评论</h2>
+  <ul class="leancloud-recent-comment"></ul>
+</div>
+
+        </div>
+        <div class="status">
+  <div class="copyright">
+    
+    &copy; 2022 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="ic i-watsmal"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Watsmal @ Watsmal</span>
+  </div>
+  <div class="count">
+    <span class="post-meta-item-icon">
+      <i class="ic i-chart-area"></i>
+    </span>
+    <span title="站点总字数">63k 字</span>
+
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="ic i-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:38</span>
+  </div>
+  <div class="powered-by">
+    基于 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span>
+  </div>
+</div>
+
+      </div>
+    </footer>
+  </div>
+<script data-config type="text/javascript">
+  var LOCAL = {
+    path: '2024/01/12/linux/k3s/k3s搭建dashboard/',
+    favicon: {
+      show: "（●´3｀●）博客",
+      hide: "(´Д｀)Watsmal"
+    },
+    search : {
+      placeholder: "文章搜索",
+      empty: "关于 「 ${query} 」，什么也没搜到",
+      stats: "${time} ms 内找到 ${hits} 条结果"
+    },
+    valine: true,fancybox: true,
+    copyright: '复制成功，转载请遵守 <i class="ic i-creative-commons"></i>BY-NC-SA 协议。',
+    ignores : [
+      function(uri) {
+        return uri.includes('#');
+      },
+      function(uri) {
+        return new RegExp(LOCAL.path+"$").test(uri);
+      }
+    ]
+  };
+</script>
+
+<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>
+
+<script src="//cdn.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js,npm/animejs@3.2.0/lib/anime.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script>
+
+<script src="/js/app.js?v=0.2.5"></script>
+
+
+
+
+</body>
+</html>
